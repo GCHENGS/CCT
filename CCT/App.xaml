@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:CCT"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="" />
+                <ResourceDictionary Source="" />
+                <ResourceDictionary Source="" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
