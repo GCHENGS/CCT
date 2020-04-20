@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CCT.UserControl.Component
+namespace CCT.View
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

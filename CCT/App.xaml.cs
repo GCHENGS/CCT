@@ -1,4 +1,5 @@
-﻿using CCT.ViewModel;
+﻿using CCT.View;
+using CCT.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
