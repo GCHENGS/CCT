@@ -106,7 +106,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Component\Exceptions\NullReferenceException.cs" />
+    <Compile Include="Component\Exceptions\ResourceReferenceKeyNotFoundException.cs" />
+    <Compile Include="Resource\Dictionarys\ResourceHelper.cs" />
+    <Compile Include="Resource\Constants\ConstantsForColor.cs" />
+    <Compile Include="Resource\Constants\ConstantsForImage.cs" />
+    <Compile Include="Resource\Constants\ConstantsForMessageBox.cs" />
+    <Compile Include="Resource\Constants\ConstantsForString.cs" />
+    <Compile Include="Resource\Constants\ErrorMessage.cs" />
+    <Compile Include="Resource\Converters\Class1.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\Class1.cs" />
+    <Compile Include="View\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +132,38 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ControlStyleResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ConverterResource\ConverterResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\DataTemplateResource\DataTemplateResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ImageResource\ImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\StringResource\StringResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\StyleResource\StyleResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ThemeResource\ThemeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -149,23 +194,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component\" />
+    <Folder Include="Component\Behaviors\" />
+    <Folder Include="Component\Helpers\" />
     <Folder Include="Model\BaseData\" />
-    <Folder Include="Model\Enum\" />
-    <Folder Include="Model\Exceptions\" />
-    <Folder Include="Resource\Constant\" />
-    <Folder Include="Resource\Converter\" />
-    <Folder Include="Resource\Dictionary\Converter\" />
-    <Folder Include="Resource\Dictionary\DataTemplate\" />
-    <Folder Include="Resource\Dictionary\Image\" />
-    <Folder Include="Resource\Dictionary\Style\" />
-    <Folder Include="Resource\Dictionary\System\" />
-    <Folder Include="Resource\Dictionary\Theme\" />
-    <Folder Include="Resource\Helper\" />
-    <Folder Include="Resource\Image\" />
-    <Folder Include="Resource\String\" />
+    <Folder Include="Resource\Enums\" />
+    <Folder Include="Resource\Images\Menu\" />
+    <Folder Include="Resource\Images\Other\" />
     <Folder Include="ViewModel\ModelChecked\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

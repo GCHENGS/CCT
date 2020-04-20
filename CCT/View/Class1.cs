@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCT.ViewModel
+namespace CCT.View
 {
-    public class MainWindowViewModel
+    class Class1
     {
     }
 }

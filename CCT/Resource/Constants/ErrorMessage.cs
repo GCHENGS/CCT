@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCT.ViewModel
+namespace CCT.Resource.Constants
 {
-    public class MainWindowViewModel
+    public class ErrorMessage
     {
+        public static string A = "";
     }
 }
