@@ -34,17 +34,36 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net45\CommonServiceLocator.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.10.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.10.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.2.2\lib\net45\ControlzEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.10.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.10.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fluent, Version=7.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluent.Ribbon.7.1.0\lib\net45\Fluent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
@@ -64,20 +83,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -89,25 +104,39 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Unity.Abstractions, Version=5.11.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Abstractions.5.11.4\lib\net45\Unity.Abstractions.dll</HintPath>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="Unity.Abstractions, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.5\lib\net45\Unity.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Container.5.11.5\lib\net45\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.7\lib\net45\Unity.Container.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Component\Controls\ExtendButton.cs" />
+    <Compile Include="Component\Controls\ExtendTextBox.cs" />
     <Compile Include="Component\Exceptions\NullReferenceException.cs" />
+    <Compile Include="Component\Exceptions\ReadSysConfigFailedException.cs" />
     <Compile Include="Component\Exceptions\ResourceReferenceKeyNotFoundException.cs" />
+    <Compile Include="Component\Helpers\TextBoxHelper.cs" />
+    <Compile Include="Model\DataType\CustomMenu.cs" />
+    <Compile Include="Model\InterFace\ICustomMenu.cs" />
+    <Compile Include="Resource\Converters\CornerRadiusToThickness.cs" />
+    <Compile Include="Resource\Converters\TagToImageSource.cs" />
+    <Compile Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml.cs">
+      <DependentUpon>WindowStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resource\Dictionarys\ResourceHelper.cs" />
     <Compile Include="Resource\Constants\ConstantsForColor.cs" />
     <Compile Include="Resource\Constants\ConstantsForImage.cs" />
@@ -115,17 +144,111 @@
     <Compile Include="Resource\Constants\ConstantsForString.cs" />
     <Compile Include="Resource\Constants\ErrorMessage.cs" />
     <Compile Include="Resource\Converters\Class1.cs" />
+    <Compile Include="Resource\Enums\ButtonType.cs" />
+    <Compile Include="Resource\Enums\IconDirection.cs" />
+    <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
+    <Compile Include="ViewModel\LoginRegist\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\ContactWindowViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\FeedBackWindowViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\HelpWindowViewModel.cs" />
     <Compile Include="ViewModel\Shell\MainWindowViewModel.cs" />
-    <Compile Include="View\Class1.cs" />
-    <Compile Include="View\LoginWindow.xaml.cs">
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RegistWindow.xaml.cs">
-      <DependentUpon>RegistWindow.xaml</DependentUpon>
+    <Compile Include="View\PopupWindow\ContactWindow.xaml.cs">
+      <DependentUpon>ContactWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="View\PopupWindow\FeedBackWindow.xaml.cs">
+      <DependentUpon>FeedBackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PopupWindow\HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resource\Dictionarys\ColorsResource\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ContextMenuStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\HyperLinkStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\Storyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\TootipStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\LabelStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\ListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\TreeViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\FontsResource\FontsStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\StringResource\En_US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\StringResource\Zh_CN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\ContactWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\FeedBackWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Shell\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,10 +261,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resource\Dictionarys\ControlStyleResource\ControlStyleResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resource\Dictionarys\ConverterResource\ConverterResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,10 +273,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resource\Dictionarys\StringResource\StringResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resource\Dictionarys\StyleResource\StyleResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,15 +281,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RegistWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControl1.xaml">
+    <Page Include="View\Login\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,19 +310,55 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resource\Dictionarys\ColorsResource\GeneratorParameters.json" />
+    <Resource Include="Resource\Dictionarys\FontsResource\fontawesome-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component\Behaviors\" />
-    <Folder Include="Component\Helpers\" />
     <Folder Include="Model\BaseData\" />
-    <Folder Include="Resource\Enums\" />
-    <Folder Include="Resource\Helpers\" />
-    <Folder Include="Resource\Images\Menu\" />
-    <Folder Include="Resource\Images\Other\" />
     <Folder Include="Service\" />
+    <Folder Include="ViewModel\UserControl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\set.png" />
+    <Resource Include="Resource\Images\switch_skin_normal.png" />
+    <Resource Include="Resource\Images\switch_skin_over.png" />
+    <Resource Include="Resource\Images\switch_us_down.png" />
+    <Resource Include="Resource\Images\switch_us_highlight.png" />
+    <Resource Include="Resource\Images\switch_us_normal.png" />
+    <Resource Include="Resource\Images\switch_zh_down.png" />
+    <Resource Include="Resource\Images\switch_zh_highlight.png" />
+    <Resource Include="Resource\Images\switch_zh_normal.png" />
+    <Resource Include="Resource\Images\cloud.png" />
+    <Resource Include="Resource\Images\bg0.png" />
+    <Resource Include="Resource\Images\checked.png" />
+    <Resource Include="Resource\Images\checked_close.png" />
+    <Resource Include="Resource\Images\checked_ed.png" />
+    <Resource Include="Config\SysConfig.xml" />
+    <Resource Include="Resource\Images\btn_close_normal.png" />
+    <Resource Include="Resource\Images\btn_close_over.png" />
+    <Resource Include="Resource\Images\btn_min_normal.png" />
+    <Resource Include="Resource\Images\btn_min_over.png" />
+    <Resource Include="Resource\Images\bg1.png" />
+    <Resource Include="Resource\Images\bg2.png" />
+    <Resource Include="Resource\Images\bg3.png" />
+    <Resource Include="Resource\Images\bg4.png" />
+    <Resource Include="Resource\Images\headIcon.png" />
+    <Resource Include="Resource\Images\eyes.png" />
+    <Resource Include="Resource\Images\eyes_disabled.png" />
+    <Resource Include="Resource\Images\clear_dark.png" />
+    <Resource Include="Resource\Images\clear.png" />
+    <Resource Include="Resource\Images\btn_set_normal.png" />
+    <Resource Include="Resource\Images\btn_set_over.png" />
+    <Resource Include="Resource\Images\btn_max_normal.png" />
+    <Resource Include="Resource\Images\btn_max_over.png" />
+    <Content Include="Resource\Images\logo.png" />
+    <Content Include="Resource\Dictionarys\FontsResource\font-awesome.css" />
+    <Resource Include="Resource\Images\shanchu.png" />
+    <Resource Include="Resource\Images\sousuo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

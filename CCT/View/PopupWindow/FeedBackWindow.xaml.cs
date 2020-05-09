@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CCT.View
 {
     /// <summary>
-    /// UserControl1.xaml 的交互逻辑
+    /// FeedBackWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class FeedBackWindow : Window
     {
-        public UserControl1()
+        public FeedBackWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 确定关闭弹窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿<Window x:Class="CCT.View.FeedBackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CCT.View"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource Popup_Window}"
+        Title="{DynamicResource WindowFeedBackTitle}" 
+        Height="210" Width="300">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource PhoneName}"></Label>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Phone}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource E_mailName}"></Label>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding E_mail}"/>
+
+        <Button Grid.Row="2" Grid.ColumnSpan="2" 
+                Width="60" Height="22" 
+                Content="{DynamicResource Confirm}" 
+                Margin="10" HorizontalAlignment="Right" 
+                Click="Button_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="StandardHyperLink" TargetType="Hyperlink">
+        <Setter Property="TextDecorations" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="SlateBlue"/>
+        <Setter Property="FontSize" Value="{DynamicResource Font.Size.Content}"/>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=(SystemParameters.HighContrast)}" Value="false" />
+                    <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <!--在鼠标悬停显示下划线-->
+                <Setter Property="TextBlock.TextDecorations">
+                    <Setter.Value>
+                        <TextDecorationCollection>
+                            <TextDecoration Location="Underline"/>
+                        </TextDecorationCollection>
+                    </Setter.Value>
+                </Setter>
+            </MultiDataTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

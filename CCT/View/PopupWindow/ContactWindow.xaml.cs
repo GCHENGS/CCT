@@ -15,13 +15,23 @@ using System.Windows.Shapes;
 namespace CCT.View
 {
     /// <summary>
-    /// RegistWindow.xaml 的交互逻辑
+    /// ContactWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class RegistWindow : Window
+    public partial class ContactWindow : Window
     {
-        public RegistWindow()
+        public ContactWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 确定关闭弹窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

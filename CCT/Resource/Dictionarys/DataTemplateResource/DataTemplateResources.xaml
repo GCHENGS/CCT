@@ -1,9 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:CCT.Resource.Dictionarys"
                     xmlns:view="clr-namespace:CCT.View"
                     xmlns:viewmodel="clr-namespace:CCT.ViewModel">
+    
+    <!--主窗体-->
     <DataTemplate DataType="{x:Type viewmodel:MainWindowViewModel}">
-        <view:UserControl1/>
+        <view:MainWindow/>
     </DataTemplate>
+    
+    <!--登录-->
+    <DataTemplate DataType="{x:Type viewmodel:LoginWindowViewModel}">
+        <view:LoginWindow/>
+    </DataTemplate>
+    
+    <!--窗口设置-->
+    <!--<DataTemplate DataType="{x:Type viewmodel:ContactWindowViewModel}">
+        <view:ContactWindow/>
+    </DataTemplate>-->
+    <DataTemplate DataType="{x:Type viewmodel:FeedBackWindowViewModel}">
+        <view:FeedBackWindow/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:HelpWindowViewModel}">
+        <view:HelpWindow/>
+    </DataTemplate>
+
 </ResourceDictionary>

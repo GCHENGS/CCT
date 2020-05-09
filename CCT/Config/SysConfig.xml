@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SysConfig>
+  <SavedLoginNames>
+    <!-- 保存的登录账号 -->
+    <LoginName>admin</LoginName>
+  </SavedLoginNames>
+</SysConfig>

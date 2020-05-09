@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:CCT.Resource.Dictionarys"
                     xmlns:converter="clr-namespace:CCT.Resource.Converters">
-    <converter:Class1 x:Key="A"></converter:Class1>
+    
+    <converter:CornerRadiusToThickness x:Key="CornerRadiusToThickness"></converter:CornerRadiusToThickness>
+    <converter:TagToImageSource x:Key="TagToImageSource"></converter:TagToImageSource>
+    
 </ResourceDictionary>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!--WindowTitle-->
+    <system:String x:Key="WindowLoginTitle">CCT登录</system:String>
+    <system:String x:Key="WindowContactTitle">CCT联系</system:String>
+    <system:String x:Key="WindowFeedBackTitle">CCT反馈</system:String>
+    <system:String x:Key="WindowHelpTitle">CCT帮助</system:String>
+    
+    <!--WindowFunc-->
+    <system:String x:Key="SwitchLanguage">中</system:String>
+
+    <!--Zh/En-->
+    <system:String x:Key="Zh">中</system:String>
+    <system:String x:Key="Zh_CN">Zh_CN</system:String>
+    
+    <!--Login-->
+    <system:String x:Key="PleaseInputUserAccount">请输入帐号...</system:String>
+    <system:String x:Key="PleaseInputUserPassword">请输入密码...</system:String>
+    <system:String x:Key="AutoLogin">自动登录</system:String>
+    <system:String x:Key="ReAccount">记住帐号</system:String>
+    <system:String x:Key="RegistAccount">注册帐号</system:String>
+    <system:String x:Key="FoundPassword">找回密码</system:String>
+
+    <!--Regist-->
+
+    <!--Popup-->    
+    <system:String x:Key="PhoneName">联系电话：</system:String>
+    <system:String x:Key="Phone">15239948664</system:String>
+    <system:String x:Key="E_mailName">联系邮箱：</system:String>
+    <system:String x:Key="E_mail">1878776239@qq.com</system:String>
+    <system:String x:Key="VersionName">版本：</system:String>
+    <system:String x:Key="Version">v1.0</system:String>
+
+    <!--Button-->
+    <system:String x:Key="Login">登录</system:String>
+    <system:String x:Key="Regist">注册</system:String>
+    <system:String x:Key="Confirm">确定</system:String>
+
+
+    <system:String x:Key="WaitDeveloping">待开发...</system:String>
+    
+</ResourceDictionary>

@@ -1,0 +1,231 @@
+﻿<ResourceDictionary x:Class="CCT.Resource.Dictionarys.ControlStyleResource.WindowStyle"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="Standard_Window" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="FontSize" Value="{DynamicResource Font.Size.Window.Title}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontFamily" Value="{DynamicResource Fonts.Family.FontAwesome}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Brushes.Backstage.Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource Brushes.Backstage.Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
+                        <Border x:Name="Bd" CornerRadius="10" 
+                                Height="{TemplateBinding Height}" 
+                                Width="{TemplateBinding Width}"
+                                Background="{TemplateBinding Background}">
+                        </Border>
+                        <Label Content="{TemplateBinding Title}" 
+                               FontSize="{TemplateBinding FontSize}" 
+                               FontWeight="{TemplateBinding FontWeight}" 
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" />
+                        <Button x:Name="BtnClose" 
+                                Margin="0,0,10,0" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Style="{DynamicResource ButtonClose}"
+                                Click="BtnClose_Click" >
+                        </Button>
+                        <Button x:Name="BtnMax" 
+                                Margin="0,0,38,0" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Style="{DynamicResource ButtonMax}"
+                                Click="BtnMax_Click" >
+                        </Button>
+                        <Button x:Name="BtnMin"
+                                Margin="0,0,65,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonMin}" 
+                                Click="BtnMin_Click" >
+                        </Button>
+                        <Grid Margin="0,29.33,0,0">
+                            <Border Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"  
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Margin}"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              CornerRadius="10"  >
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NoMax_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
+                        <Border x:Name="Bd" CornerRadius="10" 
+                                Height="{TemplateBinding Height}" 
+                                Width="{TemplateBinding Width}"
+                                Background="{TemplateBinding Background}">
+                        </Border>
+                        <Label Content="{TemplateBinding Title}" 
+                               FontSize="{TemplateBinding FontSize}" 
+                               FontWeight="{TemplateBinding FontWeight}" 
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" />
+                        <Button x:Name="BtnClose" 
+                                Margin="0,0,10,0" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Style="{DynamicResource ButtonClose}"
+                                Click="BtnClose_Click" >
+                        </Button>
+                        <Button x:Name="BtnMin"
+                                Margin="0,0,38,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonMin}" 
+                                Click="BtnMin_Click" >
+                        </Button>
+                        <Grid Margin="0,29.33,0,0">
+                            <Border Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"  
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Margin}"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              CornerRadius="10"  >
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LoginRegist_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
+                        <Border x:Name="Bd" CornerRadius="10" 
+                                Height="{TemplateBinding Height}" 
+                                Width="{TemplateBinding Width}">
+                            <Border.Background>
+                                <ImageBrush x:Name="Bg" ImageSource="{Binding Path=Tag,ElementName=Win,Converter={StaticResource TagToImageSource}}" />
+                            </Border.Background>
+                        </Border>
+                        <Label Content="{TemplateBinding Title}" 
+                               FontSize="{TemplateBinding FontSize}" 
+                               FontWeight="{TemplateBinding FontWeight}" 
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" />
+                        <Button x:Name="BtnClose" 
+                                Margin="0,5,10,0" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Style="{DynamicResource ButtonClose}"
+                                Click="BtnClose_Click" >
+                        </Button>
+                        <Button x:Name="BtnMin"
+                                Margin="0,5,38,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonMin}" 
+                                Click="BtnMin_Click" >
+                        </Button>
+                        <Button x:Name="BtnSwitchSkin"
+                                Margin="0,5,65,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonSwitchSkin}" 
+                                PreviewMouseLeftButtonDown="BtnSwitchSkin_PreviewMouseLeftButtonDown">
+                            <Button.ContextMenu>
+                                <ContextMenu x:Name="SkinContextMenu" Visibility="Collapsed"/>
+                            </Button.ContextMenu>
+                        </Button>
+                        <Button x:Name="BtnSwitchLanguage"
+                                Margin="0,5,91,0" 
+                                Content="{DynamicResource SwitchLanguage}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonSwitchLanguage}" 
+                                Click="BtnSwitchLanguage_Click" >
+                        </Button>
+                        <Button x:Name="BtnSetting"
+                                Margin="0,5,121,0" 
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonSet}" 
+                                PreviewMouseLeftButtonDown="BtnSetting_PreviewMouseLeftButtonDown">
+                            <Button.ContextMenu>
+                                <ContextMenu x:Name="SettingContextMenu" Visibility="Collapsed"/>
+                            </Button.ContextMenu>
+                        </Button>
+                        <Grid Margin="0,29.33,0,0">
+                            <Border Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"  
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Margin}"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              CornerRadius="10"  >
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Popup_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
+                        <Border x:Name="Bd" CornerRadius="10" 
+                                Height="{TemplateBinding Height}" 
+                                Width="{TemplateBinding Width}"
+                                Background="{TemplateBinding Background}">
+                        </Border>
+                        <Label Content="{TemplateBinding Title}" 
+                               FontWeight="{TemplateBinding FontWeight}" 
+                               FontSize="{TemplateBinding FontSize}"
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top" />
+                        <Button x:Name="BtnClose" 
+                                Margin="0,5,10,0" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Top" 
+                                Style="{DynamicResource ButtonClose}"
+                                Click="BtnClose_Click" >
+                        </Button>
+                        <Grid Margin="0,29.33,0,0">
+                            <Border Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"  
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              Padding="{TemplateBinding Margin}"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              CornerRadius="10"  >
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!--WindowTitle-->
+    <system:String x:Key="WindowLoginTitle">CCTLogin</system:String>
+    <system:String x:Key="WindowContactTitle">CCTContact</system:String>
+    <system:String x:Key="WindowFeedBackTitle">CCTFeedBack</system:String>
+    <system:String x:Key="WindowHelpTitle">CCTHelp</system:String>
+
+
+    <!--WindowFunc-->
+    <system:String x:Key="SwitchLanguage">En</system:String>
+    
+    <!--Zh/En-->
+    <system:String x:Key="En">En</system:String>
+    <system:String x:Key="En_US">En_US</system:String>
+
+    <!--Login-->
+    <system:String x:Key="PleaseInputUserAccount">PleaseInputAccount...</system:String>
+    <system:String x:Key="PleaseInputUserPassword">PleaseInputPassword...</system:String>
+    <system:String x:Key="AutoLogin">AutoLogin</system:String>
+    <system:String x:Key="ReAccount">ReAccount</system:String>
+    <system:String x:Key="RegistAccount">RegistAccount</system:String>
+    <system:String x:Key="FoundPassword">FoundPassword</system:String>
+
+    <!--Regist-->
+    
+    <!--Popup-->
+    <system:String x:Key="PhoneName">Phone：</system:String>
+    <system:String x:Key="Phone">15239948664</system:String>
+    <system:String x:Key="E_mailName">E_mail：</system:String>
+    <system:String x:Key="E_mail">1878776239@qq.com</system:String>
+    <system:String x:Key="VersionName">Version：</system:String>
+    <system:String x:Key="Version">v1.0</system:String>
+    
+    <!--Button-->
+    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="Regist">Regist</system:String>
+    <system:String x:Key="Confirm">Confirm</system:String>
+
+
+    <system:String x:Key="WaitDeveloping">Wait Developing...</system:String>
+    
+</ResourceDictionary>

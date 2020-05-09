@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace CCT.Resource.Constants
 {
-    public class ConstantsForString
+    public static class ConstantsForString
     {
-        public static object A => ResourceHelper.FindStringResource("A");
+        //Zh/En
+        public static object Zh => ResourceHelper.FindStringResource("Zh");
+        public static object En => ResourceHelper.FindStringResource("En");
+        public static object Zh_CN => ResourceHelper.FindStringResource("Zh_CN");
+        public static object En_US => ResourceHelper.FindStringResource("En_US");
+
+        //弹窗
+
     }
 }

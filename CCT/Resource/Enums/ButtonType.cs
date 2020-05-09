@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCT.View
+namespace CCT.Resource.Enums
 {
-    class Class1
+    public enum ButtonType
     {
+        Normal,
+        Icon,
+        Text,
+        IconText
     }
 }

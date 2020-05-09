@@ -5,12 +5,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resource\Dictionarys\ThemeResource\ThemeResources.xaml" />
-                <ResourceDictionary Source="Resource\Dictionarys\StyleResource\StyleResources.xaml" />
-                <ResourceDictionary Source="Resource\Dictionarys\StringResource\StringResources.xaml" />
-                <ResourceDictionary Source="Resource\Dictionarys\ImageResource\ImageResources.xaml" />
-                <ResourceDictionary Source="Resource\Dictionarys\ConverterResource\ConverterResources.xaml" />
-                <ResourceDictionary Source="Resource\Dictionarys\DataTemplateResource\DataTemplateResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ImageResource/ImageResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ConverterResource/ConverterResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/DataTemplateResource/DataTemplateResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ThemeResource/ThemeResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/StringResource/En_US.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/StringResource/Zh_CN.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/StyleResource/StyleResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
