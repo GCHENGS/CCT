@@ -58,10 +58,6 @@
       <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fluent, Version=7.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fluent.Ribbon.7.1.0\lib\net45\Fluent.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +77,14 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.1\lib\net451\System.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -95,6 +99,8 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -130,9 +136,15 @@
     <Compile Include="Component\Exceptions\ReadSysConfigFailedException.cs" />
     <Compile Include="Component\Exceptions\ResourceReferenceKeyNotFoundException.cs" />
     <Compile Include="Component\Helpers\TextBoxHelper.cs" />
+    <Compile Include="Model\BaseData\BaseModel.cs" />
     <Compile Include="Model\DataType\CustomMenu.cs" />
+    <Compile Include="Model\DataType\LoadedFile.cs" />
+    <Compile Include="Model\DataType\User.cs" />
+    <Compile Include="Model\Helper\DBUtils.cs" />
     <Compile Include="Model\InterFace\ICustomMenu.cs" />
+    <Compile Include="Model\InterFace\IUser.cs" />
     <Compile Include="Resource\Converters\CornerRadiusToThickness.cs" />
+    <Compile Include="Resource\Converters\StringToBool.cs" />
     <Compile Include="Resource\Converters\TagToImageSource.cs" />
     <Compile Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml.cs">
       <DependentUpon>WindowStyle.xaml</DependentUpon>
@@ -143,27 +155,64 @@
     <Compile Include="Resource\Constants\ConstantsForMessageBox.cs" />
     <Compile Include="Resource\Constants\ConstantsForString.cs" />
     <Compile Include="Resource\Constants\ErrorMessage.cs" />
-    <Compile Include="Resource\Converters\Class1.cs" />
     <Compile Include="Resource\Enums\ButtonType.cs" />
     <Compile Include="Resource\Enums\IconDirection.cs" />
     <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
-    <Compile Include="ViewModel\LoginRegist\LoginWindowViewModel.cs" />
-    <Compile Include="ViewModel\PopupWindow\ContactWindowViewModel.cs" />
-    <Compile Include="ViewModel\PopupWindow\FeedBackWindowViewModel.cs" />
-    <Compile Include="ViewModel\PopupWindow\HelpWindowViewModel.cs" />
+    <Compile Include="Resource\Helpers\FileDialogHelper.cs" />
+    <Compile Include="Resource\Helpers\FileHelper\PropertiesHelper.cs" />
+    <Compile Include="Resource\Helpers\InterFace\Iplug.cs" />
+    <Compile Include="Resource\Helpers\PlugToLower.cs" />
+    <Compile Include="Resource\Helpers\PlugToUpper.cs" />
+    <Compile Include="Resource\Helpers\RegexHelper.cs" />
+    <Compile Include="Resource\Helpers\RichTextBoxHelper.cs" />
+    <Compile Include="Resource\Helpers\StringHelper.cs" />
+    <Compile Include="Resource\Helpers\FileHelper\XmlHelper.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModel\Login\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\AboutViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\ContactViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\HelpViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\PersonViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\ReplaceViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\SelectNextViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\ToolInfoViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\UpdatePwdViewModel.cs" />
+    <Compile Include="ViewModel\PopupWindow\UpdateTelViewModel.cs" />
     <Compile Include="ViewModel\Shell\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Common\ViewModelBase.cs" />
+    <Compile Include="ViewModel\UserControl\MainXmlViewModel.cs" />
     <Compile Include="View\Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PopupWindow\ContactWindow.xaml.cs">
-      <DependentUpon>ContactWindow.xaml</DependentUpon>
+    <Compile Include="View\PopupWindow\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PopupWindow\FeedBackWindow.xaml.cs">
-      <DependentUpon>FeedBackWindow.xaml</DependentUpon>
+    <Compile Include="View\PopupWindow\Contact.xaml.cs">
+      <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PopupWindow\HelpWindow.xaml.cs">
-      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    <Compile Include="View\PopupWindow\Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\Person.xaml.cs">
+      <DependentUpon>Person.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\Replace.xaml.cs">
+      <DependentUpon>Replace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\SelectNext.xaml.cs">
+      <DependentUpon>SelectNext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\ToolInfo.xaml.cs">
+      <DependentUpon>ToolInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\UpdatePwd.xaml.cs">
+      <DependentUpon>UpdatePwd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PopupWindow\UpdateTel.xaml.cs">
+      <DependentUpon>UpdateTel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControl\MainXml.xaml.cs">
+      <DependentUpon>MainXml.xaml</DependentUpon>
     </Compile>
     <Page Include="Resource\Dictionarys\ColorsResource\Colors.xaml">
       <SubType>Designer</SubType>
@@ -237,15 +286,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PopupWindow\ContactWindow.xaml">
+    <Page Include="View\PopupWindow\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PopupWindow\FeedBackWindow.xaml">
+    <Page Include="View\PopupWindow\Contact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PopupWindow\HelpWindow.xaml">
+    <Page Include="View\PopupWindow\Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\Person.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\Replace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\SelectNext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\ToolInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\UpdatePwd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PopupWindow\UpdateTel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +358,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControl\MainXml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -311,6 +388,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Resource\Dictionarys\ColorsResource\GeneratorParameters.json" />
+    <None Include="Service\DB\db.properties" />
     <Resource Include="Resource\Dictionarys\FontsResource\fontawesome-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -318,9 +396,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component\Behaviors\" />
-    <Folder Include="Model\BaseData\" />
-    <Folder Include="Service\" />
-    <Folder Include="ViewModel\UserControl\" />
+    <Folder Include="dll\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\set.png" />

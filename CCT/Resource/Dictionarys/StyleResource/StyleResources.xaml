@@ -5,21 +5,21 @@
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/WindowStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ButtonStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/CheckBoxStyle.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ContextMenuStyle.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ContextMenuStyle.xaml" />-->
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/HyperLinkStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/LabelStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBlockStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBoxStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TootipStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style BasedOn="{StaticResource StandardLabel}" TargetType="Label"/>
 
-    <Style BasedOn="{StaticResource StandardHyperLink}" TargetType="Hyperlink"/>
+    <!--<Style BasedOn="{StaticResource StandardHyperLink}" TargetType="Hyperlink"/>-->
 
-    <Style BasedOn="{StaticResource DefaultToolTipStyle}" TargetType="ToolTip"/>
+    <!--<Style BasedOn="{StaticResource DefaultToolTipStyle}" TargetType="ToolTip"/>-->
 
-    <Style BasedOn="{StaticResource StandardButton}" TargetType="Button"/>
+    <!--<Style BasedOn="{StaticResource StandardButton}" TargetType="Button"/>-->
 
     <Style BasedOn="{StaticResource StandardTextBlock}" TargetType="TextBlock"/>
     

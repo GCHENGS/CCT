@@ -2,7 +2,10 @@
 
 namespace CCT.ViewModel
 {
-    public class HelpWindowViewModel:ViewModelBase
+    /// <summary>
+    /// 帮助视图模型
+    /// </summary>
+    public class HelpViewModel : ViewModelBase
     {
         #region 私有域
 
@@ -22,7 +25,7 @@ namespace CCT.ViewModel
 
         #region 构造方法
 
-        public HelpWindowViewModel()
+        public HelpViewModel()
         {
             Version = ResourceHelper.FindStringResource("Version");
         }

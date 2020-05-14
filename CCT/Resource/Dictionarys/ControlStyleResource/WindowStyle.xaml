@@ -190,6 +190,7 @@
 
     <Style x:Key="Popup_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
         <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Background" Value="Gainsboro"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">

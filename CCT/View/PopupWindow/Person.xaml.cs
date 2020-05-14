@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace CCT.View
 {
     /// <summary>
-    /// FeedBackWindow.xaml 的交互逻辑
+    /// Person.xaml 的交互逻辑
     /// </summary>
-    public partial class FeedBackWindow : Window
+    public partial class Person : Window
     {
-        public FeedBackWindow()
+        public Person()
         {
             InitializeComponent();
         }

@@ -31,7 +31,7 @@
     <SolidColorBrush x:Key="FontBrush" Color="#585858"></SolidColorBrush>
     <SolidColorBrush x:Key="FontBtnBrush" Color="White"></SolidColorBrush>
     
-    <Style TargetType="CheckBox">
+    <Style x:Key="LoginCheckBoxStyle" TargetType="CheckBox">
         <Setter Property="Height" Value="17" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>

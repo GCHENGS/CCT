@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:CCT.Resource.Converters">
     
+    <!--转换器-->
     <converter:CornerRadiusToThickness x:Key="CornerRadiusToThickness"></converter:CornerRadiusToThickness>
     <converter:TagToImageSource x:Key="TagToImageSource"></converter:TagToImageSource>
+    <converter:StringToBool x:Key="StringToBoolConverter"></converter:StringToBool>
     
 </ResourceDictionary>

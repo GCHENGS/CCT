@@ -88,7 +88,7 @@
                           IsThreeState="False" 
                           HorizontalAlignment="Center" 
                           VerticalAlignment="Center" 
-                          Height="22">
+                          Height="22" Style="{StaticResource LoginCheckBoxStyle}">
                     <CheckBox.Triggers>
                         <EventTrigger RoutedEvent="CheckBox.Checked">
                             <BeginStoryboard>
@@ -134,7 +134,7 @@
                            IsThreeState="False" 
                            HorizontalAlignment="Left" 
                            VerticalAlignment="Center" 
-                           Height="22">
+                           Height="22" Style="{StaticResource LoginCheckBoxStyle}">
                     <CheckBox.Triggers>
                         <EventTrigger RoutedEvent="CheckBox.Checked">
                             <BeginStoryboard>

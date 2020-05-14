@@ -5,6 +5,9 @@ using System.Windows.Input;
 
 namespace CCT.Resource.Helpers
 {
+    /// <summary>
+    /// 创建菜单帮助类
+    /// </summary>
     public class CustomMenuHelper
     {
         #region 创建菜单项

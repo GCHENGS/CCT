@@ -5,6 +5,7 @@ using CCT.View;
 using CCT.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -240,9 +241,9 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
         /// <param name="e"></param>
         private void ContactMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ContactWindow contact = new ContactWindow()
+            Contact contact = new Contact()
             {
-                DataContext = new ContactWindowViewModel()
+                DataContext = new ContactViewModel()
             };
             contact.ShowDialog();
         }
@@ -254,11 +255,11 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
         /// <param name="e"></param>
         private void FeedbackMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow help = new HelpWindow()
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://www.baidu.com 吗？", "CCT用户反馈", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (box == MessageBoxResult.OK)
             {
-                DataContext = new HelpWindowViewModel()
-            };
-            help.ShowDialog();
+                Process.Start("http://www.baidu.com");
+            }
         }
 
         /// <summary>
@@ -268,9 +269,9 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
         /// <param name="e"></param>
         private void HelpMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            HelpWindow help = new HelpWindow()
+            Help help = new Help()
             {
-                DataContext = new HelpWindowViewModel()
+                DataContext = new HelpViewModel()
             };
             help.ShowDialog();
         }

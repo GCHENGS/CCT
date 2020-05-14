@@ -2,7 +2,10 @@
 
 namespace CCT.ViewModel
 {
-    public class ContactWindowViewModel:ViewModelBase
+    /// <summary>
+    /// 联系视图模型
+    /// </summary>
+    public class ContactViewModel : ViewModelBase
     {
         #region 私有域
 
@@ -29,7 +32,7 @@ namespace CCT.ViewModel
 
         #region 构造方法
 
-        public ContactWindowViewModel()
+        public ContactViewModel()
         {
             Phone = ResourceHelper.FindStringResource("Phone");
             E_mail = ResourceHelper.FindStringResource("E_mail");

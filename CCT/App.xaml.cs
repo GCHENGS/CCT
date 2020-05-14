@@ -15,7 +15,7 @@ namespace CCT
     {
         private void OnAppStartup_UpdateThemeName(object sender, StartupEventArgs e)
         {
-            DevExpress.Xpf.Core.ApplicationThemeHelper.UpdateApplicationThemeName();
+            //DevExpress.Xpf.Core.ApplicationThemeHelper.UpdateApplicationThemeName();
         }
         public static string Language { get; set; }
 

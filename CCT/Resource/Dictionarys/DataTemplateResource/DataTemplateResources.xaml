@@ -2,26 +2,47 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:view="clr-namespace:CCT.View"
                     xmlns:viewmodel="clr-namespace:CCT.ViewModel">
-    
     <!--主窗体-->
     <DataTemplate DataType="{x:Type viewmodel:MainWindowViewModel}">
         <view:MainWindow/>
     </DataTemplate>
     
-    <!--登录-->
+    <!--登录部分-->
     <DataTemplate DataType="{x:Type viewmodel:LoginWindowViewModel}">
         <view:LoginWindow/>
     </DataTemplate>
     
-    <!--窗口设置-->
-    <!--<DataTemplate DataType="{x:Type viewmodel:ContactWindowViewModel}">
-        <view:ContactWindow/>
-    </DataTemplate>-->
-    <DataTemplate DataType="{x:Type viewmodel:FeedBackWindowViewModel}">
-        <view:FeedBackWindow/>
+    <!--弹窗部分-->
+    <DataTemplate DataType="{x:Type viewmodel:ContactViewModel}">
+        <view:Contact/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:HelpWindowViewModel}">
-        <view:HelpWindow/>
+    <DataTemplate DataType="{x:Type viewmodel:HelpViewModel}">
+        <view:Help/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type viewmodel:ReplaceViewModel}">
+        <view:Replace/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:SelectNextViewModel}">
+        <view:SelectNext/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:AboutViewModel}">
+        <view:About/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:ToolInfoViewModel}">
+        <view:ToolInfo/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:PersonViewModel}">
+        <view:Person/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:UpdatePwdViewModel}">
+        <view:UpdatePwd/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:UpdateTelViewModel}">
+        <view:UpdateTel/>
+    </DataTemplate>
+    
+    <!--解析部分-->
+    <DataTemplate DataType="{x:Type viewmodel:MainXmlViewModel}">
+        <view:MainXml/>
+    </DataTemplate>
 </ResourceDictionary>

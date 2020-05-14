@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 namespace CCT.View
 {
     /// <summary>
-    /// ContactWindow.xaml 的交互逻辑
+    /// UpdatePwd.xaml 的交互逻辑
     /// </summary>
-    public partial class ContactWindow : Window
+    public partial class UpdatePwd : Window
     {
-        public ContactWindow()
+        public UpdatePwd()
         {
             InitializeComponent();
+            oldPwd.Focus();
         }
 
         /// <summary>
