@@ -3,8 +3,12 @@
                     xmlns:converter="clr-namespace:CCT.Resource.Converters">
     
     <!--转换器-->
-    <converter:CornerRadiusToThickness x:Key="CornerRadiusToThickness"></converter:CornerRadiusToThickness>
-    <converter:TagToImageSource x:Key="TagToImageSource"></converter:TagToImageSource>
-    <converter:StringToBool x:Key="StringToBoolConverter"></converter:StringToBool>
-    
+    <converter:CornerRadiusToThickness x:Key="CornerRadiusToThickness"/>
+    <converter:TagToImageSource x:Key="TagToImageSource"/>
+    <converter:StringToBool x:Key="StringToBoolConverter"/>
+    <converter:MultiBindingDataConverter x:Key="MultiBindingDataConverter"/>
+    <converter:ListCountToBoolConverter x:Key="ListCountToBoolConverter"/>
+    <converter:ObjectToBoolConverter x:Key="ObjectToBoolConverter"/>
+    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+   
 </ResourceDictionary>

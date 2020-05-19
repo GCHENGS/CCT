@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:view="clr-namespace:CCT.View"
                     xmlns:viewmodel="clr-namespace:CCT.ViewModel">
+    
     <!--主窗体-->
     <DataTemplate DataType="{x:Type viewmodel:MainWindowViewModel}">
         <view:MainWindow/>
@@ -42,7 +43,22 @@
     </DataTemplate>
     
     <!--解析部分-->
-    <DataTemplate DataType="{x:Type viewmodel:MainXmlViewModel}">
-        <view:MainXml/>
+    <DataTemplate DataType="{x:Type viewmodel:XmlParseWindowViewModel}">
+        <view:XmlParseWindow/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:InIParseWindowViewModel}">
+        <view:InIParseWindow/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:JsonParseWindowViewModel}">
+        <view:JsonParseWindow/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:PropertiesParseWindowViewModel}">
+        <view:PropertiesParseWindow/>
+    </DataTemplate>
+    
+    <!--补充-->
+    <DataTemplate DataType="{x:Type viewmodel:LoadingViewModl}">
+        <view:Loading/>
+    </DataTemplate>
+    
 </ResourceDictionary>

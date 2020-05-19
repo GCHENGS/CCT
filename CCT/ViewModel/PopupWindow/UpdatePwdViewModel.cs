@@ -75,12 +75,12 @@ namespace CCT.ViewModel
         {
             if(string.IsNullOrWhiteSpace(oldPassword))
             {
-                MessageBox.Show("请先输入旧密码...","信息提示",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("请先输入旧密码...","信息提示",MessageBoxButton.OK,MessageBoxImage.Information);
                 return;
             }
             if(!currentUser.UserPassword.Equals(oldPassword))
             {
-                MessageBox.Show("旧密码不正确，请重新输入旧密码...","信息提示",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("旧密码不正确，请重新输入旧密码...","信息提示",MessageBoxButton.OK,MessageBoxImage.Information);
                 OldPassword = string.Empty;
                 return;
             }
@@ -88,13 +88,13 @@ namespace CCT.ViewModel
             {
                 if(string.IsNullOrWhiteSpace(newPassword))
                 {
-                    MessageBox.Show("请输入新密码...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("请输入新密码...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
 
                 if(newPassword.Equals(oldPassword))
                 {
-                    MessageBox.Show("新旧密码一致，请重新输入新密码...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("新旧密码一致，请重新输入新密码...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     NewPassword = string.Empty;
                     return;
                 }

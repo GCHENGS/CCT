@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CCT.View
 {
     /// <summary>
-    /// MainXml.xaml 的交互逻辑
+    /// JsonParseWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainXml : UserControl
+    public partial class JsonParseWindow : Window
     {
-        public MainXml()
+        public JsonParseWindow()
         {
             InitializeComponent();
         }

@@ -4,6 +4,6 @@ namespace CCT.Model
 {
     public class BaseModel : BindableBase
     {
-
+        
     }
 }

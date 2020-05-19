@@ -3,10 +3,27 @@
                     xmlns:controls="clr-namespace:CCT.Component.Controls"
                     xmlns:helpers="clr-namespace:CCT.Component.Helpers">
 
-    <!--<Style TargetType="TextBox">
-        
-    </Style>-->
-
+    <Style x:Key="StandardTextBox" TargetType="TextBox">
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsReadOnly" Value="False"></Condition>
+                    <Condition Property="IsMouseOver" Value="True"></Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="Gainsboro"/>
+                <Setter Property="BorderBrush" Value="Red"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsReadOnly" Value="False"></Condition>
+                    <Condition Property="IsFocused" Value="True"></Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="Gainsboro"/>
+                <Setter Property="BorderBrush" Value="Red"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="StandardExtendTextBox" TargetType="{x:Type controls:ExtendTextBox}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

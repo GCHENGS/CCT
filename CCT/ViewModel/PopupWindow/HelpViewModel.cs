@@ -27,6 +27,7 @@ namespace CCT.ViewModel
 
         public HelpViewModel()
         {
+            Title = "帮助-CCT通用配置工具";
             Version = ResourceHelper.FindStringResource("Version");
         }
 

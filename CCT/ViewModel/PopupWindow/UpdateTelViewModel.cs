@@ -66,12 +66,12 @@ namespace CCT.ViewModel
         {
             if (string.IsNullOrWhiteSpace(newUserPhone))
             {
-                MessageBox.Show("请输入电话...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("请输入电话...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             if (currentUser.UserPhone.Equals(newUserPhone))
             {
-                MessageBox.Show("新旧电话一样，请重新输入...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("新旧电话一样，请重新输入...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 NewUserPhone = string.Empty;
                 return;
             }
@@ -80,7 +80,7 @@ namespace CCT.ViewModel
 
                 if(!RegexHelper.IsPhoneNumber(newUserPhone))
                 {
-                    MessageBox.Show("非法手机号，请重新输入...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("非法手机号，请重新输入...", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     NewUserPhone = string.Empty;
                     return;
                 }

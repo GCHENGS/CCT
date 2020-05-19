@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CCT.View"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Style="{StaticResource Popup_Window}" FontSize="12"
-        Title="查找替换" Height="210" Width="400">
+        Title="{Binding Path=Title}"  Height="210" Width="400">
     <Grid>
         <Label x:Name="label1" Content="查找内容：" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="80" Height="25"/>
         <Label x:Name="label2" Content="替换为：" HorizontalAlignment="Left" Height="25" Margin="10,75,0,0" VerticalAlignment="Top" Width="80"/>

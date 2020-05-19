@@ -58,6 +58,17 @@
       <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>True</Private>
@@ -136,14 +147,30 @@
     <Compile Include="Component\Exceptions\ReadSysConfigFailedException.cs" />
     <Compile Include="Component\Exceptions\ResourceReferenceKeyNotFoundException.cs" />
     <Compile Include="Component\Helpers\TextBoxHelper.cs" />
+    <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Model\BaseData\BaseModel.cs" />
     <Compile Include="Model\DataType\CustomMenu.cs" />
+    <Compile Include="Model\DataType\DataList.cs" />
+    <Compile Include="Model\DataType\Definitions.cs" />
+    <Compile Include="Model\DataType\Item.cs" />
     <Compile Include="Model\DataType\LoadedFile.cs" />
+    <Compile Include="Model\DataType\PropertyItem.cs" />
+    <Compile Include="Model\DataType\RecentFile.cs" />
+    <Compile Include="Model\DataType\SavedLastLoginUser.cs" />
+    <Compile Include="Model\DataType\SavedLastOpenFile.cs" />
+    <Compile Include="Model\DataType\SavedRecentFile.cs" />
+    <Compile Include="Model\DataType\SectionItem.cs" />
+    <Compile Include="Model\DataType\SysConfig.cs" />
     <Compile Include="Model\DataType\User.cs" />
     <Compile Include="Model\Helper\DBUtils.cs" />
     <Compile Include="Model\InterFace\ICustomMenu.cs" />
+    <Compile Include="Model\InterFace\IDefinitions.cs" />
     <Compile Include="Model\InterFace\IUser.cs" />
+    <Compile Include="Resource\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resource\Converters\CornerRadiusToThickness.cs" />
+    <Compile Include="Resource\Converters\ListCountToBoolConverter.cs" />
+    <Compile Include="Resource\Converters\MultiBindingDataConverter.cs" />
+    <Compile Include="Resource\Converters\ObjectToBoolConverter.cs" />
     <Compile Include="Resource\Converters\StringToBool.cs" />
     <Compile Include="Resource\Converters\TagToImageSource.cs" />
     <Compile Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml.cs">
@@ -157,9 +184,14 @@
     <Compile Include="Resource\Constants\ErrorMessage.cs" />
     <Compile Include="Resource\Enums\ButtonType.cs" />
     <Compile Include="Resource\Enums\IconDirection.cs" />
+    <Compile Include="Resource\Enums\ImageFormat.cs" />
+    <Compile Include="Resource\Enums\MultiBindingFormatType.cs" />
     <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
     <Compile Include="Resource\Helpers\FileDialogHelper.cs" />
+    <Compile Include="Resource\Helpers\FileHelper\InIHelper.cs" />
+    <Compile Include="Resource\Helpers\FileHelper\JsonHelper.cs" />
     <Compile Include="Resource\Helpers\FileHelper\PropertiesHelper.cs" />
+    <Compile Include="Resource\Helpers\ImageGenerateHelper.cs" />
     <Compile Include="Resource\Helpers\InterFace\Iplug.cs" />
     <Compile Include="Resource\Helpers\PlugToLower.cs" />
     <Compile Include="Resource\Helpers\PlugToUpper.cs" />
@@ -167,8 +199,14 @@
     <Compile Include="Resource\Helpers\RichTextBoxHelper.cs" />
     <Compile Include="Resource\Helpers\StringHelper.cs" />
     <Compile Include="Resource\Helpers\FileHelper\XmlHelper.cs" />
+    <Compile Include="Resource\Helpers\VisualTreeHelpers.cs" />
+    <Compile Include="Resource\Helpers\WordGenerateHelper.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModel\Login\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModel\Parse\InIParseWindowViewModel.cs" />
+    <Compile Include="ViewModel\Parse\JsonParseWindowViewModel.cs" />
+    <Compile Include="ViewModel\Parse\PropertiesParseWindowViewModel.cs" />
+    <Compile Include="ViewModel\Parse\XmlParseWindowViewModel.cs" />
     <Compile Include="ViewModel\PopupWindow\AboutViewModel.cs" />
     <Compile Include="ViewModel\PopupWindow\ContactViewModel.cs" />
     <Compile Include="ViewModel\PopupWindow\HelpViewModel.cs" />
@@ -180,9 +218,21 @@
     <Compile Include="ViewModel\PopupWindow\UpdateTelViewModel.cs" />
     <Compile Include="ViewModel\Shell\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Common\ViewModelBase.cs" />
-    <Compile Include="ViewModel\UserControl\MainXmlViewModel.cs" />
+    <Compile Include="ViewModel\UserControl\LoadingViewModel.cs" />
     <Compile Include="View\Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Parse\InIParseWindow.xaml.cs">
+      <DependentUpon>InIParseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Parse\JsonParseWindow.xaml.cs">
+      <DependentUpon>JsonParseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Parse\PropertiesParseWindow.xaml.cs">
+      <DependentUpon>PropertiesParseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Parse\XmlParseWindow.xaml.cs">
+      <DependentUpon>XmlParseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PopupWindow\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -211,8 +261,8 @@
     <Compile Include="View\PopupWindow\UpdateTel.xaml.cs">
       <DependentUpon>UpdateTel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\MainXml.xaml.cs">
-      <DependentUpon>MainXml.xaml</DependentUpon>
+    <Compile Include="View\UserControl\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Page Include="Resource\Dictionarys\ColorsResource\Colors.xaml">
       <SubType>Designer</SubType>
@@ -227,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\Dictionarys\ControlStyleResource\ContextMenuStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\DataGridStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +337,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\Dictionarys\StringResource\Zh_CN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Parse\InIParseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Parse\JsonParseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Parse\PropertiesParseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Parse\XmlParseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -358,7 +428,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControl\MainXml.xaml">
+    <Page Include="View\UserControl\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,7 +466,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component\Behaviors\" />
-    <Folder Include="dll\" />
+    <Folder Include="Dll\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\set.png" />

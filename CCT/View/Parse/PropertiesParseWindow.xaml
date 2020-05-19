@@ -1,0 +1,164 @@
+﻿<Window x:Class="CCT.View.PropertiesParseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CCT.View"
+        xmlns:enum="clr-namespace:CCT.Resource.Enums"
+        xmlns:controls="clr-namespace:CCT.Component.Controls"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="{Binding Path=Title}" Height="400" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--菜单栏-->
+        <DockPanel x:Name="menu" Grid.Row="0">
+            <Menu>
+                <MenuItem Header="导出(E)" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}">
+                    <MenuItem Header="导出为Excel" Command="{Binding Path=ExportExcelCommand}"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="保存S)" Command="{Binding Path=SaveCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"></MenuItem>
+            </Menu>
+        </DockPanel>
+        <!--处理区-->
+        <Grid x:Name="main" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0" LastChildFill="True">
+                <controls:ExtendTextBox x:Name="SearchText" DockPanel.Dock="Top" Style="{StaticResource WaterMarkExtendTextBoxCanDel}" WaterMark="快速搜索" Text="{Binding Path=SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></controls:ExtendTextBox>
+                <ListBox x:Name="keyList" Margin="3" ItemsSource="{Binding Path=PropertyItemList}" SelectedItem="{Binding Path=CurrentPropertyItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardListBox}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource MultiBindingDataConverter}" ConverterParameter="{x:Static enum:MultiBindingFormatType.CommonFormat}">
+                                                    <Binding Path="KeyName"/>
+                                                    <Binding Path="KeyValue"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=KeyName}" Value="">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=KeyName}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="删除选中" Command="{Binding Path=DelKeyCommand}"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+            </DockPanel>
+            <GridSplitter Grid.Column="1" Width="5" Background="Gainsboro" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1,1,1,0"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="配置项列表" HorizontalContentAlignment="Center"/>
+                <DataGrid Grid.Row="1" Grid.Column="0" CanUserAddRows="False" x:Name="keyDataGrid" ItemsSource="{Binding Path=PropertyItemList}" SelectedItem="{Binding Path=CurrentPropertyItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardDataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="Auto" Header="选择">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
+                                                <Style.Triggers>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </CheckBox.Style>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="Auto" Header="操作">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="删除" Command="{Binding Path=DelCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="*" x:Name="key" Header="键">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="keyTextBox" Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                             PreviewMouseDoubleClick="keyTextBox_PreviewMouseDoubleClick"
+                                             LostFocus="keyTextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
+                                             IsReadOnly="True">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Style.Triggers>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="2*" x:Name="value" Header="值">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="valueTextBox" Text="{Binding Path=KeyValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                             PreviewMouseDoubleClick="valueTextBox_PreviewMouseDoubleClick"
+                                             LostFocus="valueTextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
+                                             IsReadOnly="True">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Style.Triggers>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                    <Button Content="全选" Margin="10" Command="{Binding Path=SelectAllKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
+                    <Button Content="批量删除" Margin="10" Command="{Binding Path=DelBatchKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
+                    <Button Content="添加配置" Margin="10" Command="{Binding Path=AddKeyCommand}"/>
+                    <Button Content="清空配置" Margin="10" Command="{Binding Path=ClearKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"></local:Loading>
+    </Grid>
+</Window>

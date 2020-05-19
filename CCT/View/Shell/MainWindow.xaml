@@ -14,74 +14,58 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
+        <!--菜单栏-->
         <DockPanel x:Name="menu" Grid.Row="0">
             <Menu>
-                <MenuItem Header="文件">
-                    <MenuItem Header="新建">
-                        <MenuItem Header="Xml文件"/>
-                        <MenuItem Header="InI文件"/>
-                        <MenuItem Header="Json文件"/>
-                        <MenuItem Header="Properties文件"/>
+                <MenuItem Header="文件(F)">
+                    <MenuItem Header="新建(N)" InputGestureText="Ctrl+N">
+                        <MenuItem Header="Xml文件" Command="{Binding Path=NewXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="InI文件" Command="{Binding Path=NewInICommand}" CommandParameter="{Binding ElementName=richTextBox}" />
+                        <MenuItem Header="Json文件" Command="{Binding Path=NewJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="Properties文件" Command="{Binding Path=NewPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="打开">
+                    <MenuItem Header="打开(O)" InputGestureText="Ctrl+O">
                         <MenuItem Header="Xml文件" Command="{Binding Path=OpenXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="InI文件" Command="{Binding Path=OpenInICommand}"/>
-                        <MenuItem Header="Json文件" Command="{Binding Path=OpenJsonCommand}"/>
-                        <MenuItem Header="Properties文件" Command="{Binding Path=OpenPropertiesCommand}"/>
+                        <MenuItem Header="InI文件" Command="{Binding Path=OpenInICommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="Json文件" Command="{Binding Path=OpenJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="Properties文件" Command="{Binding Path=OpenPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="保存" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                    <MenuItem Header="另存为">
-                        <MenuItem Header="另存" Command="{Binding Path=SaveAsCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <Separator/>
-                        <MenuItem Header="xml->json" />
-                        <MenuItem Header="json->xml" />
+                    <MenuItem Header="保存(S)" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+S"/>
+                    <MenuItem Header="另存为(A)" Command="{Binding Path=SaveAsCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="导出为(E)">
+                        <MenuItem Header="文本" Command="{Binding Path=ExportTCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="Word" Command="{Binding Path=ExportWCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="图片" Command="{Binding Path=ExportPCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="导出为">
-                        <MenuItem Header="文本"/>
-                        <MenuItem Header="Word"/>
-                        <MenuItem Header="Excel"/>
-                        <MenuItem Header="图片"/>
-                    </MenuItem>
-                    <MenuItem Header="打开上次文件"/>
-                    <MenuItem Header="最近文件">
-                        <MenuItem Header="文件1"/>
-                        <MenuItem Header="文件2"/>
-                        <MenuItem Header="文件3"/>
-                        <MenuItem Header="文件4"/>
+                    <MenuItem Header="打开上次文件(W)" Command="{Binding Path=RecentOpenCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="最近文件(Z)">
+                        <MenuItem Header="{Binding Path=List[2].X1}" Tag="{Binding Path=List[2].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                        <MenuItem Header="{Binding Path=List[1].X1}" Tag="{Binding Path=List[1].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                        <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="保存退出"></MenuItem>
-                    <MenuItem Header="不保存退出" Click="btnClose_Click"></MenuItem>
+                    <MenuItem Header="保存退出(X)" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="不保存退出(Y)" Command="{Binding Path=ExitCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
                 </MenuItem>
-                
-                <MenuItem Header="编辑">
-                    <MenuItem Header="撤销" Click="undo_Click"></MenuItem>
-                    <MenuItem Header="重做" Click="redo_Click"></MenuItem>
+                <MenuItem Header="编辑(E)">
+                    <MenuItem Header="撤销(U)" Command="{Binding Path=UndoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Z"></MenuItem>
+                    <MenuItem Header="重做(R)" Command="{Binding Path=RedoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Y"></MenuItem>
                     <Separator/>
-                    <MenuItem Header="剪切" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
-                    <MenuItem Header="复制" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
-                    <MenuItem Header="粘贴" Click="paste_Click" ></MenuItem>
-                    <MenuItem Header="删除" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
+                    <MenuItem Header="剪切(T)" Command="{Binding Path=CutCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
+                    <MenuItem Header="复制(C)" Command="{Binding Path=CopyCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
+                    <MenuItem Header="粘贴(P)" Command="{Binding Path=PasteCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+V"></MenuItem>
+                    <MenuItem Header="删除(D)" Command="{Binding Path=DelCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
                     <Separator/>
-                    <MenuItem Header="全选" Click="selectAll_Click"></MenuItem>
+                    <MenuItem Header="全选(A)" Command="{Binding Path=SelAllCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+A"></MenuItem>
                 </MenuItem>
-                
-                <MenuItem Header="字体">
+                <MenuItem Header="字体(F)">
                     <MenuItem x:Name="Ant" Header="字体" Click="Ant_Click"/>
                     <MenuItem x:Name="Bold" Header="加粗" Click="Bold_Click"/>
                     <MenuItem x:Name="Italic"  Header="斜体" Click="Italic_Click"/>
                     <MenuItem x:Name="AntColor"  Header="字体颜色" Click="AntColor_Click"/>
                 </MenuItem>
-                
-                <MenuItem Header="解析">
-                    <MenuItem Header="Xml文件解析"/>
-                    <MenuItem Header="InI文件解析"/>
-                    <MenuItem Header="Json文件解析"/>
-                    <MenuItem Header="Properties文件解析"/>
-                </MenuItem>
-                
-                <MenuItem Header="工具">
+                <MenuItem Header="解析(P)" Command="{Binding Path=ParseCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                <MenuItem Header="工具(T)">
                     <MenuItem x:Name="top" Header="置顶" Click="top_Click"/>
                     <MenuItem x:Name="bgColor"  Header="背景颜色" Click="bgColor_Click"/>
                     <MenuItem x:Name="autoEnter" Header="自动换行" IsChecked="False" Click="autoEnter_Click"/>
@@ -93,16 +77,14 @@
                     <MenuItem x:Name="gotoA" Header="转换为大写" Click="gotoA_Click"></MenuItem>
                     <MenuItem x:Name="gotoa" Header="转换为小写" Click="gotoa_Click_1"></MenuItem>
                 </MenuItem>
-                
-                <MenuItem Header="帐户">
+                <MenuItem Header="帐户(U)">
                     <MenuItem x:Name="lookAccount" Header="查看帐户" Command="{Binding Path=LookUserCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
                     <MenuItem x:Name="reUserPassword" Header="更新密码" Command="{Binding Path=UpdatePwdCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
                     <MenuItem x:Name="reUserPhone" Header="更新电话" Command="{Binding Path=UpdateTelCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
                     <Separator/>
                     <MenuItem x:Name="switchAccount" Header="切换帐户" Click="switchAccount_Click"></MenuItem>
                 </MenuItem>
-
-                <MenuItem Header="帮助">
+                <MenuItem Header="帮助(H)">
                     <MenuItem x:Name="toolInfo" Header="工具简介" Click="toolInfo_Click"></MenuItem>
                     <MenuItem x:Name="index" Header="官网主页" Click="index_Click"></MenuItem>
                     <MenuItem x:Name="feedback" Header="用户反馈" Click="feedback_Click"></MenuItem>
@@ -112,9 +94,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-
+        <!--编辑区-->
         <Grid x:Name="main" Grid.Row="1">
-            <!--<ContentControl x:Name="view" Content="{Binding Path=CurrentViewModel}"/>-->
             <RichTextBox x:Name="richTextBox" Margin="0" 
                          HorizontalScrollBarVisibility="Disabled" 
                          VerticalScrollBarVisibility="Auto" 
@@ -130,15 +111,15 @@
                 </RichTextBox.Document>-->
                 <RichTextBox.ContextMenu>
                     <ContextMenu x:Name="editContextMenu">
-                        <MenuItem x:Name="undo" Header="撤销" Click="undo_Click"></MenuItem>
-                        <MenuItem x:Name="redo" Header="重做" Click="redo_Click"></MenuItem>
+                        <MenuItem Header="撤销(U)" Click="undo_Click" InputGestureText="Ctrl+Z"></MenuItem>
+                        <MenuItem Header="重做(R)" Click="redo_Click" InputGestureText="Ctrl+Y"></MenuItem>
                         <Separator/>
-                        <MenuItem x:Name="cut" Header="剪切" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
-                        <MenuItem x:Name="copy" Header="复制" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
-                        <MenuItem x:Name="paste" Header="粘贴" Click="paste_Click"></MenuItem>
-                        <MenuItem x:Name="delete" Header="删除" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}"></MenuItem>
+                        <MenuItem Header="剪切(T)" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
+                        <MenuItem Header="复制(C)" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
+                        <MenuItem Header="粘贴(P)" Click="paste_Click" InputGestureText="Ctrl+V"></MenuItem>
+                        <MenuItem Header="删除(D)" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
                         <Separator/>
-                        <MenuItem x:Name="selectAll" Header="全选" Click="selectAll_Click"></MenuItem>
+                        <MenuItem Header="全选(A)" Click="selectAll_Click" InputGestureText="Ctrl+A"></MenuItem>
                     </ContextMenu>
                 </RichTextBox.ContextMenu>
                 <i:Interaction.Triggers>
@@ -151,18 +132,40 @@
                 </i:Interaction.Triggers>
             </RichTextBox>
         </Grid>
-
+        <!--状态栏-->
         <StatusBar x:Name="status" Visibility="Collapsed" Grid.Row="2" Background="Gainsboro">
             <StatusBarItem>
                 <TextBlock Name="statBarText" Text="{Binding Path=Status}"/>
             </StatusBarItem>
         </StatusBar>
-
     </Grid>
-    
-    <!--快捷键-->
+    <!--全局快捷键-->
     <Window.InputBindings>
-        <KeyBinding Gesture="Enter" Command="{Binding MenuDeleteCommand}" />
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="S" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+
+        <KeyBinding Gesture="Ctrl+Z" Command="{Binding Path=UndoCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Ctrl+Y" Command="{Binding Path=RedoCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Ctrl+X" Command="{Binding Path=CutCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Ctrl+C" Command="{Binding Path=CopyCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Ctrl+V" Command="{Binding Path=PasteCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Ctrl+A" Command="{Binding Path=SelAllCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Gesture="Del" Command="{Binding Path=DelCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+
+        <KeyBinding Key="Z" Command="{Binding Path=UndoCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="R" Command="{Binding Path=RedoCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="T" Command="{Binding Path=CutCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="C" Command="{Binding Path=CopyCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="V" Command="{Binding Path=PasteCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="A" Command="{Binding Path=SelAllCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="D" Command="{Binding Path=DelCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+
+        <KeyBinding Gesture="Alt+S" Command="{Binding Path=SaveAsCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+
+        <KeyBinding Gesture="Alt+F4" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        <KeyBinding Key="X" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+        
+        <KeyBinding Key="Y" Command="{Binding Path=ExitCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+
     </Window.InputBindings>
-    
 </Window>

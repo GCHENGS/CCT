@@ -30,6 +30,7 @@ namespace CCT.ViewModel
 
         public PersonViewModel(User user)
         {
+            Title = "帐户信息-CCT通用配置工具";
             CurrentUser = user;
         }
 

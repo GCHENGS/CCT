@@ -34,6 +34,7 @@ namespace CCT.ViewModel
 
         public ContactViewModel()
         {
+            Title = "联系我们-CCT通用配置工具";
             Phone = ResourceHelper.FindStringResource("Phone");
             E_mail = ResourceHelper.FindStringResource("E_mail");
         }

@@ -12,17 +12,14 @@ namespace CCT.Model.DataType
     public class LoadedFile:BaseModel
     {
         #region 私有域
+
         private string fileName;//文件名
-
         private string filePath;//文件路径
-
         private string fileExt;//文件扩展名
-
         private bool isSave = true;//记录是否保存
-
         private bool isOpen = false;//记录是否打开
-
         private bool isEnabled = false;//标记复制,剪切,删除是否可用
+
         #endregion
 
         #region 属性

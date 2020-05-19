@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace CCT.ViewModel
 {
-    public class MainXmlViewModel:ViewModelBase
+    public class JsonParseWindowViewModel : ViewModelBase
     {
-
-        
     }
 }

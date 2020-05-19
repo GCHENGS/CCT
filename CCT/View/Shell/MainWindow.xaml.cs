@@ -359,20 +359,6 @@ namespace CCT.View
 
         #endregion
 
-        #region 关闭
-
-        /// <summary>
-        /// 关闭窗体程序
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnClose_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        #endregion
-
         #region 帮助
 
         /// <summary>

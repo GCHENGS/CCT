@@ -5,9 +5,12 @@
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/WindowStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ButtonStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/CheckBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/DataGridStyle.xaml" />
         <!--<ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ContextMenuStyle.xaml" />-->
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/HyperLinkStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/LabelStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ListBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ListViewStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBlockStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBoxStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TootipStyle.xaml" />

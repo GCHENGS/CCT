@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CCT.View"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Style="{StaticResource Popup_Window}"
-        Title="关于"
+        Title="{Binding Path=Title}" 
         Height="180" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
