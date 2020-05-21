@@ -498,8 +498,8 @@ namespace CCT.ViewModel
                         //打开Xml解析窗口
                         new XmlParseWindow()
                         {
-                            //Owner=main,
-                            //DataContext = new XmlParseWindowViewModel(currentFile)
+                            Owner=main,
+                            DataContext = new XmlParseWindowViewModel(currentFile)
                         }.ShowDialog();
                         break;
                     case "ini":
@@ -514,8 +514,8 @@ namespace CCT.ViewModel
                         //打开Json解析窗口
                         new JsonParseWindow()
                         {
-                            //Owner = main,
-                            //DataContext = new JsonParseWindowViewModel(currentFile)
+                            Owner = main,
+                            DataContext = new JsonParseWindowViewModel(currentFile)
                         }.ShowDialog();
                         break;
                     case "properties":

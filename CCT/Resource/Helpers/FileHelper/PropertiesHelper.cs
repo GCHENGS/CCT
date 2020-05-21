@@ -98,6 +98,10 @@ namespace CCT.Resource.Helpers.FileHelper
                 while (sr.Peek() >= 0)
                 {
                     bufLine = sr.ReadLine();
+                    if (bufLine.Length == 0)
+                    {
+                        continue;//跳过空行
+                    }
                     limit = bufLine.Length;
                     keyLen = 0;
                     valueStart = limit;
@@ -105,7 +109,7 @@ namespace CCT.Resource.Helpers.FileHelper
                     precedingBackslash = false;
                     if (bufLine.StartsWith("#"))
                     {
-                        continue;
+                        continue;//跳过注释
                         //keyLen = bufLine.Length;
                     }
                     while (keyLen < limit)
@@ -278,7 +282,7 @@ namespace CCT.Resource.Helpers.FileHelper
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
-                        excelWS.Cells[i + 1, j + 1] = dt.Rows[i][j].ToString(); //Excel单元格第一个从索引1开始
+                        excelWS.Cells[i + 2, j + 1] = dt.Rows[i][j].ToString(); //Excel单元格索引2开始
                     }
                 }
 

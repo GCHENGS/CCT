@@ -25,34 +25,22 @@ namespace CCT.View
             InitializeComponent();
         }
 
-        private void keyTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        #region 文本框状态
+
+        private void TextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            (sender as TextBox).IsReadOnly = false;
+            TextBox txt = (sender as TextBox);
+            txt.IsReadOnly = false;
+            txt.BorderThickness = new Thickness(1);
         }
 
-        private void valueTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            (sender as TextBox).IsReadOnly = false;
+            TextBox txt = (sender as TextBox);
+            txt.IsReadOnly = true;
+            txt.BorderThickness = new Thickness();
         }
 
-        private void keyTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            (sender as TextBox).IsReadOnly = true;
-        }
-
-        private void valueTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            (sender as TextBox).IsReadOnly = true;
-        }
-
-        private void section_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            (sender as TextBox).IsReadOnly = false;
-        }
-
-        private void section_LostFocus(object sender, RoutedEventArgs e)
-        {
-            (sender as TextBox).IsReadOnly = true;
-        }
+        #endregion
     }
 }

@@ -42,11 +42,11 @@
                 <ListBox Grid.Row="1" Grid.Column="0" x:Name="sectionList" Margin="3" ItemsSource="{Binding Path=SectionItemList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=CurrentSectionItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardListBox}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBox x:Name="section" Text="{Binding Path=SectionName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewMouseDoubleClick="section_PreviewMouseDoubleClick" LostFocus="section_LostFocus">
+                            <TextBox x:Name="section" Text="{Binding Path=SectionName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick" LostFocus="TextBox_LostFocus">
                                 <TextBox.Style>
                                     <Style TargetType="TextBox">
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="TextWrapping" Value="NoWrap"/>
                                         <Setter Property="IsReadOnly" Value="True"/>
                                         <Setter Property="BorderBrush" Value="Transparent"/>
                                         <Setter Property="BorderThickness" Value="0"/>
@@ -78,7 +78,7 @@
                 </ListBox>
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                     <Button Content="添加" Margin="10" Command="{Binding Path=AddSectionCommand}"/>
-                    <Button Content="删除" Margin="10" Command="{Binding Path=DelSectionCommand}"/>
+                    <Button Content="删除" Margin="10" Command="{Binding Path=DelSectionCommand}" IsEnabled="{Binding Path=SectionItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
                     <Button Content="清空" Margin="10" Command="{Binding Path=ClearSectionCommand}" IsEnabled="{Binding Path=SectionItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
                 </StackPanel>
             </Grid>
@@ -130,12 +130,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="keyTextBox" Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                             PreviewMouseDoubleClick="keyTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="keyTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
+                                             PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick"
+                                             LostFocus="TextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="TextWrapping" Value="NoWrap"/>
+                                                <Setter Property="IsReadOnly" Value="True"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Style.Triggers>
 
                                                 </Style.Triggers>
@@ -149,12 +154,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="valueTextBox" Text="{Binding Path=KeyValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             PreviewMouseDoubleClick="valueTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="valueTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
+                                             PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick"
+                                             LostFocus="TextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="TextWrapping" Value="NoWrap"/>
+                                                <Setter Property="IsReadOnly" Value="True"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Style.Triggers>
 
                                                 </Style.Triggers>
@@ -174,6 +184,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <!--加载中-->
         <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"></local:Loading>
     </Grid>
 </Window>

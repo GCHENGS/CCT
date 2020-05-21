@@ -1,5 +1,4 @@
 ﻿using CCT.Model.DataType;
-using CCT.ViewModel;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
@@ -120,7 +119,7 @@ namespace CCT.Resource.Helpers.FileHelper
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
-                        excelWS.Cells[i + 1, j + 1] = dt.Rows[i][j].ToString(); //Excel单元格第一个从索引1开始
+                        excelWS.Cells[i + 2, j + 1] = dt.Rows[i][j].ToString(); //Excel单元格索引2开始
                     }
                 }
 

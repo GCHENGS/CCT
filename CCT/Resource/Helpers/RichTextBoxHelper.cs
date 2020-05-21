@@ -24,11 +24,13 @@ namespace CCT.Resource.Helpers
         {
             if (string.IsNullOrEmpty(filename))
             {
-                throw new ArgumentNullException();
+                MessageBox.Show("文件不存在！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
             if (!File.Exists(filename))
             {
-                throw new FileNotFoundException();
+                MessageBox.Show("文件不存在！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
             using (FileStream stream = File.OpenRead(filename))
             {
@@ -50,7 +52,7 @@ namespace CCT.Resource.Helpers
         {
             if (string.IsNullOrEmpty(filename))
             {
-                throw new ArgumentNullException();
+                MessageBox.Show("路径不存在！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             using (FileStream stream = File.OpenWrite(filename))
             {

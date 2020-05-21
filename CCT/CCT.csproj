@@ -73,6 +73,10 @@
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +105,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -154,6 +159,7 @@
     <Compile Include="Model\DataType\Definitions.cs" />
     <Compile Include="Model\DataType\Item.cs" />
     <Compile Include="Model\DataType\LoadedFile.cs" />
+    <Compile Include="Model\DataType\Node.cs" />
     <Compile Include="Model\DataType\PropertyItem.cs" />
     <Compile Include="Model\DataType\RecentFile.cs" />
     <Compile Include="Model\DataType\SavedLastLoginUser.cs" />
@@ -166,13 +172,17 @@
     <Compile Include="Model\InterFace\ICustomMenu.cs" />
     <Compile Include="Model\InterFace\IDefinitions.cs" />
     <Compile Include="Model\InterFace\IUser.cs" />
+    <Compile Include="Resource\Converters\BoolToOpposite.cs" />
     <Compile Include="Resource\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resource\Converters\CornerRadiusToThickness.cs" />
+    <Compile Include="Resource\Converters\IndentConverter.cs" />
     <Compile Include="Resource\Converters\ListCountToBoolConverter.cs" />
     <Compile Include="Resource\Converters\MultiBindingDataConverter.cs" />
+    <Compile Include="Resource\Converters\ObjectBoolToBoolConverter.cs" />
     <Compile Include="Resource\Converters\ObjectToBoolConverter.cs" />
     <Compile Include="Resource\Converters\StringToBool.cs" />
     <Compile Include="Resource\Converters\TagToImageSource.cs" />
+    <Compile Include="Resource\Converters\VisibleToReverse.cs" />
     <Compile Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml.cs">
       <DependentUpon>WindowStyle.xaml</DependentUpon>
     </Compile>
@@ -185,7 +195,9 @@
     <Compile Include="Resource\Enums\ButtonType.cs" />
     <Compile Include="Resource\Enums\IconDirection.cs" />
     <Compile Include="Resource\Enums\ImageFormat.cs" />
+    <Compile Include="Resource\Enums\JsonType.cs" />
     <Compile Include="Resource\Enums\MultiBindingFormatType.cs" />
+    <Compile Include="Resource\Enums\NodeType.cs" />
     <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
     <Compile Include="Resource\Helpers\FileDialogHelper.cs" />
     <Compile Include="Resource\Helpers\FileHelper\InIHelper.cs" />
@@ -293,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\Dictionarys\ControlStyleResource\Storyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\TabControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -466,7 +482,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component\Behaviors\" />
-    <Folder Include="Dll\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\set.png" />

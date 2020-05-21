@@ -11,9 +11,11 @@
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/LabelStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ListBoxStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/ListViewStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TabControlStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBlockStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TextBoxStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TootipStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Resource/Dictionarys/ControlStyleResource/TreeViewStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource StandardLabel}" TargetType="Label"/>

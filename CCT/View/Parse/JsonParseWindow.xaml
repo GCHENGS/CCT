@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:CCT.View"
         xmlns:enum="clr-namespace:CCT.Resource.Enums"
         xmlns:controls="clr-namespace:CCT.Component.Controls"
@@ -16,164 +17,131 @@
         <!--菜单栏-->
         <DockPanel x:Name="menu" Grid.Row="0">
             <Menu>
-                <MenuItem Header="导出(E)" IsEnabled="{Binding Path=SectionItemList,Converter={StaticResource ListCountToBoolConverter}}">
-                    <MenuItem Header="导出为Excel" Command="{Binding Path=ExportExcelCommand}"></MenuItem>
+                <MenuItem Header="导出(E)" IsEnabled="{Binding Path=RootNodeList,Converter={StaticResource ListCountToBoolConverter}}">
+                    <MenuItem Header="导出键值对为Excel" Command="{Binding Path=ExportExcelCommand}"></MenuItem>
+                    <MenuItem Header="导出为Xml" Command="{Binding Path=ExportXmlCommand}"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="保存S)" Command="{Binding Path=SaveCommand}" IsEnabled="{Binding Path=SectionItemList,Converter={StaticResource ListCountToBoolConverter}}"></MenuItem>
+                <MenuItem Header="保存S)" Command="{Binding Path=SaveCommand}" IsEnabled="{Binding Path=RootNodeList,Converter={StaticResource ListCountToBoolConverter}}"></MenuItem>
             </Menu>
         </DockPanel>
         <!--处理区-->
-        <Grid x:Name="main" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <controls:ExtendTextBox Grid.Row="0" Grid.Column="0" x:Name="SearchText" DockPanel.Dock="Top" Style="{StaticResource WaterMarkExtendTextBoxCanDel}" WaterMark="快速搜索" Text="{Binding Path=SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></controls:ExtendTextBox>
-                <ListBox Grid.Row="1" Grid.Column="0" x:Name="sectionList" Margin="3" ItemsSource="{Binding Path=SectionItemList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=CurrentSectionItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardListBox}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBox x:Name="section" Text="{Binding Path=SectionName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewMouseDoubleClick="section_PreviewMouseDoubleClick" LostFocus="section_LostFocus">
-                                <TextBox.Style>
-                                    <Style TargetType="TextBox">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="TextWrapping" Value="Wrap"/>
-                                        <Setter Property="IsReadOnly" Value="True"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="ToolTip">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource MultiBindingDataConverter}" ConverterParameter="{x:Static enum:MultiBindingFormatType.SectionFormat}">
-                                                    <Binding Path="SectionName"/>
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=SectionName}" Value="">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=SectionName}" Value="{x:Null}">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="删除" Command="{Binding Path=DelSectionCommand}"/>
+        <TabControl Grid.Row="1" Style="{StaticResource StandardTabControlStyle}">
+            <TabItem Header="树状结构" Style="{StaticResource StandardTabItemStyle}">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TreeView Grid.Row="0" x:Name="json" ItemsSource="{Binding Path=RootNodeList}" SelectedItemChanged="json_SelectedItemChanged" Style="{StaticResource StandardTreeView}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                                <TextBox Text="{Binding Path=DisplayName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0" PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick" LostFocus="TextBox_LostFocus" IsReadOnly="True"/>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="插入" Command="{Binding Path=InsertCommand}">
+                                    <MenuItem.Style>
+                                        <Style TargetType="MenuItem">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="false">
+                                                    <Setter Property="IsEnabled" Value="{Binding Path=CurrentNode.CanInsert,Converter={StaticResource ObjectBoolToBoolConverter}}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MenuItem.Style>
+                                </MenuItem>
+                                <MenuItem Header="移除" Command="{Binding Path=RemoveCommand}">
+                                    <MenuItem.Style>
+                                        <Style TargetType="MenuItem">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="false">
+                                                    <Setter Property="IsEnabled" Value="{Binding Path=CurrentNode.CanRemove,Converter={StaticResource ObjectBoolToBoolConverter}}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MenuItem.Style>
+                                </MenuItem>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                    </TreeView>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button x:Name="insert" Content="插入(孩子节点)" Margin="10" Command="{Binding Path=InsertCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="false">
+                                            <Setter Property="IsEnabled" Value="{Binding Path=CurrentNode.CanInsert,Converter={StaticResource ObjectBoolToBoolConverter}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="remove" Content="移除(当前节点)" Margin="10" Command="{Binding Path=RemoveCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="false">
+                                            <Setter Property="IsEnabled" Value="{Binding Path=CurrentNode.CanRemove,Converter={StaticResource ObjectBoolToBoolConverter}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="clear" Content="清空(解析数据)" Margin="10" Command="{Binding Path=ClearCommand}" CommandParameter="{Binding ElementName=xml}" IsEnabled="{Binding Path=RootNodeList,Converter={StaticResource ListCountToBoolConverter}}"/>
+                        <Button x:Name="parse" Content="恢复(解析数据)" Margin="10" Command="{Binding Path=ParseCommand}" IsEnabled="{Binding Path=IsEnabled,ElementName=clear,Converter={StaticResource BoolToOpposite}}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Xml结构(只读)" Style="{StaticResource StandardTabItemStyle}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus">
+                        <i:InvokeCommandAction Command="{Binding GotFocusCommand}" CommandParameter="{Binding ElementName=xml}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <RichTextBox x:Name="xml" Margin="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                    <!--<RichTextBox.Document>
+                               <FlowDocument PageWidth="2048"></FlowDocument>
+                        </RichTextBox.Document>-->
+                    <RichTextBox.ContextMenu>
+                        <ContextMenu x:Name="editContextMenu">
+                            <!--<MenuItem Header="撤销(U)" Click="undo_Click" InputGestureText="Ctrl+Z"></MenuItem>
+                            <MenuItem Header="重做(R)" Click="redo_Click" InputGestureText="Ctrl+Y"></MenuItem>-->
+                            <!--<Separator/>-->
+                            <!--<MenuItem Header="剪切(T)" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>-->
+                            <MenuItem Header="复制(C)" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
+                            <!--<MenuItem Header="粘贴(P)" Click="paste_Click" InputGestureText="Ctrl+V"></MenuItem>-->
+                            <!--<MenuItem Header="删除(D)" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>-->
+                            <Separator/>
+                            <MenuItem Header="全选(A)" Click="selectAll_Click" InputGestureText="Ctrl+A"></MenuItem>
                         </ContextMenu>
-                    </ListBox.ContextMenu>
-                </ListBox>
-                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                    <Button Content="添加" Margin="10" Command="{Binding Path=AddSectionCommand}"/>
-                    <Button Content="删除" Margin="10" Command="{Binding Path=DelSectionCommand}"/>
-                    <Button Content="清空" Margin="10" Command="{Binding Path=ClearSectionCommand}" IsEnabled="{Binding Path=SectionItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                </StackPanel>
-            </Grid>
-            <GridSplitter Grid.Column="1" Width="5" Background="Gainsboro" HorizontalAlignment="Center"/>
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1,1,1,0"/>
-                <Label Grid.Row="0" Grid.Column="0" Content="配置项列表" HorizontalContentAlignment="Center"/>
-                <DataGrid Grid.Row="1" Grid.Column="0" CanUserAddRows="False" x:Name="keyDataGrid" ItemsSource="{Binding Path=PropertyItemList}" Style="{StaticResource StandardDataGridStyle}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="Auto" Header="选择">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsChecked="{Binding Path=IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center">
-                                        <CheckBox.Style>
-                                            <Style TargetType="CheckBox">
-                                                <Style.Triggers>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </CheckBox.Style>
-                                    </CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="Auto" Header="操作">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="删除" Command="{Binding Path=DelCommand}">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Style.Triggers>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="*" x:Name="key" Header="键">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox x:Name="keyTextBox" Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                             PreviewMouseDoubleClick="keyTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="keyTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
-                                                <Style.Triggers>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="2*" x:Name="value" Header="值">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox x:Name="valueTextBox" Text="{Binding Path=KeyValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             PreviewMouseDoubleClick="valueTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="valueTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
-                                                <Style.Triggers>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                    <Button Content="全选" Margin="10" Command="{Binding Path=SelectAllKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                    <Button Content="批量删除" Margin="10" Command="{Binding Path=DelBatchKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                    <Button Content="添加配置" Margin="10" Command="{Binding Path=AddKeyCommand}" IsEnabled="{Binding Path=CurrentSectionItem,Converter={StaticResource ObjectToBoolConverter}}"/>
-                    <Button Content="清空配置" Margin="10" Command="{Binding Path=ClearKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
+                    </RichTextBox.ContextMenu>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding RichTextBoxSelectionChangedCommand}" CommandParameter="{Binding ElementName=xml}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </RichTextBox>
+            </TabItem>
+        </TabControl>
+        <!--加载中-->
         <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"></local:Loading>
     </Grid>
 </Window>

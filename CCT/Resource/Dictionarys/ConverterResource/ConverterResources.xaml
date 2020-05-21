@@ -9,6 +9,10 @@
     <converter:MultiBindingDataConverter x:Key="MultiBindingDataConverter"/>
     <converter:ListCountToBoolConverter x:Key="ListCountToBoolConverter"/>
     <converter:ObjectToBoolConverter x:Key="ObjectToBoolConverter"/>
+    <converter:ObjectBoolToBoolConverter x:Key="ObjectBoolToBoolConverter"/>
     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-   
+    <converter:IndentConverter x:Key="IndentConverter"/>
+    <converter:VisibleToReverse x:Key="VisibleToReverse"/>
+    <converter:BoolToOpposite x:Key="BoolToOpposite"/>
+    
 </ResourceDictionary>

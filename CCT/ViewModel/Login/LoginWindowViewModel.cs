@@ -47,10 +47,12 @@ namespace CCT.ViewModel
         #endregion
 
         #region 命令声明 
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SwitchSkinCommand { get; set; }
+
         #endregion
 
         #region 构造方法

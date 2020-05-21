@@ -34,11 +34,14 @@
                 <ListBox x:Name="keyList" Margin="3" ItemsSource="{Binding Path=PropertyItemList}" SelectedItem="{Binding Path=CurrentPropertyItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardListBox}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
+                            <TextBox x:Name="key" Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick" LostFocus="TextBox_LostFocus">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="TextWrapping" Value="NoWrap"/>
+                                        <Setter Property="IsReadOnly" Value="True"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
                                         <Setter Property="ToolTip">
                                             <Setter.Value>
                                                 <MultiBinding Converter="{StaticResource MultiBindingDataConverter}" ConverterParameter="{x:Static enum:MultiBindingFormatType.CommonFormat}">
@@ -56,8 +59,8 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                                </TextBox.Style>
+                            </TextBox>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ContextMenu>
@@ -115,12 +118,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="keyTextBox" Text="{Binding Path=KeyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                             PreviewMouseDoubleClick="keyTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="keyTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
+                                             PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick"
+                                             LostFocus="TextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="TextWrapping" Value="NoWrap"/>
+                                                <Setter Property="IsReadOnly" Value="True"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Style.Triggers>
 
                                                 </Style.Triggers>
@@ -134,12 +142,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="valueTextBox" Text="{Binding Path=KeyValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             PreviewMouseDoubleClick="valueTextBox_PreviewMouseDoubleClick"
-                                             LostFocus="valueTextBox_LostFocus"
-                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}" 
-                                             IsReadOnly="True">
+                                             PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick"
+                                             LostFocus="TextBox_LostFocus"
+                                             Width="{Binding Path=Width,RelativeSource={RelativeSource AncestorType=DataGridTemplateColumn}}">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="TextWrapping" Value="NoWrap"/>
+                                                <Setter Property="IsReadOnly" Value="True"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Style.Triggers>
 
                                                 </Style.Triggers>
@@ -159,6 +172,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <!--加载中-->
         <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"></local:Loading>
     </Grid>
 </Window>

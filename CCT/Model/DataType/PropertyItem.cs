@@ -33,6 +33,16 @@ namespace CCT.Model.DataType
         public InIParseWindowViewModel InIParseWindowViewModel { get; set; }
 
         /// <summary>
+        /// 关联视图模型-xml
+        /// </summary>
+        public XmlParseWindowViewModel XmlParseWindowViewModel { get; set; }
+
+        /// <summary>
+        /// 关联树节点
+        /// </summary>
+        public Node TreeNode { get; set; }
+
+        /// <summary>
         /// 键名称
         /// </summary>
         public string KeyName
@@ -84,7 +94,6 @@ namespace CCT.Model.DataType
         public PropertyItem(PropertiesParseWindowViewModel propertiesParseWindowViewModel)
         {
             PropertiesParseWindowViewModel = propertiesParseWindowViewModel;
-
             DelCommand = new DelegateCommand(DelPropertiesCommandExecute);
         }
 
@@ -95,8 +104,18 @@ namespace CCT.Model.DataType
         public PropertyItem(InIParseWindowViewModel iniParseWindowViewModel)
         {
             InIParseWindowViewModel = iniParseWindowViewModel;
-
             DelCommand = new DelegateCommand(DelInICommandExecute);
+        }
+
+        /// <summary>
+        /// xml
+        /// </summary>
+        /// <param name="node"></param>
+        public PropertyItem(Node node,XmlParseWindowViewModel xmlParseWindowViewModel)
+        {
+            TreeNode = node;
+            XmlParseWindowViewModel = xmlParseWindowViewModel;
+            DelCommand = new DelegateCommand(DelXmlCommandExecute);
         }
 
         #endregion
@@ -120,6 +139,16 @@ namespace CCT.Model.DataType
             InIParseWindowViewModel?.PropertyItemList.Remove(this);
             InIParseWindowViewModel?.CurrentSectionItem?.PropertyItems.Remove(this);
             InIParseWindowViewModel?.NotifyUI();
+        }
+
+        /// <summary>
+        /// 删除-xml
+        /// </summary>
+        private void DelXmlCommandExecute()
+        {       
+            TreeNode?.Attributies.Remove(this);
+            XmlParseWindowViewModel?.PropertyItemList.Remove(this);
+            XmlParseWindowViewModel?.NotifyUI();
         }
 
         #endregion

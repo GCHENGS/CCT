@@ -17,6 +17,7 @@ namespace CCT
         {
             //DevExpress.Xpf.Core.ApplicationThemeHelper.UpdateApplicationThemeName();
         }
+
         public static string Language { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -25,11 +26,11 @@ namespace CCT
 
             GetLanguage();
 
-            var window = new MainWindow()
+            var window = new LoginWindow()
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = new LoginWindowViewModel()
             };
-            window.Show();
+            window.Show();//开机进入登录界面
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -78,7 +79,7 @@ namespace CCT
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
-             }
+            }
         }
 
         /// <summary>
