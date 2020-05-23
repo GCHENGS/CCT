@@ -39,9 +39,12 @@
                     </MenuItem>
                     <MenuItem Header="打开上次文件(W)" Command="{Binding Path=RecentOpenCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     <MenuItem Header="最近文件(Z)">
-                        <MenuItem Header="{Binding Path=List[2].X1}" Tag="{Binding Path=List[2].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
-                        <MenuItem Header="{Binding Path=List[1].X1}" Tag="{Binding Path=List[1].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
-                        <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Command="{Binding Path=RecentFileCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                        <!--<MenuItem Header="{Binding Path=List[2].X1}" Tag="{Binding Path=List[2].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                        <MenuItem Header="{Binding Path=List[1].X1}" Tag="{Binding Path=List[1].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                        <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />-->
+                        <MenuItem Header="{Binding Path=List[2].X1}" Tag="{Binding Path=List[2].X2}" Click="MenuItem_Click"/>
+                        <MenuItem Header="{Binding Path=List[1].X1}" Tag="{Binding Path=List[1].X2}" Click="MenuItem_Click"/>
+                        <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Click="MenuItem_Click"/>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="保存退出(X)" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>

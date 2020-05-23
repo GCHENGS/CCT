@@ -14,5 +14,6 @@
     <converter:IndentConverter x:Key="IndentConverter"/>
     <converter:VisibleToReverse x:Key="VisibleToReverse"/>
     <converter:BoolToOpposite x:Key="BoolToOpposite"/>
+    <converter:StringToIconConverter x:Key="StringToIconConverter"/>
     
 </ResourceDictionary>

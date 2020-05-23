@@ -2,12 +2,14 @@
 using CCT.Model.DataType;
 using CCT.Resource.Enums;
 using CCT.Resource.Helpers;
+using CCT.Service;
 using CCT.View;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -136,8 +138,7 @@ namespace CCT.ViewModel
 
         public MainWindowViewModel(User user)
         {
-            //CurrentUser = user;
-            CurrentUser = new User();
+            CurrentUser = user;
 
             SysConfig = ConfigHelper.ReadSysConfig();
             SavedLastOpenFile = SysConfig.SavedLastOpenFile;
@@ -752,6 +753,7 @@ namespace CCT.ViewModel
                 //保存系统配置
                 if (ConfigHelper.SaveSysConfig(SysConfig))
                 {
+                    UpdateQuiteDate();
                     win.Close();
                 }
             }
@@ -768,6 +770,7 @@ namespace CCT.ViewModel
                 //保存系统配置
                 if (ConfigHelper.SaveSysConfig(SysConfig))
                 {
+                    UpdateQuiteDate();
                     win.Close();
                 }
             }
@@ -863,14 +866,14 @@ namespace CCT.ViewModel
 
         #endregion
 
-        #region 私有方法
+        #region 打开文件
 
         /// <summary>
         /// 打开指定类型的文件
         /// </summary>
         /// <param name="format"></param>
         /// <param name="richTextBox"></param>
-        private void OpenFile(string format,RichTextBox richTextBox)
+        public void OpenFile(string format,RichTextBox richTextBox)
         {
             if (richTextBox == null) return;
 
@@ -911,20 +914,30 @@ namespace CCT.ViewModel
                 // 改变状态栏
                 Status = currentFile.FilePath;
 
-                SavedLastOpenFile.X1 = currentFile.FileName;
-                SavedLastOpenFile.X2 = currentFile.FilePath;
-                SysConfig.SavedLastOpenFile = SavedLastOpenFile;
-
-                List[0] = List[1];
-                List[1] = List[2];
-                List[2] = new RecentFile()
+                //不包含才更新
+                var flg1 = !SavedLastOpenFile.X2.Equals(currentFile);
+                var flg2 = !List.Select(x => x.X2).Contains(currentFile.FilePath);
+                if (flg1)
                 {
-                    X1 = currentFile.FileName,
-                    X2 = currentFile.FilePath
-                };
-                SysConfig.SavedRecentFile.List = List;
-
-                ConfigHelper.SaveSysConfig(SysConfig);
+                    SavedLastOpenFile.X1 = currentFile.FileName;
+                    SavedLastOpenFile.X2 = currentFile.FilePath;
+                    SysConfig.SavedLastOpenFile = SavedLastOpenFile;
+                }
+                if (flg2)
+                {
+                    List[0] = List[1];
+                    List[1] = List[2];
+                    List[2] = new RecentFile()
+                    {
+                        X1 = currentFile.FileName,
+                        X2 = currentFile.FilePath
+                    };
+                    SysConfig.SavedRecentFile.List = List;
+                }
+                if (flg1 || flg2)
+                {
+                    ConfigHelper.SaveSysConfig(SysConfig);
+                }
 
                 //CurrentViewModel = new MainXmlViewModel();
             }
@@ -935,7 +948,7 @@ namespace CCT.ViewModel
         /// </summary>
         /// <param name="filepath"></param>
         /// <param name="richTextBox"></param>
-        private void OpenFilePath(string filepath, RichTextBox richTextBox)
+        public void OpenFilePath(string filepath, RichTextBox richTextBox)
         {
             if (richTextBox == null) return;
 
@@ -990,6 +1003,19 @@ namespace CCT.ViewModel
 
                 //CurrentViewModel = new MainXmlViewModel();
             }
+        }
+
+        #endregion
+
+        #region 更新退出时间
+
+        /// <summary>
+        /// 更新登录信息到数据库
+        /// </summary>
+        private void UpdateQuiteDate()
+        {
+            CurrentUser.UserQuiteDate = DateTime.Now;
+            UserService.UpdateUserQuiteDate(CurrentUser);
         }
 
         #endregion

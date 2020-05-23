@@ -93,6 +93,18 @@ namespace CCT.Model.DataType
             set { SetProperty(ref userCreateDate, value); }
         }
 
+        /// <summary>
+        /// 是否自动登录
+        /// </summary>
+        [System.ComponentModel.DefaultValue(false)]
+        public bool AutomaticLogon { get; set; }
+
+        /// <summary>
+        /// 是否记住密码
+        /// </summary>
+        [System.ComponentModel.DefaultValue(false)]
+        public bool RememberPwd { get; set; }
+
         #endregion
 
         #region 构造方法

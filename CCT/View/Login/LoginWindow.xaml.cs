@@ -1,26 +1,15 @@
-﻿using CCT.Component.Exceptions;
+﻿using CCT.Config;
+using CCT.Model.DataType;
+using CCT.Service;
 using CCT.ViewModel;
-using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace CCT.View
 {
@@ -29,27 +18,27 @@ namespace CCT.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        #region 构造函数
-        public LoginWindow()
-        {
-            InitializeComponent();
-            this.Loaded += LoginWindow_Loaded;
-            bw.DoWork += bw_DoWork;
-            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
-        }
-        #endregion
-
         #region 局部变量
 
-        LoginWindowViewModel _viewmodel;
-
-        UserInfo user;
+        /// <summary>
+        /// 定义系统配置
+        /// </summary>
+        private SysConfig SysConfig;
 
         /// <summary>
-        /// 生成保存登录信息的XML文件
-        /// 同时获取XML文件数据
+        /// 定义用户
         /// </summary>
-        LoginInfoXmlHelper loginInfoXmlHelper = new LoginInfoXmlHelper();
+        private User User;
+
+        /// <summary>
+        /// 定义上次登录
+        /// </summary>
+        private SavedLastLoginUser SavedLastLoginUser;
+
+        /// <summary>
+        /// 定义上次操作
+        /// </summary>
+        private SaveUserOperator SaveUserOperator;
 
         /// <summary>
         /// 后台执行
@@ -71,17 +60,37 @@ namespace CCT.View
 
         #endregion
 
-        #region 界面事件
+        #region 构造方法
+
+        public LoginWindow()
+        {
+            InitializeComponent();
+            this.Loaded += LoginWindow_Loaded;
+            //bw.DoWork += bw_DoWork;
+            //bw.RunWorkerCompleted += bw_RunWorkerCompleted;
+        }
+
+        #endregion
+
+        #region 注册链接
 
         /// <summary>
         /// 注册
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Hyperlink1_Click(object sender, RoutedEventArgs e)
+        private void RegistLink_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://localhost:8080/CCT/regist");
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/regist 吗？", "CCT新用户注册", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (box == MessageBoxResult.OK)
+            {
+                Process.Start("http://localhost:8080/CCT/regist");
+            }
         }
+
+        #endregion
+
+        #region 忘记密码
 
         /// <summary>
         /// 找回事件
@@ -90,36 +99,17 @@ namespace CCT.View
         /// <param name="e"></param>
         private void FoundLink_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        /// <summary>
-        /// 注册事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RegistLink_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 登录事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
+            Contact contact = new Contact()
             {
-                this.LoadGrid.Visibility = System.Windows.Visibility.Visible;//遮罩层可见
-                bw.RunWorkerAsync();
-            }
-            catch (Exception)
-            {
-                //报错无视
-            }
+                DataContext = new ContactViewModel()
+            };
+            contact.Owner = this;
+            contact.ShowDialog();
         }
+
+        #endregion
+
+        /*#region 登录
 
         /// <summary>
         /// 登陆后台运行
@@ -128,10 +118,9 @@ namespace CCT.View
         /// <param name="e"></param>
         void bw_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //int userID = 0;
-            //反馈
-            //feedBack = _viewmodel.Verification(ref userID);
+            feedBack = Verification();
         }
+
         /// <summary>
         /// 登陆操作后台运行结束后操作
         /// </summary>
@@ -150,29 +139,17 @@ namespace CCT.View
             {
                 case 1:
                     //登录成功
-                    //获取新的登录信息
-                    //var userInfo = new UserInfo
-                    //{
-                    //    AutomaticLogon = (bool)this.checkBox2.IsChecked,
-                    //    RememberPwd = (bool)this.checkBox1.IsChecked,
-                    //    UserName = this.cmb1.Text.Trim(),
-                    //    UserPwd = this.passwordBox1.Password.Trim(),
-                    //};
-                    //if (!(bool)this.checkBox1.IsChecked)
-                    //{
-                    //    userInfo.UserPwd = "";
-                    //}
-                    //listUserInfo.Remove(listUserInfo.FirstOrDefault(u => u.UserName == userInfo.UserName));
-                    //listUserInfo.Insert(0, userInfo);
-                    //保存登录信息
-                    //loginInfoXmlHelper.CreateXml(listUserInfo.ToList());
+                    SaveLogin();
+                    UpdateLoginDate();
                     //生成主窗体
-                    MainWindow mainWindow = new MainWindow();
+                    MainWindow mainWindow = new MainWindow()
+                    {
+                        DataContext = new MainWindowViewModel(User)
+                    };
                     //设置系统主窗体
                     App.Current.MainWindow = mainWindow;
                     //关闭登陆界面
                     this.Close();
-                    //this.DialogResult = true;
                     //显示主窗体
                     mainWindow.Show();
                     break;
@@ -187,16 +164,10 @@ namespace CCT.View
                     break;
                 case -3:
                     System.Windows.MessageBox.Show("密码不能为空！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    break;
+                    break;         
                 case -4:
-                    System.Windows.MessageBox.Show("密码含有特殊字符！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    break;
-                case -5:
-                    System.Windows.MessageBox.Show("用户名不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    break;
-                case -6:
-                    System.Windows.MessageBox.Show("密码不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    break;
+                    System.Windows.MessageBox.Show("用户名或密码不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    break; 
                 default:
                     MessageBox.Show("未知错误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
@@ -204,44 +175,144 @@ namespace CCT.View
             this.LoadGrid.Visibility = System.Windows.Visibility.Collapsed;//遮罩层隐藏
         }
 
+        #endregion
+
+        #region 登录验证处理
 
         /// <summary>
-        /// 窗体加载完成后操作
+        /// 用于验证登陆信息
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void LoginWindow_Loaded(object sender, RoutedEventArgs e)
+        /// <returns>
+        /// -4：用户名或密码不正确 
+        /// -3：密码不能为空
+        /// -2：用户名不能为空
+        /// -1：数据库未连接 
+        ///  0：登陆失败
+        ///  1：登陆成功
+        /// </returns>
+        public int Verification()
         {
-            if (_viewmodel == null)
+            int flag = 0;
+            try
             {
-                //界面中浮云移动动画
-                Storyboard sbd = Resources["sbCloud"] as Storyboard;
-                sbd.Begin();
-
-                _viewmodel = new LoginWindowViewModel();
-                this.DataContext = _viewmodel;
-
-                //获取登录信息
-                user = loginInfoXmlHelper.GetLoginInfo();
-
-                //计时器 为登录框添加数据计时执行
-                var timer1 = new System.Timers.Timer
+                if (string.IsNullOrEmpty(User.UserName))
                 {
-                    Interval = 100,
-                };
-                timer1.Elapsed += new System.Timers.ElapsedEventHandler(theout1);//到达时间的时候执行事件；
-                timer1.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；   
-                timer1.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-                //计时器 自动登录做准备的数据计时执行
-                var timer2 = new System.Timers.Timer
+                    flag = -2;
+                    return flag;
+                }
+                if (string.IsNullOrEmpty(User.UserPassword))
                 {
-                    Interval = 400,
-                };
-                timer2.Elapsed += new System.Timers.ElapsedEventHandler(theout2);
-                timer2.AutoReset = false;
-                timer2.Enabled = true;
+                    flag = -3;
+                    return flag;
+                }
+                User user = UserService.Login(User);//服务方法
+                //验证登录
+                if (user == null)
+                {
+                    flag = -4;
+                }
+                else
+                {
+                    flag = 1;
+                    User = user;
+                    //休眠1.5秒
+                    System.Threading.Thread.Sleep(1500);
+                }
             }
+            catch (Exception)
+            {
+                flag = -1;
+            }
+            return flag;
         }
+
+        #endregion
+
+        #region 保存登录信息
+
+        /// <summary>
+        /// 保存登录信息到本地
+        /// </summary>
+        private void SaveLogin()
+        {
+            SavedLastLoginUser.X1 = User.UserName;
+            SavedLastLoginUser.X2 = User.UserPassword;
+            SaveUserOperator.X1 = ReAccount.IsChecked.ToString();
+            SaveUserOperator.X2 = AutoLogin.IsChecked.ToString();
+            SysConfig.SavedLastLoginUser = SavedLastLoginUser;
+            ConfigHelper.SaveSysConfig(SysConfig);
+        }
+
+        #endregion
+
+        #region 更新登录时间
+
+        /// <summary>
+        /// 更新登录信息到数据库
+        /// </summary>
+        private void UpdateLoginDate()
+        {
+            User.UserLoginDate = DateTime.Now;
+            UserService.UpdateUserLoginDate(User);
+        }
+
+        #endregion*/
+
+        #region 窗体加载
+
+        private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //界面中浮云移动动画
+            Storyboard sbd = Resources["sbCloud"] as Storyboard;
+            sbd.Begin();
+
+            //获取登录信息
+            /*SysConfig = ConfigHelper.ReadSysConfig();
+            SavedLastLoginUser = SysConfig.SavedLastLoginUser;
+            SaveUserOperator = SysConfig.SaveUserOperator;
+            User = new User()
+            {
+                UserName = SavedLastLoginUser.X1,
+                UserPassword = SavedLastLoginUser.X2,  
+            };
+            if (SaveUserOperator.X1.ToLower() == "false")
+            {
+                User.RememberPwd = false;
+            }
+            else
+            {
+                User.RememberPwd = true;
+            }
+            if (SaveUserOperator.X2.ToLower() == "false")
+            {
+                User.AutomaticLogon = false;
+            }
+            else
+            {
+                User.AutomaticLogon = true;
+            }
+
+            //计时器 为登录框添加数据计时执行
+            var timer1 = new System.Timers.Timer
+            {
+                Interval = 100,
+            };
+            timer1.Elapsed += new System.Timers.ElapsedEventHandler(theout1);//到达时间的时候执行事件；
+            timer1.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；   
+            timer1.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                                  //计时器 自动登录做准备的数据计时执行
+            var timer2 = new System.Timers.Timer
+            {
+                Interval = 400,
+            };
+            timer2.Elapsed += new System.Timers.ElapsedEventHandler(theout2);
+            timer2.AutoReset = false;
+            timer2.Enabled = true;*/
+        }
+
+        #endregion
+
+       /* #region theout1
 
         /// <summary>
         /// 为登录框添加数据计时执行
@@ -256,6 +327,11 @@ namespace CCT.View
                 //this.cmb1.SelectedIndex = 0;
             }));
         }
+
+        #endregion
+
+        #region theout2
+
         /// <summary>
         /// 自动登录
         /// </summary>
@@ -266,10 +342,9 @@ namespace CCT.View
             this.Dispatcher.Invoke(new Action(() =>
             {
                 //显示上次登录
-                var userLogin = user;
-                if (userLogin != null)
+                if (SavedLastLoginUser != null)
                 {
-                    if (userLogin.AutomaticLogon)//自动登录
+                    if (SaveUserOperator.X2.ToLower() == "true")//自动登录
                     {
                         //触发登录
                         this.LoginButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, this.LoginButton));
@@ -277,81 +352,6 @@ namespace CCT.View
                 }
             }));
         }
-
-        /// <summary>
-        /// 记录UserInfo信息
-        /// </summary>
-        /// <param name="userinfo"></param>
-        private void UserInfoRecond(UserInfo userinfo)
-        {
-            this.ReAccount.RaiseEvent(new RoutedEventArgs(CheckBox.UncheckedEvent, this.ReAccount));
-
-            if (userinfo.AutomaticLogon)
-            {
-                this.AutoLogin.RaiseEvent(new RoutedEventArgs(CheckBox.CheckedEvent, this.AutoLogin));
-            }
-            else if (!userinfo.RememberPwd)
-            {
-                this.ReAccount.RaiseEvent(new RoutedEventArgs(CheckBox.UncheckedEvent, this.ReAccount));
-            }
-            else if (userinfo.RememberPwd)
-            {
-                this.ReAccount.RaiseEvent(new RoutedEventArgs(CheckBox.CheckedEvent, this.ReAccount));
-            }
-        }
-
-        #endregion
-
-        #region 保存帐号
-
-        /// <summary>
-        /// 保存账号(异步执行)
-        /// </summary>
-        /// <param name="loginName"></param>
-        //private async void SaveLoginName(string loginName)
-        //{
-            //if (this.SaveAccounts.IsChecked != true) return;
-            //try
-            //{
-            //    string filePath = OfficeOpenXml.Utils.GetMapPath("") + @"Config\SysConfig.xml";
-            //    XmlDocument doc = XmlHelper. .GetXMLDoc(filePath);
-            //    if (doc != null)
-            //    {
-            //        XmlNode rootNode = doc.SelectSingleNode("SysConfig");
-            //        List<string> nameList = XmlHelper.GetNodesToList(rootNode, "SavedLoginNames");
-            //        if (nameList != null && !nameList.Contains(loginName))// 如果账号仍未保存
-            //        {
-            //            XmlNode namesNode = rootNode.SelectSingleNode("SavedLoginNames");// 获取SavedLoginNames节点信息
-            //            XmlNode childNode = doc.CreateElement("LoginName");// 创建新的SavedLoginName节点
-            //            childNode.InnerText = loginName;// 节点内容值为loginName参数
-            //            namesNode.PrependChild(childNode);// 插入到最前
- 
-            //            namesNode = XmlHelper.HandleNodeUnderMaxCount(namesNode, maxCount);// 处理保存账号的最大数量大于config表中配置的数量
-            //            doc.Save(filePath);// 保存
-            //        }
-            //        else if (nameList != null && nameList.Contains(loginName))// 如果账号已保存, 将其提到最前。
-            //        {
-            //            XmlNode namesNode = rootNode.SelectSingleNode("SavedLoginNames");
-            //            XmlNodeList childNodes = namesNode.ChildNodes;
-            //            foreach (XmlNode item in childNodes)
-            //            {
-            //                if (loginName.Equals(item.InnerText))
-            //                {
-            //                    XmlNode newNode = item;
-            //                    namesNode.RemoveChild(item);
-            //                    namesNode.PrependChild(newNode);
-            //                    break;
-            //                }
-            //            }
-            //            doc.Save(filePath);// 保存
-            //        }
-            //    }
-            //}
-            //catch (ReadSysConfigFailedException ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
-       // }
 
         #endregion
 
@@ -449,258 +449,9 @@ namespace CCT.View
             bw.CancelAsync();//取消后台操作
             this.LoadGrid.Visibility = System.Windows.Visibility.Collapsed;//遮罩层隐藏
         }
-        #endregion
-
-        #endregion
-    }
-
-    #region 用户类
-    /// <summary>
-    /// 用户类用于保存记录
-    /// </summary>
-    public class UserInfo
-    {
-        public string UserName { get; set; }
-        public string UserPwd { get; set; }
-        /// <summary>
-        /// 是否自动登录
-        /// </summary>
-        [System.ComponentModel.DefaultValue(false)]
-        public bool AutomaticLogon { get; set; }
-        /// <summary>
-        /// 是否记住密码
-        /// </summary>
-        [System.ComponentModel.DefaultValue(false)]
-        public bool RememberPwd { get; set; }
-    }
-    #endregion
-
-    #region 加解密
-    /// <summary>
-    /// 加密类 
-    /// </summary>
-    internal class CryptInfo
-    {
-        /// <summary>
-        /// 私有构造方法禁止实例化该类型
-        /// </summary>
-        public CryptInfo() { }
-
-        /// <summary>
-        /// 对输入的字符串进行加密，并获取加密后的字符串
-        /// </summary>
-        /// <param name="text">输入的字符串</param>
-        /// <returns></returns>
-        public string GetEncrypt(string text)
-        {
-            return this.Encrypt(text);
-        }
-
-        /// <summary>
-        /// 加密 对用户名和密码进行加密的方法
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private string Encrypt(string text)
-        {
-            Rijndael crypt = Rijndael.Create();
-            byte[] key = new byte[32] { 0XA6, 0X7D, 0XE1, 0X3F, 0X35, 0X0E, 0XE1, 0XA9, 0X83, 0XA5, 0X62, 0XAA, 0X7A, 0XAE, 0X79, 0X98, 0XA7, 0X33, 0X49, 0XFF, 0XE6, 0XAE, 0XBF, 0X8D, 0X8D, 0X20, 0X8A, 0X49, 0X31, 0X3A, 0X12, 0X40 };
-
-            byte[] iv = new byte[16] { 0XF8, 0X8B, 0X01, 0XFB, 0X08, 0X85, 0X9A, 0XA4, 0XBE, 0X45, 0X28, 0X56, 0X03, 0X42, 0XF6, 0X19 };
-            crypt.Key = key;
-            crypt.IV = iv;
-
-            MemoryStream ms = new MemoryStream();
-
-            ICryptoTransform transtormEncode = new ToBase64Transform();
-            //Base64编码
-            CryptoStream csEncode = new CryptoStream(ms, transtormEncode, CryptoStreamMode.Write);
-
-            CryptoStream csEncrypt = new CryptoStream(csEncode, crypt.CreateEncryptor(), CryptoStreamMode.Write);
-
-            System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-            byte[] rawData = enc.GetBytes(text);
-
-            csEncrypt.Write(rawData, 0, rawData.Length);
-            csEncrypt.FlushFinalBlock();
-
-            byte[] encryptedData = new byte[ms.Length];
-            ms.Position = 0;
-            ms.Read(encryptedData, 0, (int)ms.Length);
-
-            return enc.GetString(encryptedData);
-        }
-
-    }
-
-    /// <summary>
-    /// 解密类
-    /// </summary>
-    /// 
-    internal class DecryptInfo
-    {
-        /// <summary>
-        /// 私有化构造函数不允许外部实例化
-        /// </summary>
-        public DecryptInfo()
-        { }
-
-
-        /// <summary>
-        /// 对输入的字符串进行加密,并获取解密后的字符串
-        /// </summary>
-        /// <param name="text">输入的字符串</param>
-        /// <returns></returns>
-        public string GetDecrypte(string text)
-        {
-            return this.Decrypt(text);
-        }
-
-        /// <summary>
-        /// 解密方法 对用户名和密码进行解密
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private string Decrypt(string text)
-        {
-            Rijndael crypt = Rijndael.Create();
-            byte[] key = new byte[32] { 0XA6, 0X7D, 0XE1, 0X3F, 0X35, 0X0E, 0XE1, 0XA9, 0X83, 0XA5, 0X62, 0XAA, 0X7A, 0XAE, 0X79, 0X98, 0XA7, 0X33, 0X49, 0XFF, 0XE6, 0XAE, 0XBF, 0X8D, 0X8D, 0X20, 0X8A, 0X49, 0X31, 0X3A, 0X12, 0X40 };
-            byte[] iv = new byte[16] { 0XF8, 0X8B, 0X01, 0XFB, 0X08, 0X85, 0X9A, 0XA4, 0XBE, 0X45, 0X28, 0X56, 0X03, 0X42, 0XF6, 0X19 };
-            crypt.Key = key;
-            crypt.IV = iv;
-
-            MemoryStream ms = new MemoryStream();
-            CryptoStream csDecrypt = new CryptoStream(ms, crypt.CreateDecryptor(), CryptoStreamMode.Write);
-            ICryptoTransform transformDecode = new FromBase64Transform();
-            CryptoStream csDecode = new CryptoStream(csDecrypt, transformDecode, CryptoStreamMode.Write);
-
-            System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-            byte[] rawData = enc.GetBytes(text);
-            csDecode.Write(rawData, 0, rawData.Length);
-            csDecode.FlushFinalBlock();
-
-            byte[] decryptedData = new byte[ms.Length];
-            ms.Position = 0;
-            ms.Read(decryptedData, 0, (int)ms.Length);
-
-            return (enc.GetString(decryptedData));
-        }
-    }
-    #endregion
-
-    #region LoginInfoXmlHelper
-    /// <summary>
-    /// Xml配置文件
-    /// </summary>
-    public class LoginInfoXmlHelper
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userName"></param>
-        public LoginInfoXmlHelper()
-        {
-            string appStartPath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            StringBuilder builder = new StringBuilder();
-            builder.Append(appStartPath);
-            builder.Append("\\AthenFile\\");
-            builder.Append("\\XML\\");
-            System.IO.DirectoryInfo directoryInfo = new DirectoryInfo(builder.ToString());
-            if (!directoryInfo.Exists)
-            {
-                directoryInfo.Create();//创建一个
-            }
-            builder.Append("LoginInfoXml.xml");
-            this.fullFilePath = builder.ToString();
-
-            CreateXml(new UserInfo()
-            {
-                UserName = "yeshen",
-                UserPwd = "111"
-            });
-        }
-
-        #region 成员
-        /// <summary>
-        /// 文件全路径
-        /// </summary>
-        string fullFilePath;
-        /// <summary>
-        /// 加密
-        /// </summary>
-        CryptInfo cryptInfo = new CryptInfo();
-        /// <summary>
-        /// 解密
-        /// </summary>
-        DecryptInfo decryptInfo = new DecryptInfo();
 
         #endregion
 
-        /// <summary>
-        /// 获取用户登录信息
-        /// </summary>
-        /// <returns></returns>
-        public UserInfo GetLoginInfo()
-        {
-            var loginInfo = new UserInfo();
-            if (InfoFile.Exists)
-            {
-                XmlSerializer xml = new XmlSerializer(loginInfo.GetType());
-                using (Stream s = InfoFile.OpenRead())
-                {
-                    loginInfo = xml.Deserialize(s) as UserInfo;
-                }
-            }
-
-            var tList = new UserInfo()
-            {
-                AutomaticLogon = loginInfo.AutomaticLogon,
-                RememberPwd = loginInfo.RememberPwd,
-                UserName = this.decryptInfo.GetDecrypte(loginInfo.UserName),
-                UserPwd = this.decryptInfo.GetDecrypte(loginInfo.UserPwd),
-            };
-
-            return tList;
-        }
-
-        /// <summary>
-        /// 文件方式
-        /// </summary>
-        private FileInfo InfoFile
-        {
-            get
-            {
-                return new FileInfo(fullFilePath);
-            }
-        }
-
-        /// <summary>
-        /// 生成Xml文件
-        /// </summary>
-        /// <param name="loginInfo"></param>
-        private void CreateXml(UserInfo loginInfo)
-        {
-            var tList = new UserInfo()
-            {
-                AutomaticLogon = loginInfo.AutomaticLogon,
-                RememberPwd = loginInfo.RememberPwd,
-                UserName = this.cryptInfo.GetEncrypt(loginInfo.UserName),
-                UserPwd = this.cryptInfo.GetEncrypt(loginInfo.UserPwd),
-            };
-
-            XmlSerializer xmls = new XmlSerializer(tList.GetType());
-
-            if (InfoFile.Exists)
-            {
-                InfoFile.Delete();
-            }
-
-            using (Stream s = InfoFile.OpenWrite())
-            {
-                xmls.Serialize(s, tList);
-                s.Close();
-            }
-        }
+        #endregion*/
     }
-    #endregion
 }

@@ -165,6 +165,7 @@
     <Compile Include="Model\DataType\SavedLastLoginUser.cs" />
     <Compile Include="Model\DataType\SavedLastOpenFile.cs" />
     <Compile Include="Model\DataType\SavedRecentFile.cs" />
+    <Compile Include="Model\DataType\SaveUserOperator.cs" />
     <Compile Include="Model\DataType\SectionItem.cs" />
     <Compile Include="Model\DataType\SysConfig.cs" />
     <Compile Include="Model\DataType\User.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Resource\Converters\ObjectBoolToBoolConverter.cs" />
     <Compile Include="Resource\Converters\ObjectToBoolConverter.cs" />
     <Compile Include="Resource\Converters\StringToBool.cs" />
+    <Compile Include="Resource\Converters\StringToIconConverter.cs" />
     <Compile Include="Resource\Converters\TagToImageSource.cs" />
     <Compile Include="Resource\Converters\VisibleToReverse.cs" />
     <Compile Include="Resource\Dictionarys\ControlStyleResource\WindowStyle.xaml.cs">
@@ -198,7 +200,9 @@
     <Compile Include="Resource\Enums\JsonType.cs" />
     <Compile Include="Resource\Enums\MultiBindingFormatType.cs" />
     <Compile Include="Resource\Enums\NodeType.cs" />
+    <Compile Include="Resource\Helpers\CryptInfo.cs" />
     <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
+    <Compile Include="Resource\Helpers\DecryptInfo.cs" />
     <Compile Include="Resource\Helpers\FileDialogHelper.cs" />
     <Compile Include="Resource\Helpers\FileHelper\InIHelper.cs" />
     <Compile Include="Resource\Helpers\FileHelper\JsonHelper.cs" />

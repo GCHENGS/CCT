@@ -3,6 +3,7 @@ using CCT.Resource.Helpers.InterFace;
 using CCT.ViewModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CCT.View
 {
@@ -476,6 +477,26 @@ namespace CCT.View
         private System.Windows.Media.Brush AtColor;
 
         private System.Windows.Media.Brush BgColor;
+
+        #endregion
+
+        #region 最近文件
+
+        /// <summary>
+        /// 最近文件列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            var path = menuItem.Tag.ToString();
+            var data = (DataContext as MainWindowViewModel);
+            if(data!=null)
+            {
+                data.OpenFilePath(path,richTextBox);
+            }
+        }
 
         #endregion
     }

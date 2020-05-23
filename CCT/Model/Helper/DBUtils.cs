@@ -45,7 +45,6 @@ namespace CCT.Model.Helper
             SqlCommand cmd = GetSqlCommand(commandText, conn);
             cmd.CommandType = commandType;
             cmd.Parameters.AddRange(parameters);
-
             try
             {
                 conn.Open();
@@ -63,7 +62,6 @@ namespace CCT.Model.Helper
             SqlCommand cmd = GetSqlCommand(commandText, conn);
             cmd.CommandType = commandType;
             cmd.Parameters.AddRange(parameters);
-
             try
             {
                 conn.Open();
@@ -79,15 +77,12 @@ namespace CCT.Model.Helper
         public static SqlDataReader ExecuteReader(SqlConnection conn , string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             SqlCommand cmd = GetSqlCommand(commandText, conn);
-            cmd.CommandType = commandType;
-            cmd.Parameters.AddRange(parameters);
-
+            //cmd.CommandType = commandType;
+            //cmd.Parameters.AddRange(parameters);
             try
             {
-                conn.Open();
-                // When using CommandBehavior.CloseConnection, the connection will be closed when the   
-                // IDataReader is closed.  
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                conn.Open(); 
+                return cmd.ExecuteReader();
             }
             catch
             {

@@ -1,39 +1,59 @@
-﻿using CCT.View;
+﻿using CCT.Config;
+using CCT.Model.DataType;
+using CCT.Service;
+using CCT.View;
 using Prism.Commands;
-using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace CCT.ViewModel
 {
     /// <summary>
-    /// 登录窗口模块
+    /// 登录窗体图模型
     /// </summary>
     public class LoginWindowViewModel : ViewModelBase
     {
-        #region 局部变量
-        /// <summary>
-        /// 用户
-        /// </summary>
-        UserInfo user = null;
-        #endregion
+        #region 私有域
 
-        #region 成员
-        private string userName;
-        private string userPassword;
+        private User currentUser;//用户
+        private string userName;//名称
+        private string userPassword;//密码
+        private bool isCurrentUserNull = true ;//是否用户为空
+        private bool isReAccount = false;//是否记住密码
+        private bool isAutoLogin = false;//是否自动登录
+
         #endregion
 
         #region 属性
+
         /// <summary>
-        /// 用户名
+        /// 用户
+        /// </summary>
+        public User CurrentUser
+        {
+            get { return currentUser; }
+            set
+            {
+                SetProperty(ref currentUser, value);
+                if(currentUser!=null)
+                {
+                    IsCurrentUserNull = false;
+                }
+                else
+                {
+                    IsCurrentUserNull = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 名称
         /// </summary>
         public string UserName
         {
             get { return userName; }
-            set { this.SetProperty(ref this.userName, value); }
+            set { SetProperty(ref userName, value); }
         }
 
         /// <summary>
@@ -42,116 +62,227 @@ namespace CCT.ViewModel
         public string UserPassword
         {
             get { return userPassword; }
-            set { this.SetProperty(ref this.userPassword, value); }
+            set { SetProperty(ref userPassword, value); }
         }
-        #endregion
-
-        #region 命令声明 
 
         /// <summary>
-        /// 
+        /// 是否用户为空
         /// </summary>
-        public ICommand SwitchSkinCommand { get; set; }
+        public bool IsCurrentUserNull
+        {
+            get { return isCurrentUserNull; }
+            set { SetProperty(ref isCurrentUserNull, value); }
+        }
+
+        /// <summary>
+        /// 是否记住密码
+        /// </summary>
+        public bool IsReAccount
+        {
+            get { return isReAccount; }
+            set { SetProperty(ref isReAccount, value); }
+        }
+
+        /// <summary>
+        /// 是否自动登录
+        /// </summary>
+        public bool IsAutoLogin
+        {
+            get { return isAutoLogin; }
+            set { SetProperty(ref isAutoLogin, value); }
+        }
+
+        /// <summary>
+        /// 定义系统配置
+        /// </summary>
+        public SysConfig SysConfig { get; set; }
+
+        /// <summary>
+        /// 定义上次登录
+        /// </summary>
+        public SavedLastLoginUser SavedLastLoginUser { get; set; }
+
+        /// <summary>
+        /// 定义上次操作
+        /// </summary>
+        public SaveUserOperator SaveUserOperator { get; set; }
+
+        #endregion
+
+        #region 命令
+
+        public ICommand LoginCommand { get; private set; }
 
         #endregion
 
         #region 构造方法
+
         public LoginWindowViewModel()
         {
-            SwitchSkinCommand = new DelegateCommand(SwitchSkinCommandExecute);
+            Title = "CCT登录";
 
-            UserName = "yeshen";
-
-            UserPassword = "111";
-
-            user = new UserInfo()
+            SysConfig = ConfigHelper.ReadSysConfig();
+            SavedLastLoginUser = SysConfig.SavedLastLoginUser;
+            SaveUserOperator = SysConfig.SaveUserOperator;   
+            if (SaveUserOperator.X1.ToLower() == "false")
             {
-                UserName=userName,
-                UserPwd=userPassword
-            };
+                IsReAccount = false;
+            }
+            else
+            {
+                IsReAccount = true;
+            }
+            if(SaveUserOperator.X2.ToLower()=="false")
+            {
+                IsAutoLogin = false;
+            }
+            else
+            {
+                IsAutoLogin = true;
+            }
+            if (IsReAccount || IsAutoLogin)
+            {
+                UserName = SavedLastLoginUser.X1;
+                UserPassword = SavedLastLoginUser.X2;
+            }
+            LoginCommand = new DelegateCommand<Window>(LoginCommandExecute);
         }
+
         #endregion
 
-        #region 命令执行
+        #region 登录命令
 
-        private void SwitchSkinCommandExecute()
+        private void LoginCommandExecute(Window win)
         {
-            
+            int feedBack = Verification();//验证登录
+
+            switch (feedBack)
+            {
+                case 1:
+                    SaveLogin();
+                    UpdateLoginDate();
+                    //生成主窗体
+                    MainWindow mainWindow = new MainWindow()
+                    {
+                        DataContext = new MainWindowViewModel(CurrentUser)
+                    };
+                    //设置系统主窗体
+                    App.Current.MainWindow = mainWindow;
+                    //关闭登陆界面
+                    win.Close();
+                    //显示主窗体
+                    mainWindow.Show();
+                    break;
+                case 0:
+                    MessageBox.Show("登录失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                case -1:
+                    System.Windows.MessageBox.Show("数据库未连接！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    break;
+                case -2:
+                    System.Windows.MessageBox.Show("用户名不能为空！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    break;
+                case -3:
+                    System.Windows.MessageBox.Show("密码不能为空！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    break;
+                case -4:
+                    System.Windows.MessageBox.Show("用户名或密码不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    break;
+                default:
+                    MessageBox.Show("未知错误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+            }
         }
 
         #endregion
 
-        #region 工作方法
+        #region 登录验证处理
+
         /// <summary>
         /// 用于验证登陆信息
         /// </summary>
-        /// <param name="userID"></param>
         /// <returns>
-        /// 返回值代表 
-        /// -6：密码不正确  -5：用户名不正确
-        /// -4：密码含有特殊字符 -3：密码不能为空
+        /// -4：用户名或密码不正确 
+        /// -3：密码不能为空
         /// -2：用户名不能为空
-        /// -1：数据库未连接 0：登陆失败
-        ///  1：登陆成功  2：
-        /// 
+        /// -1：数据库未连接 
+        ///  0：登陆失败
+        ///  1：登陆成功
         /// </returns>
-        public int Verification(ref int userID)
-        {
+        public int Verification()
+        {  
             int flag = 0;
-            try
-            {
-                if (string.IsNullOrEmpty(this.userName))
+            try{
+                if (string.IsNullOrEmpty(UserName))
                 {
-                    //用户名不能为空
                     flag = -2;
                     return flag;
                 }
-                if (string.IsNullOrEmpty(this.userPassword))
+                if (string.IsNullOrEmpty(UserPassword))
                 {
-                    //密码不能为空
                     flag = -3;
                     return flag;
                 }
-                //正则表达式
-                var r = new System.Text.RegularExpressions.Regex(@"\-");
-                if (r.IsMatch(this.userPassword) || r.IsMatch(this.userName))
-                {
-                    //密码含有特殊字符
-                    flag = -4;
-                    return flag;
-                }
-
+                User user = UserService.Login(new User() { UserName = UserName, UserPassword = UserPassword });//服务方法
                 //验证登录
-                if (this.userName != "sss")
+                if (user == null)
                 {
-                    //用户名不正确
-                    flag = -5;
+                    flag = -4;
                 }
                 else
                 {
-                    //var userInfo = dicUser.FirstOrDefault(u => u.Key == this.userName && u.Value == this.userPassword);
-
-                    //if (userInfo.Key != null && userInfo.Value != null)
-                    {
-                        userID = 100;
-                        //int id = userInfo.ID;
-                        flag = 1;
-                        //休眠1.5秒
-                        System.Threading.Thread.Sleep(1500);
-                    }
-                    //else
-                    {
-                        //密码不正确
-                        //flag = -6;
-                    }
+                    flag = 1;
+                    CurrentUser = user;
+                    //休眠1.5秒
+                    System.Threading.Thread.Sleep(1500);
                 }
             }
             catch (Exception)
             {
-                //数据库连接失败
                 flag = -1;
             }
             return flag;
+        }
+
+        #endregion
+
+        #region 保存登录信息
+
+        /// <summary>
+        /// 保存登录信息到本地
+        /// </summary>
+        private void SaveLogin()
+        {
+            SavedLastLoginUser.X1 = CurrentUser.UserName;
+            SavedLastLoginUser.X2 = CurrentUser.UserPassword;
+            SaveUserOperator.X1 = IsReAccount.ToString();
+            SaveUserOperator.X2 = IsAutoLogin.ToString();
+            SysConfig.SavedLastLoginUser = SavedLastLoginUser;
+            ConfigHelper.SaveSysConfig(SysConfig);
+        }
+
+        #endregion
+
+        #region 更新登录时间
+
+        /// <summary>
+        /// 更新登录信息到数据库
+        /// </summary>
+        private void UpdateLoginDate()
+        {
+            CurrentUser.UserLoginDate = DateTime.Now;
+            UserService.UpdateUserLoginDate(CurrentUser);
+        }
+
+        #endregion
+
+        #region 通知
+
+        private void NotifyUI()
+        {
+            RaisePropertyChanged(nameof(CurrentUser));
+            RaisePropertyChanged(nameof(UserName));
+            RaisePropertyChanged(nameof(UserPassword));
         }
 
         #endregion

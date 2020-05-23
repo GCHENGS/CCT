@@ -7,6 +7,9 @@ namespace CCT.Model.DataType
         [XmlElement("SavedLastLoginUser")]
         public SavedLastLoginUser SavedLastLoginUser { get; set; } = new SavedLastLoginUser();
 
+        [XmlElement("SaveUserOperator")]
+        public SaveUserOperator SaveUserOperator { get; set; } = new SaveUserOperator();
+
         [XmlElement("SavedLastOpenFile")]
         public SavedLastOpenFile SavedLastOpenFile { get; set; } = new SavedLastOpenFile();
 

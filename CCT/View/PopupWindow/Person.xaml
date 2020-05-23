@@ -30,8 +30,8 @@
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=CurrentUser.UserPhone}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="头像:"></Label>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=CurrentUser.UserHeadIcon}"/>
-        
+        <Image Grid.Row="3" Grid.Column="1" Source="{Binding Path=CurrentUser.UserHeadIcon,Converter={StaticResource StringToIconConverter}}"/>
+
         <Label Grid.Row="4" Grid.Column="0" Content="注册时间:"></Label>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=CurrentUser.UserCreateDate}"/>
 

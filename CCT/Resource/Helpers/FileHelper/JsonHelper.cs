@@ -42,7 +42,7 @@ namespace CCT.Resource.Helpers.FileHelper
 
         #endregion
 
-        #region 读取文件
+        #region 解析文件
 
         /// <summary>
         /// 解析文件
@@ -439,7 +439,6 @@ namespace CCT.Resource.Helpers.FileHelper
                 }
             }
         }
-
 
         #endregion
 
