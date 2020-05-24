@@ -1,4 +1,5 @@
-﻿using CCT.Model.InterFace;
+﻿using CCT.Config;
+using CCT.Model.InterFace;
 using CCT.Resource.Constants;
 using CCT.Resource.Helpers;
 using CCT.View;
@@ -255,10 +256,10 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
         /// <param name="e"></param>
         private void FeedbackMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://www.baidu.com 吗？", "CCT用户反馈", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (box == MessageBoxResult.OK)
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/feedback 吗？",ConstantsForMessageBox.InfoTip.ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (box == MessageBoxResult.Yes)
             {
-                Process.Start("http://www.baidu.com");
+                Process.Start("http://localhost:8080/CCT/feedback");
             }
         }
 
@@ -277,15 +278,30 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
         }
 
         /// <summary>
+        /// 单击设置MenuItem事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            About about = new About()
+            {
+                DataContext = new AboutViewModel()
+            };
+            about.ShowDialog();
+        }
+
+        /// <summary>
         /// 获取设置菜单列表
         /// </summary>
         /// <returns></returns>
         private List<ICustomMenu> GetSettingCustomMenus()
         {
             List<ICustomMenu> list = new List<ICustomMenu>();
-            list.Add(CustomMenuHelper.CreateCustomMenu("联系", ContactMenuItem_Click));
-            list.Add(CustomMenuHelper.CreateCustomMenu("反馈", FeedbackMenuItem_Click));
-            list.Add(CustomMenuHelper.CreateCustomMenu("帮助", HelpMenuItem_Click));
+            list.Add(CustomMenuHelper.CreateCustomMenu("联系我们(ContactUs)", ContactMenuItem_Click));
+            list.Add(CustomMenuHelper.CreateCustomMenu("用户反馈(UserFeedBack)", FeedbackMenuItem_Click));
+            list.Add(CustomMenuHelper.CreateCustomMenu("帮助(Help)", HelpMenuItem_Click));
+            list.Add(CustomMenuHelper.CreateCustomMenu("关于(About)", AboutMenuItem_Click));
             return list;
         }
 
@@ -305,8 +321,70 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
                 Window win = GetWindow(btn);
                 if (win != null)
                 {
-                    win.Close();
-                    //Environment.Exit(0);
+                    //判断是否为主窗体
+                    if (win.DataContext is MainWindowViewModel)
+                    {
+                        var data = win.DataContext as MainWindowViewModel;//获取数据源
+                        var richTextBox = VisualTreeHelpers.GetChildObject<RichTextBox>(win, "richTextBox");
+                        try
+                        {
+                            var file = data.CurrentFile;
+                            if (file == null)//用户只是登录未处理文件
+                            {
+                                ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                data.UpdateQuiteDate();
+                                win.Close();//关闭窗体
+                                Environment.Exit(0);//环境退出
+                            }
+                            else
+                            {
+                                if (file.IsSave)//已经保存的可以直接关闭
+                                {
+                                    ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                    data.UpdateQuiteDate();
+                                    win.Close();//关闭窗体
+                                    Environment.Exit(0);//环境退出
+                                }
+                                else
+                                {
+                                    if (string.IsNullOrWhiteSpace(file.FilePath))
+                                    {
+                                        MessageBoxResult result = MessageBox.Show("存在未保存的内容，是否需要保存？", "信息提示", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                                        if (result == MessageBoxResult.Yes)
+                                        {
+                                            data.SaveCommandExecute(richTextBox);//保存数据
+                                            ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                            data.UpdateQuiteDate();
+                                            win.Close();//关闭窗体
+                                            Environment.Exit(0);//环境退出
+                                        }
+                                        else
+                                        {
+                                            ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                            data.UpdateQuiteDate();
+                                            win.Close();//关闭窗体
+                                            Environment.Exit(0);//环境退出
+                                        }
+                                    }
+                                    else
+                                    {
+                                        data.SaveCommandExecute(richTextBox);//保存数据
+                                        ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                        data.UpdateQuiteDate();
+                                        win.Close();//关闭窗体
+                                        Environment.Exit(0);//环境退出
+                                    }
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            MessageBox.Show("系统关闭异常!");
+                        }
+                    }else
+                    {
+                        win.Close();//关闭弹窗
+                    }
                 }
             }
         }
@@ -323,7 +401,14 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
                 Window win = GetWindow(btn);
                 if (win != null)
                 {
-                    win.WindowState = System.Windows.WindowState.Maximized;
+                    if (win.WindowState != System.Windows.WindowState.Maximized)
+                    {
+                        win.WindowState = System.Windows.WindowState.Maximized;
+                    }
+                    else
+                    {
+                        win.WindowState = System.Windows.WindowState.Normal;
+                    }
                 }
             }
         }

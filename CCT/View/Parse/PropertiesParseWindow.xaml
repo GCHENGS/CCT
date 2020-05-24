@@ -7,7 +7,9 @@
         xmlns:enum="clr-namespace:CCT.Resource.Enums"
         xmlns:controls="clr-namespace:CCT.Component.Controls"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
-        Title="{Binding Path=Title}" Height="400" Width="800">
+        Style="{StaticResource NoMax_Window}"
+        Title="{DynamicResource WindowParsePropertiesTitle}" 
+        Height="400" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -30,7 +32,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0" LastChildFill="True">
-                <controls:ExtendTextBox x:Name="SearchText" DockPanel.Dock="Top" Style="{StaticResource WaterMarkExtendTextBoxCanDel}" WaterMark="快速搜索" Text="{Binding Path=SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></controls:ExtendTextBox>
+                <controls:ExtendTextBox x:Name="SearchText" Margin="4" DockPanel.Dock="Top" Style="{StaticResource WaterMarkExtendTextBoxCanDel}" WaterMark="快速搜索" Text="{Binding Path=SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></controls:ExtendTextBox>
                 <ListBox x:Name="keyList" Margin="3" ItemsSource="{Binding Path=PropertyItemList}" SelectedItem="{Binding Path=CurrentPropertyItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource StandardListBox}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -104,7 +106,7 @@
                                 <DataTemplate>
                                     <Button Content="删除" Command="{Binding Path=DelCommand}">
                                         <Button.Style>
-                                            <Style TargetType="Button">
+                                            <Style TargetType="Button" BasedOn="{StaticResource StandardButton}">
                                                 <Style.Triggers>
 
                                                 </Style.Triggers>
@@ -165,10 +167,38 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                    <Button Content="全选" Margin="10" Command="{Binding Path=SelectAllKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                    <Button Content="批量删除" Margin="10" Command="{Binding Path=DelBatchKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                    <Button Content="添加配置" Margin="10" Command="{Binding Path=AddKeyCommand}"/>
-                    <Button Content="清空配置" Margin="10" Command="{Binding Path=ClearKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}"/>
+                    <Button Content="全选" Command="{Binding Path=SelectAllKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="批量删除" Command="{Binding Path=DelBatchKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="添加配置" Command="{Binding Path=AddKeyCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="清空配置" Command="{Binding Path=ClearKeyCommand}" IsEnabled="{Binding Path=PropertyItemList,Converter={StaticResource ListCountToBoolConverter}}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

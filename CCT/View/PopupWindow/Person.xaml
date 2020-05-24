@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CCT.View"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Style="{StaticResource Popup_Window}"
-        Title="{Binding Path=Title}"  Height="270" Width="300">
+        Title="{DynamicResource WindowPersonTitle}"  Height="270" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -20,19 +20,19 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="ID:"></Label>
+        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource ID}"></Label>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrentUser.UserId}"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="昵称:"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Name}"></Label>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=CurrentUser.UserName}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="电话:"></Label>
+        <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Telphone}"></Label>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=CurrentUser.UserPhone}"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="头像:"></Label>
-        <Image Grid.Row="3" Grid.Column="1" Source="{Binding Path=CurrentUser.UserHeadIcon,Converter={StaticResource StringToIconConverter}}"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource HeadIcon}"></Label>
+        <Image Grid.Row="3" Grid.Column="1" Margin="4,0,0,0" HorizontalAlignment="Left" Source="{Binding Path=CurrentUser.UserHeadIcon,Converter={StaticResource StringToIconConverter}}"/>
 
-        <Label Grid.Row="4" Grid.Column="0" Content="注册时间:"></Label>
+        <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource CreateDate}"></Label>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=CurrentUser.UserCreateDate}"/>
 
         <Button Grid.Row="5" Grid.ColumnSpan="2" 

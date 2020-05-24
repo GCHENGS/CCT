@@ -7,7 +7,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Style="{StaticResource Popup_Window}" 
         x:Name="updateTelWindow"
-        Title="{Binding Path=Title}" 
+        Title="{DynamicResource WindowUpdateTelTitle}" 
         Height="150" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="新电话："></Label>
+        <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource NewTel}"></Label>
         <TextBox x:Name="newTel" Grid.Row="0" Grid.Column="1" Height="22" VerticalContentAlignment="Center" 
                  Text="{Binding Path=CurrentUser.UserPhone}" MaxLength="11"
                  ToolTip="请输入11位手机号" KeyDown="newTel_KeyDown" 
@@ -30,7 +30,7 @@
                 Margin="10" HorizontalAlignment="Right" 
                 Command="{Binding Path=UpdateTelCommand}" CommandParameter="{Binding ElementName=updateTelWindow}"/>
             <Button Width="60" Height="22" 
-                Content="取消" 
+                Content="{DynamicResource Cancel}" 
                 Margin="10" HorizontalAlignment="Right" 
                 Click="Button_Click"/>
         </StackPanel>

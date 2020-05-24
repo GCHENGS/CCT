@@ -1,5 +1,6 @@
 ﻿using CCT.Config;
 using CCT.Model.DataType;
+using CCT.Resource.Constants;
 using CCT.Service;
 using CCT.ViewModel;
 using System;
@@ -81,8 +82,8 @@ namespace CCT.View
         /// <param name="e"></param>
         private void RegistLink_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/regist 吗？", "CCT新用户注册", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (box == MessageBoxResult.OK)
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/regist 吗？", ConstantsForMessageBox.InfoTip.ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (box == MessageBoxResult.Yes)
             {
                 Process.Start("http://localhost:8080/CCT/regist");
             }

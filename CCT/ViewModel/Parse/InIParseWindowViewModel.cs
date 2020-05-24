@@ -386,11 +386,15 @@ namespace CCT.ViewModel
         {
             FilterSectionItemListView.Filter += (obj) =>
             {
+                var sectionName = (obj as SectionItem).SectionName;
+                if (sectionName == currentSectionItem?.SectionName)
+                {
+                    CurrentSectionItem = (obj as SectionItem);//显示选中项
+                }
+
                 if (string.IsNullOrWhiteSpace(searchText)) return true;
 
-                var sectionName = (obj as SectionItem).SectionName;
-
-                if (sectionName.ToLower().Contains(searchText.ToLower()))
+                if (sectionName.ToLower().Contains(searchText.ToLower()))//模糊查询
                 {
                     return true;
                 }

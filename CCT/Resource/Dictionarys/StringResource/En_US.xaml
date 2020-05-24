@@ -2,11 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <!--WindowTitle-->
-    <system:String x:Key="WindowLoginTitle">CCTLogin</system:String>
-    <system:String x:Key="WindowContactTitle">CCTContact</system:String>
-    <system:String x:Key="WindowFeedBackTitle">CCTFeedBack</system:String>
-    <system:String x:Key="WindowHelpTitle">CCTHelp</system:String>
+    <system:String x:Key="MainWindowTitle">CCT</system:String>
+    <system:String x:Key="-MainWindowTitle">-CCT</system:String>
+    <system:String x:Key="WindowLoginTitle">Login-CCT</system:String>
+    <system:String x:Key="WindowContactUsTitle">ContactUs-CCT</system:String>
+    <system:String x:Key="WindowFeedBackTitle">UserFeedBack-CCT</system:String>
+    <system:String x:Key="WindowToolInfoTitle">ToolInfo-CCT</system:String>
+    <system:String x:Key="WindowAboutTitle">About-CCT</system:String>
+    <system:String x:Key="WindowHelpTitle">Help-CCT</system:String>
+    <system:String x:Key="WindowPersonTitle">PersonInfo-CCT</system:String>
+    <system:String x:Key="WindowUpdatePwdTitle">UpdatePassword-CCT</system:String>
+    <system:String x:Key="WindowUpdateTelTitle">UpdateTelphone-CCT</system:String>
+    <system:String x:Key="WindowFindAndReplaceTitle">FindAndReplace-CCT</system:String>
+    <system:String x:Key="WindowFindNextTitle">FindNext-CCT</system:String>
+    <system:String x:Key="WindowParseXmlTitle">ParseXml-CCT</system:String>
+    <system:String x:Key="WindowParseInITitle">ParseInI-CCT</system:String>
+    <system:String x:Key="WindowParseJsonlTitle">ParseJson-CCT</system:String>
+    <system:String x:Key="WindowParsePropertiesTitle">ParseProperties-CCT</system:String>
 
+    <!---Window-->
+    <system:String x:Key="Ready">Ready...</system:String>
 
     <!--WindowFunc-->
     <system:String x:Key="SwitchLanguage">En</system:String>
@@ -23,8 +38,6 @@
     <system:String x:Key="RegistAccount">RegistAccount</system:String>
     <system:String x:Key="FoundPassword">FoundPassword</system:String>
 
-    <!--Regist-->
-    
     <!--Popup-->
     <system:String x:Key="PhoneName">Phone：</system:String>
     <system:String x:Key="Phone">15239948664</system:String>
@@ -32,13 +45,97 @@
     <system:String x:Key="E_mail">1878776239@qq.com</system:String>
     <system:String x:Key="VersionName">Version：</system:String>
     <system:String x:Key="Version">v1.0</system:String>
+    <system:String x:Key="WaitDeveloping">Wait Developing...</system:String>
     
+    <system:String x:Key="InfoTip">Information TooTip</system:String>
+
+    <system:String x:Key="CCTInfo">Information：</system:String>
+    <system:String x:Key="CCTBackground">Background：</system:String>
+
+    <system:String x:Key="NewTel">New Telphone：</system:String>
+    <system:String x:Key="OldPwd">Old Password：</system:String>
+    <system:String x:Key="NewPwd">New Password：</system:String>
+
+    <system:String x:Key="ID">ID：</system:String>
+    <system:String x:Key="Name">Name：</system:String>
+    <system:String x:Key="Telphone">Telphone：</system:String>
+    <system:String x:Key="HeadIcon">HeadIcon：</system:String>
+    <system:String x:Key="CreateDate">CreateDate：</system:String>
+
+    <system:String x:Key="FindContent">Content：</system:String>
+    <system:String x:Key="ReplaceTo">To：</system:String>
+    <system:String x:Key="FindNext">FindNext</system:String>
+    <system:String x:Key="Replace">Replace</system:String>
+    <system:String x:Key="ReplaceAll">ReplaceAll</system:String>
+    <system:String x:Key="Direction">Direction</system:String>
+    <system:String x:Key="ToUp">Up</system:String>
+    <system:String x:Key="ToLow">Low</system:String>
+    <system:String x:Key="IgnoreCase">IgnoreCase</system:String>
+
     <!--Button-->
     <system:String x:Key="Login">Login</system:String>
     <system:String x:Key="Regist">Regist</system:String>
     <system:String x:Key="Confirm">Confirm</system:String>
-
-
-    <system:String x:Key="WaitDeveloping">Wait Developing...</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
     
+    <!--Menu-->
+    <system:String x:Key="File">File(F)</system:String>
+    <system:String x:Key="New">New(N)</system:String>
+    <system:String x:Key="Xml">Xml File</system:String>
+    <system:String x:Key="InI">InI File</system:String>
+    <system:String x:Key="Json">Json File</system:String>
+    <system:String x:Key="Properties">Properties File</system:String>
+    <system:String x:Key="Open">Open(O)</system:String>
+    <system:String x:Key="Save">Save(S)</system:String>
+    <system:String x:Key="SaveAs">SaveAs(A)</system:String>
+    <system:String x:Key="Export">Export(E)</system:String>
+    <system:String x:Key="Txt">TxT File</system:String>
+    <system:String x:Key="Word">Word File</system:String>
+    <system:String x:Key="Picture">Picture File</system:String>
+    <system:String x:Key="OpenLastFile">OpenLastFile(W)</system:String>
+    <system:String x:Key="OpenRecentFiles">OpenRecentFiles(Z)</system:String>
+    <system:String x:Key="ExitWithSave">ExitWithSave(X)</system:String>
+    <system:String x:Key="ExitWithoutSave">ExitWithoutSave(Y)</system:String>
+
+    <system:String x:Key="Edit">Edit(E)</system:String>
+    <system:String x:Key="Undo">Undo(U)</system:String>
+    <system:String x:Key="Redo">Redo(R)</system:String>
+    <system:String x:Key="Cut">Cut(T)</system:String>
+    <system:String x:Key="Copy">Copy(C)</system:String>
+    <system:String x:Key="Paste">Paste(P)</system:String>
+    <system:String x:Key="Delete">Delete(D)</system:String>
+    <system:String x:Key="SelectAll">SelectAll(A)</system:String>
+
+    <system:String x:Key="Font">Font(F)</system:String>
+    <system:String x:Key="Ant">Font</system:String>
+    <system:String x:Key="Bold">Bold</system:String>
+    <system:String x:Key="Italic">Italic</system:String>
+    <system:String x:Key="AntColor">AntColor</system:String>
+
+    <system:String x:Key="Parse">Parse(P)</system:String>
+
+    <system:String x:Key="Tool">Tool(T)</system:String>
+    <system:String x:Key="Top">Top</system:String>
+    <system:String x:Key="BgColor">BgColor</system:String>
+    <system:String x:Key="AutoWrap">AutoWrap</system:String>
+    <system:String x:Key="WatchStatus">WatchStatus</system:String>
+    <system:String x:Key="LookAndReplace">FindAndReplace</system:String>
+    <system:String x:Key="LookNextOne">FindNextOne</system:String>
+    <system:String x:Key="LetterToUpper">LetterToUpper</system:String>
+    <system:String x:Key="LetterToLower">LetterToLower</system:String>
+
+    <system:String x:Key="Account">Account(A)</system:String>
+    <system:String x:Key="WatchAccount">WatchAccount</system:String>
+    <system:String x:Key="UpdatePassword">UpdatePassword</system:String>
+    <system:String x:Key="UpdateTelphone">UpdateTelphone</system:String>
+    <system:String x:Key="SwitchAccount">SwitchAccount</system:String>
+
+    <system:String x:Key="Helps">Help(H)</system:String>
+    <system:String x:Key="ToopInfo">ToopInfo</system:String>
+    <system:String x:Key="OfficialWebsite">OfficialWebsite</system:String>
+    <system:String x:Key="UserFeedBack">UserFeedBack</system:String>
+    <system:String x:Key="ContactUs">ContactUs</system:String>
+    <system:String x:Key="Help">Help</system:String>
+    <system:String x:Key="About">About</system:String>
+
 </ResourceDictionary>

@@ -2,11 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <!--WindowTitle-->
-    <system:String x:Key="WindowLoginTitle">CCT登录</system:String>
-    <system:String x:Key="WindowContactTitle">CCT联系</system:String>
-    <system:String x:Key="WindowFeedBackTitle">CCT反馈</system:String>
-    <system:String x:Key="WindowHelpTitle">CCT帮助</system:String>
+    <system:String x:Key="MainWindowTitle">通用配置工具(CCT)</system:String>
+    <system:String x:Key="-MainWindowTitle">-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowLoginTitle">登录-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowContactUsTitle">联系我们-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowFeedBackTitle">用户反馈-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowToolInfoTitle">工具简介-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowAboutTitle">关于-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowHelpTitle">帮助-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowPersonTitle">个人信息-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowUpdatePwdTitle">更新密码-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowUpdateTelTitle">更新电话-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowFindAndReplaceTitle">查找替换-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowFindNextTitle">查找下一个-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowParseXmlTitle">解析Xml-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowParseInITitle">解析InI-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowParseJsonlTitle">解析Json-通用配置工具(CCT)</system:String>
+    <system:String x:Key="WindowParsePropertiesTitle">解析Properties-通用配置工具(CCT)</system:String>
     
+    <!---Window-->
+    <system:String x:Key="Ready">就绪...</system:String>
+
     <!--WindowFunc-->
     <system:String x:Key="SwitchLanguage">中</system:String>
 
@@ -21,9 +37,7 @@
     <system:String x:Key="ReAccount">记住帐号</system:String>
     <system:String x:Key="RegistAccount">注册帐号</system:String>
     <system:String x:Key="FoundPassword">找回密码</system:String>
-
-    <!--Regist-->
-
+    
     <!--Popup-->    
     <system:String x:Key="PhoneName">联系电话：</system:String>
     <system:String x:Key="Phone">15239948664</system:String>
@@ -31,13 +45,97 @@
     <system:String x:Key="E_mail">1878776239@qq.com</system:String>
     <system:String x:Key="VersionName">版本：</system:String>
     <system:String x:Key="Version">v1.0</system:String>
+    <system:String x:Key="WaitDeveloping">待开发...</system:String>
 
+    <system:String x:Key="InfoTip">信息提示</system:String>
+
+    <system:String x:Key="CCTInfo">工具简介：</system:String>
+    <system:String x:Key="CCTBackground">工具背景：</system:String>
+
+    <system:String x:Key="NewTel">新电话：</system:String>
+    <system:String x:Key="OldPwd">旧密码：</system:String>
+    <system:String x:Key="NewPwd">新密码：</system:String>
+
+    <system:String x:Key="ID">ID：</system:String>
+    <system:String x:Key="Name">昵称：</system:String>
+    <system:String x:Key="Telphone">电话：</system:String>
+    <system:String x:Key="HeadIcon">头像：</system:String>
+    <system:String x:Key="CreateDate">创建日期：</system:String>
+
+    <system:String x:Key="FindContent">查找内容：</system:String>
+    <system:String x:Key="ReplaceTo">替换为：</system:String>
+    <system:String x:Key="FindNext">查找下一个</system:String>
+    <system:String x:Key="Replace">替换</system:String>
+    <system:String x:Key="ReplaceAll">全部替换</system:String>
+    <system:String x:Key="Direction">方向</system:String>
+    <system:String x:Key="ToUp">向上</system:String>
+    <system:String x:Key="ToLow">向下</system:String>
+    <system:String x:Key="IgnoreCase">区分大小写</system:String>
+    
     <!--Button-->
     <system:String x:Key="Login">登录</system:String>
     <system:String x:Key="Regist">注册</system:String>
     <system:String x:Key="Confirm">确定</system:String>
-
-
-    <system:String x:Key="WaitDeveloping">待开发...</system:String>
+    <system:String x:Key="Cancel">取消</system:String>
     
+    <!--Menu-->
+    <system:String x:Key="File">文件(F)</system:String>
+    <system:String x:Key="New">新建(N)</system:String>
+    <system:String x:Key="Xml">Xml文件</system:String>
+    <system:String x:Key="InI">InI文件</system:String>
+    <system:String x:Key="Json">Json文件</system:String>
+    <system:String x:Key="Properties">Properties文件</system:String>
+    <system:String x:Key="Open">打开(O)</system:String>
+    <system:String x:Key="Save">保存(S)</system:String>
+    <system:String x:Key="SaveAs">另存为(A)</system:String>
+    <system:String x:Key="Export">导出(E)</system:String>
+    <system:String x:Key="Txt">文本文件</system:String>
+    <system:String x:Key="Word">Word文件</system:String>
+    <system:String x:Key="Picture">图片文件</system:String>
+    <system:String x:Key="OpenLastFile">打开上次文件(W)</system:String>
+    <system:String x:Key="OpenRecentFiles">打开最近文件(Z)</system:String>
+    <system:String x:Key="ExitWithSave">保存退出(X)</system:String>
+    <system:String x:Key="ExitWithoutSave">不保存退出(Y)</system:String>
+
+    <system:String x:Key="Edit">编辑(E)</system:String>
+    <system:String x:Key="Undo">撤销(U)</system:String>
+    <system:String x:Key="Redo">重做(R)</system:String>
+    <system:String x:Key="Cut">剪切(T)</system:String>
+    <system:String x:Key="Copy">复制(C)</system:String>
+    <system:String x:Key="Paste">粘贴(P)</system:String>
+    <system:String x:Key="Delete">删除(D)</system:String>
+    <system:String x:Key="SelectAll">全选(A)</system:String>
+
+    <system:String x:Key="Font">字体(F)</system:String>
+    <system:String x:Key="Ant">字体</system:String>
+    <system:String x:Key="Bold">粗体</system:String>
+    <system:String x:Key="Italic">斜体</system:String>
+    <system:String x:Key="AntColor">字体颜色</system:String>
+
+    <system:String x:Key="Parse">解析(P)</system:String>
+
+    <system:String x:Key="Tool">工具(T)</system:String>
+    <system:String x:Key="Top">置顶</system:String>
+    <system:String x:Key="BgColor">背景颜色</system:String>
+    <system:String x:Key="AutoWrap">自动换行</system:String>
+    <system:String x:Key="WatchStatus">查看状态</system:String>
+    <system:String x:Key="LookAndReplace">查找替换</system:String>
+    <system:String x:Key="LookNextOne">查找下一个</system:String>
+    <system:String x:Key="LetterToUpper">转为大写</system:String>
+    <system:String x:Key="LetterToLower">转为小写</system:String>
+
+    <system:String x:Key="Account">帐户(A)</system:String>
+    <system:String x:Key="WatchAccount">查看帐户</system:String>
+    <system:String x:Key="UpdatePassword">更新密码</system:String>
+    <system:String x:Key="UpdateTelphone">更新电话</system:String>
+    <system:String x:Key="SwitchAccount">切换帐户</system:String>
+
+    <system:String x:Key="Helps">帮助(H)</system:String>
+    <system:String x:Key="ToopInfo">工具简介</system:String>
+    <system:String x:Key="OfficialWebsite">官网主页</system:String>
+    <system:String x:Key="UserFeedBack">用户反馈</system:String>
+    <system:String x:Key="ContactUs">联系我们</system:String>
+    <system:String x:Key="Help">帮助</system:String>
+    <system:String x:Key="About">关于</system:String>
+
 </ResourceDictionary>

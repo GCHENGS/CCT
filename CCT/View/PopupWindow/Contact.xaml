@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CCT.View"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Style="{StaticResource Popup_Window}"
-        Title="{Binding Path=Title}" 
+        Title="{DynamicResource WindowContactUsTitle}" 
         Height="210" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>

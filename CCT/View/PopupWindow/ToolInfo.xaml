@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CCT.View"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Style="{StaticResource Popup_Window}"
-        Title="{Binding Path=Title}" 
+        Title="{DynamicResource WindowToolInfoTitle}" 
         Height="180" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -17,9 +17,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0"  Content="CCT简介:"></Label>
+        <Label Grid.Row="0" Grid.Column="0"  Content="{DynamicResource CCTInfo}"></Label>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Text=""/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="4,0,0,0" HorizontalAlignment="Left" Text="{Binding Path=ToolInfo}" TextWrapping="Wrap"/>
 
         <Button Grid.Row="1" Grid.ColumnSpan="2" 
                 Width="60" Height="22" 

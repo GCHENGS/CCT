@@ -26,9 +26,9 @@ namespace CCT
 
             GetLanguage();
 
-            var window = new LoginWindow()
+            var window = new MainWindow()
             {
-                DataContext = new LoginWindowViewModel()
+                DataContext = new MainWindowViewModel()
             };
             window.Show();//开机进入登录界面
         }

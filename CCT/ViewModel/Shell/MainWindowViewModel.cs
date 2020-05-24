@@ -1,5 +1,6 @@
 ﻿using CCT.Config;
 using CCT.Model.DataType;
+using CCT.Resource.Constants;
 using CCT.Resource.Enums;
 using CCT.Resource.Helpers;
 using CCT.Service;
@@ -138,6 +139,8 @@ namespace CCT.ViewModel
 
         public MainWindowViewModel(User user)
         {
+            Title = ConstantsForString.MainWindowTitle.ToString();
+
             CurrentUser = user;
 
             SysConfig = ConfigHelper.ReadSysConfig();
@@ -186,6 +189,8 @@ namespace CCT.ViewModel
 
         public MainWindowViewModel()
         {
+            Title = ConstantsForString.MainWindowTitle.ToString();
+
             CurrentUser = new User();
 
             SysConfig = ConfigHelper.ReadSysConfig();
@@ -386,7 +391,7 @@ namespace CCT.ViewModel
         /// <summary>
         /// 保存文件
         /// </summary>
-        private void SaveCommandExecute(RichTextBox richTextBox)
+        public void SaveCommandExecute(RichTextBox richTextBox)
         {
             // 当前文件未初始化时，不能保存
             if (currentFile == null) return;
@@ -418,7 +423,7 @@ namespace CCT.ViewModel
         /// <summary>
         /// 另存为文件
         /// </summary>
-        private void SaveAsCommandExecute(RichTextBox richTextBox)
+        public void SaveAsCommandExecute(RichTextBox richTextBox)
         {
             // 当前文件未初始化时，不能另存为
             if (currentFile == null) return;
@@ -746,16 +751,14 @@ namespace CCT.ViewModel
         private void SaveExitCommandExecute(RichTextBox richTextBox)
         {
             if (richTextBox == null) return;
-            SaveCommandExecute(richTextBox);
+            SaveCommandExecute(richTextBox);//保存数据
             Window win = VisualTreeHelpers.GetParentObject<Window>(richTextBox, "mainWindow");
             if (win != null)
             {
-                //保存系统配置
-                if (ConfigHelper.SaveSysConfig(SysConfig))
-                {
-                    UpdateQuiteDate();
-                    win.Close();
-                }
+                ConfigHelper.SaveSysConfig(SysConfig);//保存系统配置
+                UpdateQuiteDate();//更新用户退出时间
+                win.Close();//关闭窗体
+                Environment.Exit(0);//环境退出
             }
         }
 
@@ -767,12 +770,10 @@ namespace CCT.ViewModel
         {
             if (win != null)
             {
-                //保存系统配置
-                if (ConfigHelper.SaveSysConfig(SysConfig))
-                {
-                    UpdateQuiteDate();
-                    win.Close();
-                }
+                ConfigHelper.SaveSysConfig(SysConfig);//保存系统配置
+                UpdateQuiteDate();//更新用户退出时间
+                win.Close();//关闭窗体
+                Environment.Exit(0);//环境退出
             }
         }
 
@@ -910,7 +911,7 @@ namespace CCT.ViewModel
                 currentFile.FileExt = StringHelper.GetFileExt(currentFile.FileName).ToLower();
 
                 // 把标题改为打开的文件的名称
-                Title = currentFile.FileName + "-CCT通用配置工具";
+                Title = currentFile.FileName + ConstantsForString._MainWindowTitle.ToString();
                 // 改变状态栏
                 Status = currentFile.FilePath;
 
@@ -982,7 +983,7 @@ namespace CCT.ViewModel
                 currentFile.FileExt = StringHelper.GetFileExt(currentFile.FileName).ToLower();
 
                 // 把标题改为打开的文件的名称
-                Title = currentFile.FileName + "-CCT通用配置工具";
+                Title = currentFile.FileName + ConstantsForString._MainWindowTitle.ToString();
                 // 改变状态栏
                 Status = currentFile.FilePath;
 
@@ -1010,9 +1011,9 @@ namespace CCT.ViewModel
         #region 更新退出时间
 
         /// <summary>
-        /// 更新登录信息到数据库
+        /// 更新用户退出系统时间
         /// </summary>
-        private void UpdateQuiteDate()
+        public void UpdateQuiteDate()
         {
             CurrentUser.UserQuiteDate = DateTime.Now;
             UserService.UpdateUserQuiteDate(CurrentUser);

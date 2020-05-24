@@ -124,12 +124,12 @@ namespace CCT.ViewModel
 
         public XmlParseWindowViewModel()
         {
-            Title = "解析Xml-CCT通用配置工具";
+            Title = "解析Xml-通用配置工具(CCT)";
         }
 
         public XmlParseWindowViewModel(LoadedFile file)
         {
-            Title = "解析Xml-CCT通用配置工具";
+            Title = "解析Xml-通用配置工具(CCT)";
 
             CurrentFile = file;
 
@@ -300,13 +300,13 @@ namespace CCT.ViewModel
             if (CurrentNode != null)
             {
                 //获取输入
-                string nodeName = GetUserInput("注意：输入不能为空且不能与已有孩子节点名称重复\r\nArray结构为数值，Object结构为键值对！", "请输入节点名称", "");
+                string nodeName = GetUserInput("注意：输入不能为空且不能与已有孩子节点名称重复！", "请输入节点名称", "");
                 if (!string.IsNullOrWhiteSpace(nodeName))
                 {
                     if (CurrentNode.Children.Count(x => x.DisplayName.Equals(nodeName)) == 0)
                     {
                         Node node = new Node() { Parent = CurrentNode };
-                        if (CurrentNode.DisplayName.Equals(JsonType.Array.ToString()))
+                        /*if (CurrentNode.DisplayName.Equals(JsonType.Array.ToString()))
                         {
                             if (nodeName.Contains(":"))
                             {
@@ -321,8 +321,9 @@ namespace CCT.ViewModel
                                 MessageBox.Show("名称格式不正确，创建失败！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                 return;
                             }
-                        }
+                        }*/
                         node.DisplayName = nodeName;
+                        node.NodeType = NodeType.Element.ToString();
                         CurrentNode.Children.Add(node);
                         NotifyUI();
                     }

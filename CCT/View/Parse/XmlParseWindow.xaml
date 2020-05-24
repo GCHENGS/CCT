@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:CCT.View"
         xmlns:enum="clr-namespace:CCT.Resource.Enums"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner"
-        Title="{Binding Path=Title}" Height="400" Width="800" x:Name="window">
+        Style="{StaticResource NoMax_Window}"
+        Title="{DynamicResource WindowParseXmlTitle}" 
+        Height="400" Width="800" x:Name="window">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -81,6 +83,7 @@
                             <Button x:Name="insert" Content="插入(孩子节点)" Margin="10" Command="{Binding Path=InsertCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -95,6 +98,7 @@
                             <Button x:Name="remove" Content="移除(当前节点)" Margin="10" Command="{Binding Path=RemoveCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -106,8 +110,22 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Button x:Name="clear" Content="清空(解析数据)" Margin="10" Command="{Binding Path=ClearCommand}" CommandParameter="{Binding ElementName=json}" IsEnabled="{Binding Path=RootNodeList,Converter={StaticResource ListCountToBoolConverter}}"/>
-                            <Button x:Name="parse" Content="恢复(解析数据)" Margin="10" Command="{Binding Path=ParseCommand}" IsEnabled="{Binding Path=IsEnabled,ElementName=clear,Converter={StaticResource BoolToOpposite}}"/>
+                            <Button x:Name="clear" Content="清空(解析数据)" Command="{Binding Path=ClearCommand}" CommandParameter="{Binding ElementName=json}" IsEnabled="{Binding Path=RootNodeList,Converter={StaticResource ListCountToBoolConverter}}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Margin" Value="10"/>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button x:Name="parse" Content="恢复(解析数据)" Command="{Binding Path=ParseCommand}" IsEnabled="{Binding Path=IsEnabled,ElementName=clear,Converter={StaticResource BoolToOpposite}}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Margin" Value="10"/>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </Grid>
                     <GridSplitter Grid.Column="1" Width="5" Background="Gainsboro" HorizontalAlignment="Center"/>
@@ -144,7 +162,7 @@
                                         <DataTemplate>
                                             <Button Content="删除" Command="{Binding Path=DelCommand}">
                                                 <Button.Style>
-                                                    <Style TargetType="Button">
+                                                    <Style TargetType="Button" BasedOn="{StaticResource StandardButton}">
                                                         <Style.Triggers>
 
                                                         </Style.Triggers>
@@ -205,9 +223,11 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                            <Button Content="全选" Margin="10" Command="{Binding Path=SelectAllKeyCommand}">
+                            <Button Content="全选" Command="{Binding Path=SelectAllKeyCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="10"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -219,10 +239,11 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-
-                            <Button Content="批量删除" Margin="10" Command="{Binding Path=DelBatchKeyCommand}">
+                            <Button Content="批量删除" Command="{Binding Path=DelBatchKeyCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Margin" Value="10"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -234,9 +255,11 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Button Content="添加属性" Margin="10" Command="{Binding Path=AddKeyCommand}">
+                            <Button Content="添加属性" Command="{Binding Path=AddKeyCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Margin" Value="10"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>
@@ -248,9 +271,11 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Button Content="清空属性" Margin="10" Command="{Binding Path=ClearKeyCommand}">
+                            <Button Content="清空属性" Command="{Binding Path=ClearKeyCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Margin" Value="10"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsCurrentNodeNull}" Value="true">
                                                 <Setter Property="IsEnabled" Value="False"/>

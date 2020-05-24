@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using CCT.Resource.Constants;
+using Prism.Mvvm;
 
 namespace CCT.ViewModel
 {
@@ -7,12 +8,11 @@ namespace CCT.ViewModel
     /// </summary>
     public class ViewModelBase : BindableBase
     {
-
         #region 私有域
 
-        private string title = "CCT通用配置工具";//窗口标题
+        private string title;//窗口标题
        
-        private string status="Ready";//状态
+        private string status = ConstantsForString.Ready.ToString();//状态
 
         #endregion
 

@@ -2,12 +2,12 @@
 <SysConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SavedLastLoginUser X1="admin" X2="000" />
   <SaveUserOperator X1="True" X2="False" />
-  <SavedLastOpenFile X1="log4j.properties" X2="C:\Users\程献威\Desktop\毕业设计\log4j.properties" />
+  <SavedLastOpenFile X1="sqlserver.properties" X2="C:\Users\程献威\Desktop\毕业设计\properties\sqlserver.properties" />
   <SavedRecentFile>
     <List>
-      <RecentFile X1="install.ini" X2="C:\Users\程献威\Desktop\毕业设计\install.ini" />
-      <RecentFile X1="tree_data2.json" X2="C:\Users\程献威\Desktop\毕业设计\tree_data2.json" />
-      <RecentFile X1="log4j.properties" X2="C:\Users\程献威\Desktop\毕业设计\log4j.properties" />
+      <RecentFile X1="browser.json" X2="C:\Users\程献威\Desktop\毕业设计\json\browser.json" />
+      <RecentFile X1="array.json" X2="C:\Users\程献威\Desktop\毕业设计\json\array.json" />
+      <RecentFile X1="sqlserver.properties" X2="C:\Users\程献威\Desktop\毕业设计\properties\sqlserver.properties" />
     </List>
   </SavedRecentFile>
 </SysConfig>

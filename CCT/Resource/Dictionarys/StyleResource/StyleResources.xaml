@@ -24,7 +24,7 @@
 
     <!--<Style BasedOn="{StaticResource DefaultToolTipStyle}" TargetType="ToolTip"/>-->
 
-    <!--<Style BasedOn="{StaticResource StandardButton}" TargetType="Button"/>-->
+    <Style BasedOn="{StaticResource StandardButton}" TargetType="Button"/>
 
     <Style BasedOn="{StaticResource StandardTextBlock}" TargetType="TextBlock"/>
     

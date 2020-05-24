@@ -6,8 +6,8 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:CCT.View"       
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        x:Name="mainWindow"
-        Title="{Binding Path=Title}" Height="600" Width="800">
+        Style="{StaticResource Standard_Window}"
+        x:Name="mainWindow" Title="{Binding Path=Title}" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -17,28 +17,28 @@
         <!--菜单栏-->
         <DockPanel x:Name="menu" Grid.Row="0">
             <Menu>
-                <MenuItem Header="文件(F)">
-                    <MenuItem Header="新建(N)" InputGestureText="Ctrl+N">
-                        <MenuItem Header="Xml文件" Command="{Binding Path=NewXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="InI文件" Command="{Binding Path=NewInICommand}" CommandParameter="{Binding ElementName=richTextBox}" />
-                        <MenuItem Header="Json文件" Command="{Binding Path=NewJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="Properties文件" Command="{Binding Path=NewPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                <MenuItem Header="{DynamicResource File}">
+                    <MenuItem Header="{DynamicResource New}" InputGestureText="Ctrl+N">
+                        <MenuItem Header="{DynamicResource Xml}" Command="{Binding Path=NewXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource InI}" Command="{Binding Path=NewInICommand}" CommandParameter="{Binding ElementName=richTextBox}" />
+                        <MenuItem Header="{DynamicResource Json}" Command="{Binding Path=NewJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource Properties}" Command="{Binding Path=NewPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="打开(O)" InputGestureText="Ctrl+O">
-                        <MenuItem Header="Xml文件" Command="{Binding Path=OpenXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="InI文件" Command="{Binding Path=OpenInICommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="Json文件" Command="{Binding Path=OpenJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="Properties文件" Command="{Binding Path=OpenPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="{DynamicResource Open}" InputGestureText="Ctrl+O">
+                        <MenuItem Header="{DynamicResource Xml}" Command="{Binding Path=OpenXmlCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource InI}" Command="{Binding Path=OpenInICommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource Json}" Command="{Binding Path=OpenJsonCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource Properties}" Command="{Binding Path=OpenPropertiesCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="保存(S)" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+S"/>
-                    <MenuItem Header="另存为(A)" Command="{Binding Path=SaveAsCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                    <MenuItem Header="导出为(E)">
-                        <MenuItem Header="文本" Command="{Binding Path=ExportTCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="Word" Command="{Binding Path=ExportWCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                        <MenuItem Header="图片" Command="{Binding Path=ExportPCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="{DynamicResource Save}" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+S"/>
+                    <MenuItem Header="{DynamicResource SaveAs}" Command="{Binding Path=SaveAsCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="{DynamicResource Export}">
+                        <MenuItem Header="{DynamicResource Txt}" Command="{Binding Path=ExportTCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource Word}" Command="{Binding Path=ExportWCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                        <MenuItem Header="{DynamicResource Picture}" Command="{Binding Path=ExportPCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
                     </MenuItem>
-                    <MenuItem Header="打开上次文件(W)" Command="{Binding Path=RecentOpenCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                    <MenuItem Header="最近文件(Z)">
+                    <MenuItem Header="{DynamicResource OpenLastFile}" Command="{Binding Path=RecentOpenCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="{DynamicResource OpenRecentFiles}">
                         <!--<MenuItem Header="{Binding Path=List[2].X1}" Tag="{Binding Path=List[2].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                         <MenuItem Header="{Binding Path=List[1].X1}" Tag="{Binding Path=List[1].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                         <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Command="{Binding Path=RecentFileCommand}" Click="MenuItem_Click" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />-->
@@ -47,53 +47,53 @@
                         <MenuItem Header="{Binding Path=List[0].X1}" Tag="{Binding Path=List[0].X2}" Click="MenuItem_Click"/>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="保存退出(X)" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
-                    <MenuItem Header="不保存退出(Y)" Command="{Binding Path=ExitCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                    <MenuItem Header="{DynamicResource ExitWithSave}" Command="{Binding Path=SaveExitCommand}" CommandParameter="{Binding ElementName=richTextBox}"/>
+                    <MenuItem Header="{DynamicResource ExitWithoutSave}" Command="{Binding Path=ExitCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
                 </MenuItem>
-                <MenuItem Header="编辑(E)">
-                    <MenuItem Header="撤销(U)" Command="{Binding Path=UndoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Z"></MenuItem>
-                    <MenuItem Header="重做(R)" Command="{Binding Path=RedoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Y"></MenuItem>
+                <MenuItem Header="{DynamicResource Edit}">
+                    <MenuItem Header="{DynamicResource Undo}" Command="{Binding Path=UndoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Z"></MenuItem>
+                    <MenuItem Header="{DynamicResource Redo}" Command="{Binding Path=RedoCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+Y"></MenuItem>
                     <Separator/>
-                    <MenuItem Header="剪切(T)" Command="{Binding Path=CutCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
-                    <MenuItem Header="复制(C)" Command="{Binding Path=CopyCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
-                    <MenuItem Header="粘贴(P)" Command="{Binding Path=PasteCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+V"></MenuItem>
-                    <MenuItem Header="删除(D)" Command="{Binding Path=DelCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
+                    <MenuItem Header="{DynamicResource Cut}" Command="{Binding Path=CutCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
+                    <MenuItem Header="{DynamicResource Copy}" Command="{Binding Path=CopyCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
+                    <MenuItem Header="{DynamicResource Paste}" Command="{Binding Path=PasteCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+V"></MenuItem>
+                    <MenuItem Header="{DynamicResource Delete}" Command="{Binding Path=DelCommand}" CommandParameter="{Binding ElementName=richTextBox}" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
                     <Separator/>
-                    <MenuItem Header="全选(A)" Command="{Binding Path=SelAllCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+A"></MenuItem>
+                    <MenuItem Header="{DynamicResource SelectAll}" Command="{Binding Path=SelAllCommand}" CommandParameter="{Binding ElementName=richTextBox}" InputGestureText="Ctrl+A"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="字体(F)">
-                    <MenuItem x:Name="Ant" Header="字体" Click="Ant_Click"/>
-                    <MenuItem x:Name="Bold" Header="加粗" Click="Bold_Click"/>
-                    <MenuItem x:Name="Italic"  Header="斜体" Click="Italic_Click"/>
-                    <MenuItem x:Name="AntColor"  Header="字体颜色" Click="AntColor_Click"/>
+                <MenuItem Header="{DynamicResource Font}">
+                    <MenuItem x:Name="Ant" Header="{DynamicResource Ant}" Click="Ant_Click"/>
+                    <MenuItem x:Name="Bold" Header="{DynamicResource Bold}" Click="Bold_Click"/>
+                    <MenuItem x:Name="Italic"  Header="{DynamicResource Italic}" Click="Italic_Click"/>
+                    <MenuItem x:Name="AntColor"  Header="{DynamicResource AntColor}" Click="AntColor_Click"/>
                 </MenuItem>
-                <MenuItem Header="解析(P)" Command="{Binding Path=ParseCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
-                <MenuItem Header="工具(T)">
-                    <MenuItem x:Name="top" Header="置顶" Click="top_Click"/>
-                    <MenuItem x:Name="bgColor"  Header="背景颜色" Click="bgColor_Click"/>
-                    <MenuItem x:Name="autoEnter" Header="自动换行" IsChecked="False" Click="autoEnter_Click"/>
-                    <MenuItem x:Name="watchStatus" Header="查看状态栏" IsChecked="False" Click="watchStatus_Click"/>
+                <MenuItem Header="{DynamicResource Parse}" Command="{Binding Path=ParseCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                <MenuItem Header="{DynamicResource Tool}">
+                    <MenuItem x:Name="top" Header="{DynamicResource Top}" Click="top_Click"/>
+                    <MenuItem x:Name="bgColor"  Header="{DynamicResource BgColor}" Click="bgColor_Click"/>
+                    <MenuItem x:Name="autoEnter" Header="{DynamicResource AutoWrap}" IsChecked="False" Click="autoEnter_Click"/>
+                    <MenuItem x:Name="watchStatus" Header="{DynamicResource WatchStatus}" IsChecked="False" Click="watchStatus_Click"/>
                     <Separator/>
-                    <MenuItem x:Name="replace" Header="查找替换" Click="replace_Click"></MenuItem>
-                    <MenuItem x:Name="selectNext" Header="查找下一个" Click="selectNext_Click"></MenuItem>
+                    <MenuItem x:Name="replace" Header="{DynamicResource LookAndReplace}" Click="replace_Click"></MenuItem>
+                    <MenuItem x:Name="selectNext" Header="{DynamicResource LookNextOne}" Click="selectNext_Click"></MenuItem>
                     <Separator/>
-                    <MenuItem x:Name="gotoA" Header="转换为大写" Click="gotoA_Click"></MenuItem>
-                    <MenuItem x:Name="gotoa" Header="转换为小写" Click="gotoa_Click_1"></MenuItem>
+                    <MenuItem x:Name="gotoA" Header="{DynamicResource LetterToUpper}" Click="gotoA_Click"></MenuItem>
+                    <MenuItem x:Name="gotoa" Header="{DynamicResource LetterToLower}" Click="gotoa_Click_1"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="帐户(U)">
-                    <MenuItem x:Name="lookAccount" Header="查看帐户" Command="{Binding Path=LookUserCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
-                    <MenuItem x:Name="reUserPassword" Header="更新密码" Command="{Binding Path=UpdatePwdCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
-                    <MenuItem x:Name="reUserPhone" Header="更新电话" Command="{Binding Path=UpdateTelCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
+                <MenuItem Header="{DynamicResource Account}">
+                    <MenuItem x:Name="lookAccount" Header="{DynamicResource WatchAccount}" Command="{Binding Path=LookUserCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
+                    <MenuItem x:Name="reUserPassword" Header="{DynamicResource UpdatePassword}" Command="{Binding Path=UpdatePwdCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
+                    <MenuItem x:Name="reUserPhone" Header="{DynamicResource UpdateTelphone}" Command="{Binding Path=UpdateTelCommand}" CommandParameter="{Binding ElementName=mainWindow}"></MenuItem>
                     <Separator/>
-                    <MenuItem x:Name="switchAccount" Header="切换帐户" Click="switchAccount_Click"></MenuItem>
+                    <MenuItem x:Name="switchAccount" Header="{DynamicResource SwitchAccount}" Click="switchAccount_Click"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="帮助(H)">
-                    <MenuItem x:Name="toolInfo" Header="工具简介" Click="toolInfo_Click"></MenuItem>
-                    <MenuItem x:Name="index" Header="官网主页" Click="index_Click"></MenuItem>
-                    <MenuItem x:Name="feedback" Header="用户反馈" Click="feedback_Click"></MenuItem>
-                    <MenuItem x:Name="contact" Header="联系我们" Click="contact_Click"></MenuItem>
-                    <MenuItem x:Name="help" Header="帮助" Click="help_Click"></MenuItem>
-                    <MenuItem x:Name="about" Header="关于" Click="about_Click"></MenuItem>
+                <MenuItem Header="{DynamicResource Helps}">
+                    <MenuItem x:Name="toolInfo" Header="{DynamicResource ToopInfo}" Click="toolInfo_Click"></MenuItem>
+                    <MenuItem x:Name="index" Header="{DynamicResource OfficialWebsite}" Click="index_Click"></MenuItem>
+                    <MenuItem x:Name="feedback" Header="{DynamicResource UserFeedBack}" Click="feedback_Click"></MenuItem>
+                    <MenuItem x:Name="contact" Header="{DynamicResource ContactUs}" Click="contact_Click"></MenuItem>
+                    <MenuItem x:Name="help" Header="{DynamicResource Help}" Click="help_Click"></MenuItem>
+                    <MenuItem x:Name="about" Header="{DynamicResource About}" Click="about_Click"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -114,15 +114,15 @@
                 </RichTextBox.Document>-->
                 <RichTextBox.ContextMenu>
                     <ContextMenu x:Name="editContextMenu">
-                        <MenuItem Header="撤销(U)" Click="undo_Click" InputGestureText="Ctrl+Z"></MenuItem>
-                        <MenuItem Header="重做(R)" Click="redo_Click" InputGestureText="Ctrl+Y"></MenuItem>
+                        <MenuItem Header="{DynamicResource Undo}" Click="undo_Click" InputGestureText="Ctrl+Z"></MenuItem>
+                        <MenuItem Header="{DynamicResource Redo}" Click="redo_Click" InputGestureText="Ctrl+Y"></MenuItem>
                         <Separator/>
-                        <MenuItem Header="剪切(T)" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
-                        <MenuItem Header="复制(C)" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
-                        <MenuItem Header="粘贴(P)" Click="paste_Click" InputGestureText="Ctrl+V"></MenuItem>
-                        <MenuItem Header="删除(D)" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
+                        <MenuItem Header="{DynamicResource Cut}" Click="cut_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+X"></MenuItem>
+                        <MenuItem Header="{DynamicResource Copy}" Click="copy_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Ctrl+C"></MenuItem>
+                        <MenuItem Header="{DynamicResource Paste}" Click="paste_Click" InputGestureText="Ctrl+V"></MenuItem>
+                        <MenuItem Header="{DynamicResource Delete}" Click="delete_Click" IsEnabled="{Binding Path=CurrentFile.IsEnabled}" InputGestureText="Del"></MenuItem>
                         <Separator/>
-                        <MenuItem Header="全选(A)" Click="selectAll_Click" InputGestureText="Ctrl+A"></MenuItem>
+                        <MenuItem Header="{DynamicResource SelectAll}" Click="selectAll_Click" InputGestureText="Ctrl+A"></MenuItem>
                     </ContextMenu>
                 </RichTextBox.ContextMenu>
                 <i:Interaction.Triggers>

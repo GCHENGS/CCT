@@ -1,4 +1,5 @@
-﻿using CCT.Resource.Helpers;
+﻿using CCT.Resource.Constants;
+using CCT.Resource.Helpers;
 using CCT.Resource.Helpers.InterFace;
 using CCT.ViewModel;
 using System.Diagnostics;
@@ -175,10 +176,14 @@ namespace CCT.View
             if (richTextBox.FontWeight == FontWeights.Bold)
             {
                 richTextBox.FontWeight = FontWeights.Regular;
+                Bold.IsChecked = false;
+                //Bold.FontWeight = FontWeights.Regular;
             }
             else
             {
                 richTextBox.FontWeight = FontWeights.Bold;
+                Bold.IsChecked = true;
+                //Bold.FontWeight = FontWeights.Bold;
             }
         }
 
@@ -194,10 +199,14 @@ namespace CCT.View
             if (richTextBox.FontStyle == FontStyles.Italic)
             {
                 richTextBox.FontStyle = FontStyles.Normal;
+                Italic.IsChecked = false;
+                //Italic.FontWeight = FontWeights.Regular;
             }
             else
             {
                 richTextBox.FontStyle = FontStyles.Italic;
+                Italic.IsChecked = true;
+                //Italic.FontWeight = FontWeights.Bold;
             }
         }
 
@@ -384,8 +393,8 @@ namespace CCT.View
         /// <param name="e"></param>
         private void index_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/index.jsp 吗？", "CCT用户反馈", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (box == MessageBoxResult.OK)
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/index.jsp 吗？", ConstantsForMessageBox.InfoTip.ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (box == MessageBoxResult.Yes)
             {
                 Process.Start("http://localhost:8080/CCT/index.jsp");
             }
@@ -398,8 +407,8 @@ namespace CCT.View
         /// <param name="e"></param>
         private void feedback_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/feedback 吗？", "CCT用户反馈", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (box == MessageBoxResult.OK)
+            MessageBoxResult box = MessageBox.Show("要用浏览器打开URL http://localhost:8080/CCT/feedback 吗？", ConstantsForMessageBox.InfoTip.ToString(), MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (box == MessageBoxResult.Yes)
             {
                 Process.Start("http://localhost:8080/CCT/feedback");
             }
@@ -474,9 +483,9 @@ namespace CCT.View
 
         private System.Windows.Media.Brush BaseColor = new System.Windows.Media.SolidColorBrush();
 
-        private System.Windows.Media.Brush AtColor;
+        private System.Windows.Media.Brush AtColor;//字体颜色
 
-        private System.Windows.Media.Brush BgColor;
+        private System.Windows.Media.Brush BgColor;//背景颜色
 
         #endregion
 

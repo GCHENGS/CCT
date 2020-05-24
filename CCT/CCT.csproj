@@ -520,6 +520,7 @@
     <Resource Include="Resource\Images\btn_set_over.png" />
     <Resource Include="Resource\Images\btn_max_normal.png" />
     <Resource Include="Resource\Images\btn_max_over.png" />
+    <Resource Include="Resource\Images\logo-16.png" />
     <Content Include="Resource\Images\logo.png" />
     <Content Include="Resource\Dictionarys\FontsResource\font-awesome.css" />
     <Resource Include="Resource\Images\shanchu.png" />

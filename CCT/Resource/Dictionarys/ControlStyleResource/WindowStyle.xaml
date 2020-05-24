@@ -6,46 +6,71 @@
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="AllowsTransparency" Value="True" />
-        <Setter Property="FontSize" Value="{DynamicResource Font.Size.Window.Title}" />
+        <!--<Setter Property="FontSize" Value="{DynamicResource Font.Size.Window.Title}" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontFamily" Value="{DynamicResource Fonts.Family.FontAwesome}"/>
-        <Setter Property="Foreground" Value="{DynamicResource Brushes.Backstage.Foreground}" />
-        <Setter Property="Background" Value="{DynamicResource Brushes.Backstage.Background}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Fonts.Family.Window.Title}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Brushes.Backstage.Foreground}" />-->
+        <Setter Property="Background" Value="SteelBlue" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
-                        <Border x:Name="Bd" CornerRadius="10" 
+                        <Border x:Name="Bd" CornerRadius="0" 
                                 Height="{TemplateBinding Height}" 
                                 Width="{TemplateBinding Width}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}">
                         </Border>
-                        <Label Content="{TemplateBinding Title}" 
+                        <Image Source="/Resource/Images/logo-16.png"  
+                               Margin="10,8,0,0" 
+                               Height="16" Width="16" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Top"/>
+                        <Label Content="{TemplateBinding Title}"
+                               Margin="30,4,0,0" 
                                FontSize="{TemplateBinding FontSize}" 
                                FontWeight="{TemplateBinding FontWeight}" 
                                Foreground="{TemplateBinding Foreground}"
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Top" />
                         <Button x:Name="BtnClose" 
-                                Margin="0,0,10,0" 
+                                Margin="0,7,10,0" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Top" 
                                 Style="{DynamicResource ButtonClose}"
                                 Click="BtnClose_Click" >
                         </Button>
                         <Button x:Name="BtnMax" 
-                                Margin="0,0,38,0" 
+                                Margin="0,7,38,0" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Top" 
                                 Style="{DynamicResource ButtonMax}"
                                 Click="BtnMax_Click" >
                         </Button>
                         <Button x:Name="BtnMin"
-                                Margin="0,0,65,0"
+                                Margin="0,7,65,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
                                 Style="{DynamicResource ButtonMin}" 
                                 Click="BtnMin_Click" >
+                        </Button>
+                        <Button x:Name="BtnSwitchLanguage"
+                                Margin="0,5,91,0" 
+                                Content="{DynamicResource SwitchLanguage}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonSwitchLanguage}" 
+                                Click="BtnSwitchLanguage_Click" >
+                        </Button>
+                        <Button x:Name="BtnSetting"
+                                Margin="0,7,121,0" 
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Style="{DynamicResource ButtonSet}" 
+                                PreviewMouseLeftButtonDown="BtnSetting_PreviewMouseLeftButtonDown">
+                            <Button.ContextMenu>
+                                <ContextMenu x:Name="SettingContextMenu" Visibility="Collapsed"/>
+                            </Button.ContextMenu>
                         </Button>
                         <Grid Margin="0,29.33,0,0">
                             <Border Background="{TemplateBinding Background}"
@@ -53,7 +78,7 @@
                               BorderThickness="{TemplateBinding BorderThickness}"
                               Padding="{TemplateBinding Margin}"
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                              CornerRadius="10"  >
+                              CornerRadius="0"  >
                                 <ContentPresenter />
                             </Border>
                         </Grid>
@@ -65,12 +90,11 @@
 
     <Style x:Key="NoMax_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
         <Setter Property="ResizeMode" Value="NoResize" />
-        <Setter Property="Background" Value="Gainsboro"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
-                        <Border x:Name="Bd" CornerRadius="10" 
+                        <Border x:Name="Bd" CornerRadius="0" 
                                 Height="{TemplateBinding Height}" 
                                 Width="{TemplateBinding Width}"
                                 Background="{TemplateBinding Background}">
@@ -82,14 +106,14 @@
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Top" />
                         <Button x:Name="BtnClose" 
-                                Margin="0,0,10,0" 
+                                Margin="0,7,10,0" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Top" 
                                 Style="{DynamicResource ButtonClose}"
                                 Click="BtnClose_Click" >
                         </Button>
                         <Button x:Name="BtnMin"
-                                Margin="0,0,38,0"
+                                Margin="0,7,38,0"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
                                 Style="{DynamicResource ButtonMin}" 
@@ -101,7 +125,7 @@
                               BorderThickness="{TemplateBinding BorderThickness}"
                               Padding="{TemplateBinding Margin}"
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                              CornerRadius="10"  >
+                              CornerRadius="0"  >
                                 <ContentPresenter />
                             </Border>
                         </Grid>
@@ -191,12 +215,11 @@
 
     <Style x:Key="Popup_Window" TargetType="{x:Type Window}" BasedOn="{StaticResource Standard_Window}">
         <Setter Property="ResizeMode" Value="NoResize" />
-        <Setter Property="Background" Value="Gainsboro"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Grid x:Name="Win" Background="Transparent" MouseDown="Window_MouseDown">
-                        <Border x:Name="Bd" CornerRadius="10" 
+                        <Border x:Name="Bd" CornerRadius="0" 
                                 Height="{TemplateBinding Height}" 
                                 Width="{TemplateBinding Width}"
                                 Background="{TemplateBinding Background}">
@@ -220,7 +243,7 @@
                               BorderThickness="{TemplateBinding BorderThickness}"
                               Padding="{TemplateBinding Margin}"
                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                              CornerRadius="10"  >
+                              CornerRadius="0"  >
                                 <ContentPresenter />
                             </Border>
                         </Grid>

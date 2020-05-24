@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CCT.View"
-        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Style="{StaticResource Popup_Window}"
-        Title="{Binding Path=Title}" 
+        Title="{DynamicResource WindowAboutTitle}" 
         Height="180" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -17,9 +17,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0"  Content="CCT背景:"></Label>
-        
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Text=""/>
+        <Label Grid.Row="0" Grid.Column="0"  Content="{DynamicResource CCTBackground}"></Label>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="4,0,0,0" HorizontalAlignment="Left" Text="{Binding Path=BackGround}" TextWrapping="Wrap"/>
 
         <Button Grid.Row="1" Grid.ColumnSpan="2" 
                 Width="60" Height="22" 

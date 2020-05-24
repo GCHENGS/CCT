@@ -33,15 +33,15 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#87cefa"/>
+                            <Setter Property="Background" Value="Gainsboro"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Gainsboro"/>
+                            <Setter Property="Background" Value="#87cefa"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="Foreground" Value="Red"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Background" Value="White" TargetName="Panel"/>
+                            <Setter Property="Background" Value="Transparent" TargetName="Panel"/>
                             <Setter Property="FontWeight" Value="Normal"/>
                             <Setter Property="Foreground" Value="Black"/>
                         </Trigger>
