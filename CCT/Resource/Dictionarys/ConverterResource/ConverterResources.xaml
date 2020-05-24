@@ -15,5 +15,6 @@
     <converter:VisibleToReverse x:Key="VisibleToReverse"/>
     <converter:BoolToOpposite x:Key="BoolToOpposite"/>
     <converter:StringToIconConverter x:Key="StringToIconConverter"/>
+    <converter:StatusToAnimationVisibilityConverter x:Key="StatusToAnimationVisibilityConverter" />
     
 </ResourceDictionary>

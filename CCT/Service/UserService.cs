@@ -84,6 +84,8 @@ namespace CCT.Service
                 return ret;
             }
 
+            //string commandText = "update Users set userPassword = '"+ user.UserPassword +"' where userId = "+1;
+
             string commandText = "update Users set userPassword = @userPassword where userId = @userId";
 
             SqlParameter[] parameters = new SqlParameter[2]
@@ -127,6 +129,8 @@ namespace CCT.Service
                 return ret;
             }
 
+            //string commandText = "update Users set userLoginDate = '"+ user.UserLoginDate +"' where userId = "+1;
+
             string commandText = "update Users set userLoginDate = @userLoginDate where userId = @userId";
 
             SqlParameter[] parameters = new SqlParameter[2]
@@ -168,6 +172,8 @@ namespace CCT.Service
             {
                 return ret;
             }
+
+            //string commandText = "update Users set userQuiteDate = '"+ user.UserQuiteDate +"' where userId = "+1;
 
             string commandText = "update Users set userQuiteDate = @userQuiteDate where userId = @userId";
 
@@ -212,6 +218,8 @@ namespace CCT.Service
             {
                 return ret;
             }
+
+            //string commandText = "update Users set userPhone = '"+ user.UserPhone +"' where userId = "+1;
 
             string commandText = "update Users set userPhone = @userPhone where userId = @userId";
 

@@ -17,6 +17,8 @@ namespace CCT.ViewModel
     {
         #region 私有域
 
+        private ViewModelStatus _status = ViewModelStatus.None;//异步状态
+
         private LoadedFile currentFile;//当前文件
 
         private XmlHelper xmlHelper;//属性文件助手
@@ -85,6 +87,22 @@ namespace CCT.ViewModel
         {
             get { return isLoading; }
             set { SetProperty(ref isLoading, value); }
+        }
+
+        /// <summary>
+        /// ViewModel状态
+        /// </summary>
+        public ViewModelStatus _Status
+        {
+            get { return _status; }
+            protected set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    RaisePropertyChanged(@"_Status");
+                }
+            }
         }
 
         /// <summary>
@@ -195,6 +213,8 @@ namespace CCT.ViewModel
         /// </summary>
         private void ExportNodeExcelCommandExecute()
         {
+            _Status = ViewModelStatus.Initializing;
+
             // 获取路径
             var path = FileDialogHelper.SaveAsFile("xlsx");
 
@@ -208,11 +228,12 @@ namespace CCT.ViewModel
 
             if (xmlHelper.ExportNodeExcel(path, RootNode))
             {
+                _Status = ViewModelStatus.Loaded;
                 MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 IsLoading = false;
                 return;
             }
-
+            _Status = ViewModelStatus.Loaded;
             IsLoading = false;
             MessageBox.Show("导出异常！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -222,6 +243,8 @@ namespace CCT.ViewModel
         /// </summary>
         private void ExportAttributeExcelCommandExecute()
         {
+            _Status = ViewModelStatus.Initializing;
+
             // 获取路径
             var path = FileDialogHelper.SaveAsFile("xlsx");
 
@@ -235,11 +258,12 @@ namespace CCT.ViewModel
 
             if (xmlHelper.ExportAttributeExcel(path, RootNode))
             {
+                _Status = ViewModelStatus.Loaded;
                 MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 IsLoading = false;
                 return;
             }
-
+            _Status = ViewModelStatus.Loaded;
             IsLoading = false;
             MessageBox.Show("导出异常！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -249,6 +273,8 @@ namespace CCT.ViewModel
         /// </summary>
         private void ExportJsonCommandExecute()
         {
+            _Status = ViewModelStatus.Initializing;
+
             // 获取路径
             var path = FileDialogHelper.SaveAsFile("json");
 
@@ -262,11 +288,12 @@ namespace CCT.ViewModel
 
             if (xmlHelper.ExportXml(path))
             {
+                _Status = ViewModelStatus.Loaded;
                 MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 IsLoading = false;
                 return;
             }
-
+            _Status = ViewModelStatus.Loaded;
             IsLoading = false;
             MessageBox.Show("导出异常,请检查Xml格式是否正确！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
         }

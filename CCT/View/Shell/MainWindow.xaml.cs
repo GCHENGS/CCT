@@ -1,4 +1,5 @@
-﻿using CCT.Resource.Constants;
+﻿using CCT.Config;
+using CCT.Resource.Constants;
 using CCT.Resource.Helpers;
 using CCT.Resource.Helpers.InterFace;
 using CCT.ViewModel;
@@ -469,12 +470,63 @@ namespace CCT.View
         /// <param name="e"></param>
         private void switchAccount_Click(object sender, RoutedEventArgs e)
         {
+            var data = DataContext as MainWindowViewModel;
+            try
+            {
+                var file = data.CurrentFile;
+                if (file == null)//用户只是登录未处理文件
+                {
+                    ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                    data.UpdateQuiteDate();
+                    this.Close();//关闭窗体
+                }
+                else
+                {
+                    if (file.IsSave)//已经保存的可以直接关闭
+                    {
+                        ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                        data.UpdateQuiteDate();
+                        this.Close();//关闭窗体
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(file.FilePath))
+                        {
+                            MessageBoxResult result = MessageBox.Show("存在未保存的内容，是否需要保存？", "信息提示", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                data.SaveCommandExecute(richTextBox);//保存数据
+                                ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                data.UpdateQuiteDate();
+                                this.Close();//关闭窗体
+                            }
+                            else
+                            {
+                                ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                                data.UpdateQuiteDate();
+                                this.Close();//关闭窗体
+                            }
+                        }
+                        else
+                        {
+                            data.SaveCommandExecute(richTextBox);//默认保存数据
+                            ConfigHelper.SaveSysConfig(data.SysConfig);//保存系统配置
+                            data.UpdateQuiteDate();
+                            this.Close();//关闭窗体
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("系统关闭异常!");
+                return;
+            }
             LoginWindow login = new LoginWindow();
             {
                 DataContext = new LoginWindowViewModel();
             }
             login.Show();
-            this.Close();
         }
 
         #endregion

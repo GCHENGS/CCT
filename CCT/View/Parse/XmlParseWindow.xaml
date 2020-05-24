@@ -328,6 +328,6 @@
             </TabItem>
         </TabControl>
         <!--加载中-->
-        <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"></local:Loading>
+        <local:Loading Grid.Row="1" Background="Transparent" VerticalAlignment="Center" x:Name="loading" Visibility="{Binding Path=_Status,Converter={StaticResource StatusToAnimationVisibilityConverter}}"></local:Loading>
     </Grid>
 </Window>

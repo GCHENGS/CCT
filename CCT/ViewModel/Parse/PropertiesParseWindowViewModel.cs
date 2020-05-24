@@ -1,4 +1,5 @@
 ﻿using CCT.Model.DataType;
+using CCT.Resource.Enums;
 using CCT.Resource.Helpers;
 using CCT.Resource.Helpers.FileHelper;
 using Microsoft.VisualBasic;
@@ -16,6 +17,8 @@ namespace CCT.ViewModel
     public class PropertiesParseWindowViewModel : ViewModelBase
     {
         #region 私有域
+
+        private ViewModelStatus _status = ViewModelStatus.None;//异步状态
 
         private string searchText;//搜索字符串
 
@@ -85,6 +88,22 @@ namespace CCT.ViewModel
             set { SetProperty(ref isLoading, value); }
         }
 
+        /// <summary>
+        /// ViewModel状态
+        /// </summary>
+        public ViewModelStatus _Status
+        {
+            get { return _status; }
+            protected set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    RaisePropertyChanged(@"_Status");
+                }
+            }
+        }
+
         #endregion
 
         #region 命令
@@ -143,6 +162,8 @@ namespace CCT.ViewModel
         /// </summary>
         private void ExportExcelCommandExecute()
         {
+            _Status = ViewModelStatus.Initializing;
+
             // 获取路径
             var path = FileDialogHelper.SaveAsFile("xlsx");
 
@@ -156,11 +177,12 @@ namespace CCT.ViewModel
 
             if (propertiesHelper.ExportExcel(path,PropertyItemList.ToList()))
             {
-                MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                _Status = ViewModelStatus.Loaded;
+                MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);          
                 IsLoading = false;
                 return;
             }
-
+            _Status = ViewModelStatus.Loaded;
             IsLoading = false;
             MessageBox.Show("导出异常！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -297,6 +319,7 @@ namespace CCT.ViewModel
         {    
             RaisePropertyChanged(nameof(PropertyItemList));
             RaisePropertyChanged(nameof(CurrentPropertyItem));
+            RaisePropertyChanged(nameof(_Status));
         }
 
         /// <summary>

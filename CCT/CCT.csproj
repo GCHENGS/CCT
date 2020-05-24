@@ -181,6 +181,7 @@
     <Compile Include="Resource\Converters\MultiBindingDataConverter.cs" />
     <Compile Include="Resource\Converters\ObjectBoolToBoolConverter.cs" />
     <Compile Include="Resource\Converters\ObjectToBoolConverter.cs" />
+    <Compile Include="Resource\Converters\StatusToAnimationVisibilityConverter.cs" />
     <Compile Include="Resource\Converters\StringToBool.cs" />
     <Compile Include="Resource\Converters\StringToIconConverter.cs" />
     <Compile Include="Resource\Converters\TagToImageSource.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Resource\Enums\JsonType.cs" />
     <Compile Include="Resource\Enums\MultiBindingFormatType.cs" />
     <Compile Include="Resource\Enums\NodeType.cs" />
+    <Compile Include="Resource\Enums\ViewModelStatus.cs" />
     <Compile Include="Resource\Helpers\CryptInfo.cs" />
     <Compile Include="Resource\Helpers\CustomMenuHelper.cs" />
     <Compile Include="Resource\Helpers\DecryptInfo.cs" />
@@ -317,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\Dictionarys\ControlStyleResource\TootipStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\Dictionarys\ControlStyleResource\UserControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
