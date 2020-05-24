@@ -67,8 +67,8 @@ namespace CCT.View
         {
             InitializeComponent();
             this.Loaded += LoginWindow_Loaded;
-            //bw.DoWork += bw_DoWork;
-            //bw.RunWorkerCompleted += bw_RunWorkerCompleted;
+            bw.DoWork += bw_DoWork;
+            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
         }
 
         #endregion
@@ -110,7 +110,7 @@ namespace CCT.View
 
         #endregion
 
-        /*#region 登录
+        #region 登录处理
 
         /// <summary>
         /// 登陆后台运行
@@ -257,7 +257,7 @@ namespace CCT.View
             UserService.UpdateUserLoginDate(User);
         }
 
-        #endregion*/
+        #endregion
 
         #region 窗体加载
 
@@ -268,7 +268,7 @@ namespace CCT.View
             sbd.Begin();
 
             //获取登录信息
-            /*SysConfig = ConfigHelper.ReadSysConfig();
+            SysConfig = ConfigHelper.ReadSysConfig();
             SavedLastLoginUser = SysConfig.SavedLastLoginUser;
             SaveUserOperator = SysConfig.SaveUserOperator;
             User = new User()
@@ -293,45 +293,19 @@ namespace CCT.View
                 User.AutomaticLogon = true;
             }
 
-            //计时器 为登录框添加数据计时执行
-            var timer1 = new System.Timers.Timer
-            {
-                Interval = 100,
-            };
-            timer1.Elapsed += new System.Timers.ElapsedEventHandler(theout1);//到达时间的时候执行事件；
-            timer1.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；   
-            timer1.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-                                  //计时器 自动登录做准备的数据计时执行
+            //计时器 自动登录做准备的数据计时执行
             var timer2 = new System.Timers.Timer
             {
                 Interval = 400,
             };
             timer2.Elapsed += new System.Timers.ElapsedEventHandler(theout2);
             timer2.AutoReset = false;
-            timer2.Enabled = true;*/
+            timer2.Enabled = true;
         }
 
         #endregion
 
-       /* #region theout1
-
-        /// <summary>
-        /// 为登录框添加数据计时执行
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
-        public void theout1(object source, System.Timers.ElapsedEventArgs e)
-        {
-            this.Dispatcher.Invoke(new Action(() =>
-            {
-                //显示上次登录
-                //this.cmb1.SelectedIndex = 0;
-            }));
-        }
-
-        #endregion
-
-        #region theout2
+        #region 自动登录
 
         /// <summary>
         /// 自动登录
@@ -354,9 +328,25 @@ namespace CCT.View
             }));
         }
 
-        #endregion
+        /// <summary>
+        /// 登录事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.LoadGrid.Visibility = System.Windows.Visibility.Visible;//遮罩层可见
+                bw.RunWorkerAsync();
+            }
+            catch (Exception)
+            {
+                //报错无视
+            }
+        }
 
-        #region Load登录加载界面
+        #endregion
 
         #region 登陆加载界面局部变量
         /// <summary>
@@ -452,7 +442,5 @@ namespace CCT.View
         }
 
         #endregion
-
-        #endregion*/
     }
 }

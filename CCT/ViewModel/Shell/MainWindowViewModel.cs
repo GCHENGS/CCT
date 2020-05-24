@@ -144,6 +144,8 @@ namespace CCT.ViewModel
             CurrentUser = user;
 
             SysConfig = ConfigHelper.ReadSysConfig();
+            SysConfig.SaveUserOperator.X1 = CurrentUser.RememberPwd.ToString();
+            SysConfig.SaveUserOperator.X2 = CurrentUser.AutomaticLogon.ToString();
             SavedLastOpenFile = SysConfig.SavedLastOpenFile;
             List = SysConfig.SavedRecentFile.List;
 

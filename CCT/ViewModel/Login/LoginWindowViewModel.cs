@@ -89,7 +89,14 @@ namespace CCT.ViewModel
         public bool IsAutoLogin
         {
             get { return isAutoLogin; }
-            set { SetProperty(ref isAutoLogin, value); }
+            set
+            {
+                SetProperty(ref isAutoLogin, value);
+                if(isAutoLogin)
+                {
+                    if (!isReAccount) IsReAccount = true;
+                }
+            }
         }
 
         /// <summary>
@@ -121,30 +128,43 @@ namespace CCT.ViewModel
         {
             Title = "CCT登录";
 
+            CurrentUser = new User();
             SysConfig = ConfigHelper.ReadSysConfig();
             SavedLastLoginUser = SysConfig.SavedLastLoginUser;
             SaveUserOperator = SysConfig.SaveUserOperator;   
+
             if (SaveUserOperator.X1.ToLower() == "false")
             {
                 IsReAccount = false;
+                CurrentUser.RememberPwd = false;
             }
             else
             {
                 IsReAccount = true;
+                CurrentUser.RememberPwd = true;
             }
+
             if(SaveUserOperator.X2.ToLower()=="false")
             {
                 IsAutoLogin = false;
+                CurrentUser.AutomaticLogon= false;
             }
             else
             {
                 IsAutoLogin = true;
+                CurrentUser.AutomaticLogon = true;
             }
+
+            //显示上次登录信息
             if (IsReAccount || IsAutoLogin)
             {
                 UserName = SavedLastLoginUser.X1;
                 UserPassword = SavedLastLoginUser.X2;
             }
+
+            CurrentUser.UserName = UserName;
+            CurrentUser.UserPassword = UserPassword;
+
             LoginCommand = new DelegateCommand<Window>(LoginCommandExecute);
         }
 
@@ -233,6 +253,8 @@ namespace CCT.ViewModel
                 {
                     flag = 1;
                     CurrentUser = user;
+                    CurrentUser.RememberPwd = IsReAccount;
+                    CurrentUser.AutomaticLogon = IsAutoLogin;
                     //休眠1.5秒
                     System.Threading.Thread.Sleep(1500);
                 }
@@ -251,7 +273,7 @@ namespace CCT.ViewModel
         /// <summary>
         /// 保存登录信息到本地
         /// </summary>
-        private void SaveLogin()
+        public void SaveLogin()
         {
             SavedLastLoginUser.X1 = CurrentUser.UserName;
             SavedLastLoginUser.X2 = CurrentUser.UserPassword;
@@ -268,7 +290,7 @@ namespace CCT.ViewModel
         /// <summary>
         /// 更新登录信息到数据库
         /// </summary>
-        private void UpdateLoginDate()
+        public void UpdateLoginDate()
         {
             CurrentUser.UserLoginDate = DateTime.Now;
             UserService.UpdateUserLoginDate(CurrentUser);
@@ -278,7 +300,7 @@ namespace CCT.ViewModel
 
         #region 通知
 
-        private void NotifyUI()
+        public void NotifyUI()
         {
             RaisePropertyChanged(nameof(CurrentUser));
             RaisePropertyChanged(nameof(UserName));

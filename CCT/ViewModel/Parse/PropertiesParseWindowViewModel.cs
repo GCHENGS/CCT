@@ -175,10 +175,10 @@ namespace CCT.ViewModel
                 return;
             }
 
-            if (propertiesHelper.ExportExcel(path,PropertyItemList.ToList()))
+            if (propertiesHelper.ExportExcel(path, PropertyItemList.ToList()))
             {
                 _Status = ViewModelStatus.Loaded;
-                MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);          
+                MessageBox.Show("已导出！", "信息提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 IsLoading = false;
                 return;
             }

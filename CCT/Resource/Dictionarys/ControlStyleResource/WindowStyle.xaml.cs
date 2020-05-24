@@ -383,7 +383,20 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
                         }
                     }else
                     {
-                        win.Close();//关闭弹窗
+                        if (win.DataContext is LoginWindowViewModel)
+                        {
+                            var data = win.DataContext as LoginWindowViewModel;//获取数据源
+                            if(data!=null)
+                            {
+                                data.SaveLogin();
+                            }
+                            win.Close();//关闭窗体
+                            Environment.Exit(0);//环境退出
+                        }
+                        else
+                        {
+                            win.Close();//关闭弹窗
+                        }
                     }
                 }
             }
