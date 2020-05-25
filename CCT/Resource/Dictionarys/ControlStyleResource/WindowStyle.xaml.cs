@@ -388,7 +388,7 @@ namespace CCT.Resource.Dictionarys.ControlStyleResource
                             var data = win.DataContext as LoginWindowViewModel;//获取数据源
                             if(data!=null)
                             {
-                                data.SaveLogin();
+                                //data.SaveLogin();
                             }
                             win.Close();//关闭窗体
                             Environment.Exit(0);//环境退出
