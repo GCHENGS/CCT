@@ -67,8 +67,8 @@ namespace CCT.View
         {
             InitializeComponent();
             this.Loaded += LoginWindow_Loaded;
-            bw.DoWork += bw_DoWork;
-            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
+            //bw.DoWork += bw_DoWork;
+            //bw.RunWorkerCompleted += bw_RunWorkerCompleted;
         }
 
         #endregion
@@ -173,7 +173,7 @@ namespace CCT.View
                     MessageBox.Show("未知错误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
-            this.LoadGrid.Visibility = System.Windows.Visibility.Collapsed;//遮罩层隐藏
+            //this.LoadGrid.Visibility = System.Windows.Visibility.Collapsed;//遮罩层隐藏
         }
 
         #endregion
@@ -322,7 +322,7 @@ namespace CCT.View
                     if (SaveUserOperator.X2.ToLower() == "true")//自动登录
                     {
                         //触发登录
-                        this.LoginButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, this.LoginButton));
+                        //this.LoginButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, this.LoginButton));
                     }
                 }
             }));
@@ -337,8 +337,8 @@ namespace CCT.View
         {
             try
             {
-                this.LoadGrid.Visibility = System.Windows.Visibility.Visible;//遮罩层可见
-                bw.RunWorkerAsync();
+                //this.LoadGrid.Visibility = System.Windows.Visibility.Visible;//遮罩层可见
+                //bw.RunWorkerAsync();
             }
             catch (Exception)
             {
@@ -348,7 +348,7 @@ namespace CCT.View
 
         #endregion
 
-        #region 登陆加载界面局部变量
+        /*#region 登陆加载界面局部变量
         /// <summary>
         /// 队列计时器
         /// </summary>
@@ -441,6 +441,6 @@ namespace CCT.View
             this.LoadGrid.Visibility = System.Windows.Visibility.Collapsed;//遮罩层隐藏
         }
 
-        #endregion
+        #endregion*/
     }
 }

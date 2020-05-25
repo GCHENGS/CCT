@@ -1,5 +1,7 @@
-﻿using CCT.Config;
+﻿using CCT.Component.Controls;
+using CCT.Config;
 using CCT.Model.DataType;
+using CCT.Resource.Helpers;
 using CCT.Service;
 using CCT.View;
 using Prism.Commands;
@@ -19,6 +21,7 @@ namespace CCT.ViewModel
         private User currentUser;//用户
         private string userName;//名称
         private string userPassword;//密码
+        private string userPasswordStr;//密码隐藏
         private bool isCurrentUserNull = true ;//是否用户为空
         private bool isReAccount = false;//是否记住密码
         private bool isAutoLogin = false;//是否自动登录
@@ -35,6 +38,7 @@ namespace CCT.ViewModel
             get { return currentUser; }
             set
             {
+                if (value == null) return;
                 SetProperty(ref currentUser, value);
                 if(currentUser!=null)
                 {
@@ -62,7 +66,19 @@ namespace CCT.ViewModel
         public string UserPassword
         {
             get { return userPassword; }
-            set { SetProperty(ref userPassword, value); }
+            set
+            {   if (value == null) return;
+                SetProperty(ref userPassword, value);
+            }
+        }
+
+        /// <summary>
+        /// 密码隐藏
+        /// </summary>
+        public string UserPasswordStr
+        {
+            get { return userPasswordStr; }
+            set { SetProperty(ref userPasswordStr, value); }
         }
 
         /// <summary>
@@ -173,8 +189,9 @@ namespace CCT.ViewModel
 
         private void LoginCommandExecute(Window win)
         {
-            int feedBack = Verification();//验证登录
-
+            ExtendTextBox textbox = VisualTreeHelpers.GetChildObject<ExtendTextBox>(win, "UserPassword");//密码控件
+            UserPasswordStr = textbox.PasswordStr;//密码字符串
+            int feedBack = Verification();//验证登录           
             switch (feedBack)
             {
                 case 1:
@@ -237,14 +254,14 @@ namespace CCT.ViewModel
                     flag = -2;
                     return flag;
                 }
-                if (string.IsNullOrEmpty(UserPassword))
+                if (string.IsNullOrEmpty(UserPasswordStr))
                 {
                     flag = -3;
                     return flag;
                 }
-                User user = UserService.Login(new User() { UserName = UserName, UserPassword = UserPassword });//服务方法
+                User user = UserService.Login(new User() { UserName = UserName, UserPassword = UserPasswordStr });//服务方法
                 //验证登录
-                if (user == null)
+                if (user.UserId==0)
                 {
                     flag = -4;
                 }
@@ -275,7 +292,7 @@ namespace CCT.ViewModel
         public void SaveLogin()
         {
             SavedLastLoginUser.X1 = UserName;
-            SavedLastLoginUser.X2 = UserPassword;
+            SavedLastLoginUser.X2 = UserPasswordStr;
             SaveUserOperator.X1 = IsReAccount.ToString();
             SaveUserOperator.X2 = IsAutoLogin.ToString();
             SysConfig.SavedLastLoginUser = SavedLastLoginUser;
