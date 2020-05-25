@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SysConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SavedLastLoginUser />
-  <SaveUserOperator X1="False" X2="False" />
-  <SavedLastOpenFile X1="ApplicationInfo.xml" X2="C:\Users\程献威\Desktop\毕业设计\xml\ApplicationInfo.xml" />
+  <SavedLastLoginUser X1="" X2=""/>
+  <SaveUserOperator X1="True" X2="False" />
+  <SavedLastOpenFile X1="log4j.properties" X2="C:\Users\程献威\Desktop\毕业设计\properties\log4j.properties" />
   <SavedRecentFile>
     <List>
-      <RecentFile X1="array.json" X2="C:\Users\程献威\Desktop\毕业设计\json\array.json" />
+      <RecentFile X1="Color.ini" X2="C:\Users\程献威\Desktop\毕业设计\ini\Color.ini" />
+      <RecentFile X1="treegrid_data1.json" X2="C:\Users\程献威\Desktop\毕业设计\json\treegrid_data1.json" />
       <RecentFile X1="log4j.properties" X2="C:\Users\程献威\Desktop\毕业设计\properties\log4j.properties" />
-      <RecentFile X1="ApplicationInfo.xml" X2="C:\Users\程献威\Desktop\毕业设计\xml\ApplicationInfo.xml" />
     </List>
   </SavedRecentFile>
 </SysConfig>
