@@ -160,10 +160,9 @@ namespace CCT.ViewModel
             {
                 UserName = SavedLastLoginUser.X1;
                 UserPassword = SavedLastLoginUser.X2;
+                CurrentUser.UserName = UserName;
+                CurrentUser.UserPassword = UserPassword;
             }
-
-            CurrentUser.UserName = UserName;
-            CurrentUser.UserPassword = UserPassword;
 
             LoginCommand = new DelegateCommand<Window>(LoginCommandExecute);
         }
@@ -275,11 +274,12 @@ namespace CCT.ViewModel
         /// </summary>
         public void SaveLogin()
         {
-            SavedLastLoginUser.X1 = CurrentUser.UserName;
-            SavedLastLoginUser.X2 = CurrentUser.UserPassword;
+            SavedLastLoginUser.X1 = UserName;
+            SavedLastLoginUser.X2 = UserPassword;
             SaveUserOperator.X1 = IsReAccount.ToString();
             SaveUserOperator.X2 = IsAutoLogin.ToString();
             SysConfig.SavedLastLoginUser = SavedLastLoginUser;
+            SysConfig.SaveUserOperator = SaveUserOperator;
             ConfigHelper.SaveSysConfig(SysConfig);
         }
 
