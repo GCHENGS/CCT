@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SysConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SavedLastLoginUser X1="" X2=""/>
-  <SaveUserOperator X1="True" X2="False" />
+  <SavedLastLoginUser X1="admin" X2="000" />
+  <SaveUserOperator X1="False" X2="False" />
   <SavedLastOpenFile X1="log4j.properties" X2="C:\Users\程献威\Desktop\毕业设计\properties\log4j.properties" />
   <SavedRecentFile>
     <List>

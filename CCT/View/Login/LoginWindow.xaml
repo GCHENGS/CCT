@@ -81,8 +81,8 @@
                 <controls:ExtendTextBox Grid.Column="1" x:Name="UserPassword" 
                                     Style="{StaticResource WaterMarkExtendTextBoxCanDel}"
                                     WaterMark="{DynamicResource PleaseInputUserPassword}" 
-                                    IsPasswordBox="True"
-                                    PasswordStr="{Binding UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                    IsPasswordBox="True" Text="{Binding Path=UserPassword,Mode=OneWay}"
+                                    PasswordStr="{Binding Path=UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 </controls:ExtendTextBox>
                 <TextBlock Grid.Column="2" Height="12" Margin="2,0,6,0" Style="{StaticResource HyperlinkTextBlock}">
                       <Hyperlink x:Name="FoundLink" Click="FoundLink_Click" ToolTip="{DynamicResource FoundPassword}" NavigateUri="http://www.baidu.com/">
